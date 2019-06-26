@@ -1,0 +1,52 @@
+<!--pages/myMoney/myMoney.wxml-->
+<!-- 头部收入信息 -->
+<view class='bg-white padding-tb-xl flex text-center solids-bottom'>
+  <view class='flex-sub solids-right'>
+    <view class='text-black'>￥
+      <text class='text-xl text-bold'>110.00</text>
+    </view>
+    <view class='margin-top-xs'>今天</view>
+  </view>
+  <view class='flex-sub'>
+    <view class='text-black'>￥
+      <text class='text-xl text-bold'>220.00</text>
+    </view>
+    <view class='margin-top-xs'>本月</view>
+  </view>
+</view>
+
+<!-- 今天收入列表 -->
+<view class='cu-bar bg-white solids-bottom margin-top-sm'>
+  <view class='action'>
+    <text class='icon-titles text-orange'></text>
+    <text class='text-black text-lg'>今天</text>
+  </view>
+</view>
+
+<view class='flex align-center bg-white padding-lr padding-tb-sm solids-bottom' wx:for="{{todayMoneyList}}" wx:key="{{todayMoneyList}}">
+  <view class='flex-sub'>
+    <view class='text-xl text-black text-bold'>{{item.name}}</view>
+    <view>{{item.time}}</view>
+  </view>
+    <view class='flex-sub text-right'>
+    <text class='text-main text-bold text-xl'>{{item.money}}</text>
+  </view>
+</view>
+
+<!-- 昨天收入列表 -->
+<view class='cu-bar bg-white solids-bottom margin-top-sm'>
+  <view class='action'>
+    <text class='icon-titles text-orange'></text>
+    <text class='text-black text-lg'>昨天</text>
+  </view>
+</view>
+
+<view class='flex align-center bg-white padding-lr padding-tb-sm solids-bottom' wx:for="{{yesterdayMoneyList}}" wx:key="{{yesterdayMoneyList}}">
+  <view class='flex-sub'>
+    <view class='text-xl text-black text-bold'>{{item.name}}</view>
+    <view>{{item.time}}</view>
+  </view>
+    <view class='flex-sub text-right'>
+    <text class='text-main text-bold text-xl'>{{item.money}}</text>
+  </view>
+</view>

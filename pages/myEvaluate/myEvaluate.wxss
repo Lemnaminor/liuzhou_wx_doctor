@@ -1,0 +1,11 @@
+/* pages/myEvaluate/myEvaluate.wxss */
+.evaluate-box .tag-box .cu-tag {
+  margin-left: 0;
+  margin-right: 10rpx;
+}
+.evaluate-box .cu-item {
+  height: auto!important;
+  align-items: flex-start!important;
+  padding-top: 30rpx!important;
+  padding-bottom: 30rpx!important;
+}

@@ -1,0 +1,117 @@
+<!--pages/personCenter/personCenter.wxml-->
+<!-- 头部医生详情 -->
+<view class='doctor-box'>
+  <view class='doctor-info'>
+    <view class='flex align-center'>
+      <view class='margin-right'>
+        <view class="cu-avatar xl round margin-left" style="background-image:url({{doctorDetail.doctorIcon}});"></view>
+      </view>
+      <view>
+        <view>
+          <text class='text-xl text-bold margin-right-sm'>{{doctorDetail.doctorName}}</text>
+          <text>{{doctorDetail.doctorLevel}}</text>
+        </view>
+        <view>{{doctorDetail.hospitalName}}</view>
+        <view>{{doctorDetail.deptName}}</view>
+      </view>
+    </view>
+
+    <view class='doctor-nav grid col-3 padding-lg text-center'>
+      <view>
+        <text class='text-xl text-bold margin-right-sm'>{{doctorDetail.consultationNum}}</text>
+        <text>次咨询</text>
+      </view>
+      <view>
+        <text class='text-xl text-bold margin-right-sm'>{{doctorDetail.collectionNum}}</text>
+        <text>条评价</text>
+      </view>
+      <view>
+        <text class='text-xl text-bold margin-right-sm'>{{doctorDetail.collectionNum}}</text>
+        <text>个收藏</text>
+      </view>
+    </view>
+
+    <view class='wave-bg wave-bg1' style="background:url('../../images/wave1.png')"></view>
+    <view class='wave-bg wave-bg2' style="background:url('../../images/wave2.png')"></view>
+  </view>
+
+</view>
+
+<!-- 咨询状态 -->
+<view class="cu-form-group margin-top">
+  <view class='title'>咨询状态</view>
+  <view class='flex-sub text-right'>
+    <text class='text-main'>在线（接受咨询）</text>
+    <!-- <text class='text-gray'>离线（不接受咨询）</text> -->
+
+    <switch class='main' checked></switch>
+  </view>
+</view>
+
+<!-- 分类导航 -->
+<view class='personCenter-nav padding'>
+
+  <view class='flex margin-bottom-lg'>
+    <view class='flex-sub flex align-center' bindtap='toQrcode' id="{{doctorId}}">
+      <view class='personCenter-icon bg-blue round margin-right-sm text-center flex align-center'>
+        <text class='text-xxl'><text class='icon-profilefill lg text-white'></text></text>
+      </view>
+      <view class='flex-sub'>
+        <view class='text-black text-lg'>我的名片</view>
+        <view class='text-gray'>扫码关注我</view>
+      </view>
+    </view>
+    <view class='flex-sub flex align-center' bindtap='toEditData' id="{{doctorId}}">
+      <view class='personCenter-icon bg-purple round margin-right-sm text-center flex align-center'>
+        <text class='text-xxl'><text class='icon-settingsfill lg text-white'></text></text>
+      </view>
+      <view class='flex-sub'>
+        <view class='text-black text-lg'>编辑资料</view>
+        <view class='text-gray'>及时更新信息</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='flex margin-bottom-lg'>
+    <view class='flex-sub flex align-center' bindtap='toMyEvaluate' id="{{doctorId}}">
+      <view class='personCenter-icon bg-orange round margin-right-sm text-center flex align-center'>
+        <text class='text-xxl'><text class='icon-appreciatefill lg text-white'></text></text>
+      </view>
+      <view class='flex-sub'>
+        <view class='text-black text-lg'>我的评价</view>
+        <view class='text-gray'>患者的肯定</view>
+      </view>
+    </view>
+    <view class='flex-sub flex align-center' bindtap='toMyMoney' id="{{doctorId}}">
+      <view class='personCenter-icon bg-yellow round margin-right-sm text-center flex align-center'>
+        <text class='text-xxl'><text class='icon-moneybagfill lg text-white'></text></text>
+      </view>
+      <view class='flex-sub'>
+        <view class='text-black text-lg'>我的收入</view>
+        <view class='text-gray'>详单查询</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='flex'>
+    <view class='flex-sub flex align-center' bindtap='toReplyLanguage' id="{{doctorId}}">
+      <view class='personCenter-icon bg-cyan round margin-right-sm text-center flex align-center'>
+        <text class='text-xxl'><text class='icon-markfill lg text-white'></text></text>
+      </view>
+      <view class='flex-sub'>
+        <view class='text-black text-lg'>常用回复</view>
+        <view class='text-gray'>省时省力</view>
+      </view>
+    </view>
+    <view class='flex-sub flex align-center' bindtap='toAdvice' id="{{doctorId}}">
+      <view class='personCenter-icon bg-olive round margin-right-sm text-center flex align-center'>
+        <text class='text-xxl'><text class='icon-samefill lg text-white'></text></text>
+      </view>
+      <view class='flex-sub'>
+        <view class='text-black text-lg'>咨询记录</view>
+        <view class='text-gray'>全部咨询订单</view>
+      </view>
+    </view>
+  </view>
+
+</view>

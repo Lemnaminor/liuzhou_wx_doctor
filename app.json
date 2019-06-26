@@ -1,13 +1,53 @@
 {
   "pages": [
+    "pages/personCenter/personCenter",
+    "pages/openList/openList",
+    "pages/doctorTask/doctorTask",
+    "pages/userManageDetail/userManageDetail",
+    "pages/userManage/userManage",
+    "pages/advice/advice",
+    "pages/consult/consult",
+    "pages/qrcode/qrcode",
+    "pages/myMoney/myMoney",
+    "pages/myEvaluate/myEvaluate",
+    "pages/editDataSuccess/editDataSuccess",
+    "pages/editData/editData",
+    "pages/buildReplyLanguage/buildReplyLanguage",
+    "pages/replyLanguage/replyLanguage",
     "pages/index/index",
     "pages/logs/logs"
   ],
   "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "backgroundTextStyle": "dark",
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#00d8a0",
+    "navigationBarTitleText": "柳工医院",
+    "backgroundColor": "#eeeeee"
+  },
+  "tabBar": {
+    "color": "#333",
+    "selectedColor": "#00d8a0",
+    "borderStyle": "black",
+    "list": [
+      {
+        "selectedIconPath": "images/ask.png",
+        "iconPath": "images/ask.png",
+        "pagePath": "pages/doctorTask/doctorTask",
+        "text": "医生任务"
+      },
+      {
+        "selectedIconPath": "images/advice.png",
+        "iconPath": "images/advice.png",
+        "pagePath": "pages/userManage/userManage",
+        "text": "患者管理"
+      },
+      {
+        "selectedIconPath": "images/user.png",
+        "iconPath": "images/user.png",
+        "pagePath": "pages/personCenter/personCenter",
+        "text": "个人中心"
+      }
+    ]
   },
   "sitemapLocation": "sitemap.json"
 }

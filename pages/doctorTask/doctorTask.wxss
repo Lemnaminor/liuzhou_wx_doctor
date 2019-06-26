@@ -1,0 +1,13 @@
+/* pages/doctorTask/doctorTask.wxss */
+page{
+    font-size: 16px;/**计算切换宽度，需要设置为px单位**/
+}
+.news-box1 .weui-navbar {
+  background: #fff;
+}
+.weui-bar__item_on {
+  color: #00d8a0!important;
+}
+.weui-navbar__slider {
+  background-color: #00d8a0!important;
+}

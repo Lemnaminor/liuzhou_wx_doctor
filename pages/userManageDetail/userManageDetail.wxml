@@ -1,0 +1,76 @@
+<!--pages/userManageDetail/userManageDetail.wxml-->
+<!-- 患者详情 -->
+<view class='doctor-box'>
+  <view class='doctor-info'>
+    <view class='flex align-center'>
+      <view class='margin-right'>
+        <view class="cu-avatar xl round margin-left" style="background-image:url({{userDetailList.userIcon}});"></view>
+      </view>
+      <view class='flex-sub'>
+        <view class='flex'>
+          <view>
+            <text class='text-xl text-bold margin-right-sm'>{{userDetailList.name}}</text>
+          </view>
+          <view class='flex-sub text-right'>
+            <button class='cu-btn margin-right-sm text-white' bindtap='changeCollection'>
+              <text class='icon-{{collectionIcon}} lg margin-right-xs'></text>{{collectionName}}</button>
+          </view>
+        </view>
+        <view>
+          <text class='margin-right-sm'>{{userDetailList.sex}}</text>
+          <text>{{userDetailList.age}}岁</text>
+        </view>
+        <view>就诊卡号：{{userDetailList.hospitalCard}}</view>
+
+      </view>
+    </view>
+
+  </view>
+</view>
+
+<!-- 患者导航 -->
+<view class='personCenter-nav padding'>
+
+  <view class='flex margin-tb-lg'>
+    <view class='flex-sub flex align-center'>
+      <view class='personCenter-icon bg-{{isDisabled?"gray":"blue"}} round margin-right-sm text-center flex align-center'>
+        <text class='text-xxl'><text class='icon-profilefill lg text-white'></text></text>
+      </view>
+      <view class='flex-sub'>
+        <view class='text-{{isDisabled?"gray":"black"}} text-lg'>电子病历</view>
+        <view class='text-gray'>该患者在医院的历史病历</view>
+      </view>
+    </view>
+    <view class='flex-sub flex align-center'>
+      <view class='personCenter-icon bg-{{isDisabled?"gray":"purple"}} round margin-right-sm text-center flex align-center'>
+        <text class='text-xxl'><text class='icon-settingsfill lg text-white'></text></text>
+      </view>
+      <view class='flex-sub'>
+        <view class='text-{{isDisabled?"gray":"black"}} text-lg'>检查检验</view>
+        <view class='text-gray'>该患者在医院的相关报告</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='flex margin-tb-lg'>
+    <view class='flex-sub flex align-center' bindtap='toConsult' id="{{userId}}">
+      <view class='personCenter-icon bg-orange round margin-right-sm text-center flex align-center'>
+        <text class='text-xxl'><text class='icon-appreciatefill lg text-white'></text></text>
+      </view>
+      <view class='flex-sub'>
+        <view class='text-black text-lg'>咨询记录</view>
+        <view class='text-gray'>我与该患者的线上咨询记录</view>
+      </view>
+    </view>
+    <view class='flex-sub flex align-center' bindtap='toOpenList' id="{{userId}}">
+      <view class='personCenter-icon bg-yellow round margin-right-sm text-center flex align-center'>
+        <text class='text-xxl'><text class='icon-moneybagfill lg text-white'></text></text>
+      </view>
+      <view class='flex-sub'>
+        <view class='text-black text-lg'>已开处方</view>
+        <view class='text-gray'>我在线上为该患者开具的处方</view>
+      </view>
+    </view>
+  </view>
+
+</view>

@@ -1,0 +1,65 @@
+<!--pages/advice/advice.wxml-->
+<!-- 咨询记录 -->
+<view class="weui-tab">
+  <view class="weui-navbar bg-white">
+    <block wx:for="{{tabs}}" wx:key="*this">
+      <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+        <view class="weui-navbar__title">{{item}}</view>
+      </view>
+    </block>
+    <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+  </view>
+  <view class="weui-tab__panel">
+
+    <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+
+      <!-- 咨询-进行中 -->
+      <view class='cu-list menu menu-avatar'>
+        <view class="cu-item" wx:for="{{beingAdviceList}}" wx:key="{{beingAdviceList.doctorId}}" bindtap='toConsult'>
+          <view class="cu-avatar radius lg" style="background-image:url({{item.doctorIcon}});"></view>
+          <view class='content'>
+            <view class='text-cut' style='width:400rpx;'>
+              <text class='text-xl'>{{item.doctorName}}</text>
+              <text class='margin-lr-sm text-gray'>{{item.sex}}</text>
+              <text class='text-gray'>{{item.age}}</text>
+            </view>
+            <view class='text-gray text-cut' style='width:400rpx;'>{{item.content}}</view>
+          </view>
+          <view class='action'>
+            <view class='text-gray text-sm'>{{item.time}}</view>
+            <button class='cu-btn radius line sm text-main'>进入聊天</button>
+          </view>
+        </view>
+      </view>
+
+    </view>
+
+    <view class="weui-tab__content advice-complete" hidden="{{activeIndex != 1}}">
+
+      <!-- 咨询-已完成 -->
+      <view class='cu-list menu menu-avatar'>
+
+        <view class="cu-item" wx:for="{{successAdviceList}}" wx:key="{{successAdviceList.doctorId}}" bindtap='toConsult'>
+          <view class="cu-avatar radius lg" style="background-image:url({{item.doctorIcon}});"></view>
+          <view class='content'>
+            <view class='text-cut' style='width:400rpx;'>
+              <text class='text-xl'>{{item.doctorName}}</text>
+              <text class='margin-lr-sm text-gray'>{{item.sex}}</text>
+              <text class='text-gray'>{{item.age}}</text>
+            </view>
+            <view class='text-gray text-cut' style='width:400rpx;'>{{item.content}}</view>
+          </view>
+          <view class='action'>
+            <view class='text-gray text-sm'>{{item.time}}</view>
+          </view>
+        </view>
+        <!-- <view class='text-right bg-white solids-bottom padding-bottom-sm'>
+          <button class='cu-btn radius line sm text-main'>再次咨询</button>
+        </view> -->
+
+      </view>
+
+    </view>
+
+  </view>
+</view>

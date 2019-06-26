@@ -1,0 +1,46 @@
+<!--pages/myEvaluate/myEvaluate.wxml-->
+<!-- 评价总数、星级 -->
+<view class='padding-tb-xl padding-lr bg-white text-black'>
+  <view class='margin-bottom-xs'>评价总数：
+    <text class='text-bold text-lg'>10</text> 条</view>
+  <view class='flex'>
+    <text>平均星级：</text>
+    <view class='flex-sub'>
+      <block wx:for="{{starList}}" wx:key="{{starList.id}}">
+        <text catchtap='selectStar' id='{{item.id}}'>
+               <text class='icon-{{starActive >= item.id?"favorfill":"favor"}} lg text-{{starActive >= item.id?"yellow":"gray"}} margin-right-xs'></text>
+        </text>
+      </block>
+      <text class='margin-left-xs'>{{starActive}} 星</text>
+    </view>
+  </view>
+</view>
+
+<!-- 评价列表 -->
+<view class='evaluate-box bg-white margin-top-sm'>
+  <view class='cu-bar bg-white solids-bottom'>
+    <view class='action'>
+      <text class='icon-titles text-orange'></text>
+      <text class='text-black text-lg'>患者评价</text>
+    </view>
+  </view>
+
+  <view class="cu-list menu menu-avatar">
+    <view class="cu-item padding-top padding-bottom" wx:for="{{evaluateList}}" wx:key="{{evaluateList.openId}}">
+      <view class="cu-avatar radius lg" style="background-image:url({{item.wxIcon}});"></view>
+      <view class='content'>
+        <view>
+          <view>
+            <text class='margin-right-sm'>{{item.patientName}}</text>
+            <text class='icon-favorfill lg text-yellow' wx:for="{{item.starLevel}}" wx:key="{{index}}"></text>
+          </view>
+        </view>
+        <view class='text-gray text-sm tag-box'>
+          <view class='cu-tag radius bg-grey margin-bottom-xs' wx:for="{{item.evaluateLabelSeqText}}" wx:key="{{index}}">{{item}}</view>
+        </view>
+        <view>{{item.evaluateContent}}</view>
+      </view>
+    </view>
+  </view>
+
+</view>

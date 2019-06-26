@@ -1,0 +1,210 @@
+<!--pages/consult/consult.wxml-->
+
+<!-- 提示消息模板 -->
+<!-- <view class='cu-info round'>对方撤回一条消息!</view> -->
+
+<!-- 图片模板 -->
+<!-- <view class="cu-item self">
+    <view class="main">
+      <image src="https://image.weilanwl.com/img/3x4-1.jpg" class='radius' mode="widthFix"></image>
+    </view>
+    <view class="cu-avatar radius" style="background-image:url(https://image.weilanwl.com/img/square-3.jpg);"></view>
+    <view class='date'> 13:23</view>
+  </view> -->
+
+<!-- 拒绝消息模板 -->
+<!-- <view class="cu-info">
+    <text class='icon-roundclosefill text-red '></text> 对方拒绝了你的消息
+  </view> -->
+
+<!-- 语音消息模板 -->
+<!-- <view class="cu-item self">
+    <view class="main">
+      <view class='action text-bold text-grey'>
+        3"
+      </view>
+      <view class='content shadow'>
+        <text class='icon-sound text-xxl padding-right-xl'> </text>
+      </view>
+    </view>
+    <view class="cu-avatar radius" style="background-image:url(https://image.weilanwl.com/img/square-3.jpg);"></view>
+    <view class='date'>13:23</view>
+  </view> -->
+
+<!-- 语音翻译错误模板 -->
+<!-- <view class="cu-item">
+    <view class="cu-avatar radius" style="background-image:url(https://image.weilanwl.com/img/square-2.jpg);"></view>
+    <view class="main">
+      <view class='content shadow'>
+        @#$^&**
+      </view>
+      <view class='action text-grey'>
+        <text class='icon-warnfill text-red text-xxl'></text>
+        <text class='text-sm margin-left-sm'>翻译错误</text>
+      </view>
+    </view>
+    <view class='date'>13:23</view>
+  </view> -->
+
+<!-- 消息失败模板 -->
+<!-- <view class="cu-item self">
+    <view class="main">
+      <view class='action'>
+        <text class='icon-infofill text-red text-xxl'></text>
+      </view>
+      <view class='content shadow'>
+        消息发送失败
+      </view>
+    </view>
+    <view class="cu-avatar radius" style="background-image:url(../../images/head2.jpg);"></view>
+    <view class='date'>13:23</view>
+  </view>   -->
+
+<!-- 咨询页面 -->
+<scroll-view scroll-y='true' scroll-with-animation="true" scroll-into-view='{{toView}}' style='height:{{scrollHeight}}px' scroll-top="{{scrollTop}}">
+  <view class=' class="consult-box cu-chat"'>
+    <view class="cu-item self">
+
+      <!-- 游客咨询信息 -->
+      <view class="main">
+        <view class='content bg-main shadow'>
+          <text>性别：男
+        年龄：20
+        请问手术需要多少费用。？
+        </text>
+        </view>
+
+      </view>
+
+      <!-- <view class="cu-avatar radius" style="background-image:url(../../images/head2.jpg);"></view> -->
+      <block wx:for="{{userList}}" wx:key="userList">
+        <!-- <text class="userinfo-nickname">{{item.userName}}</text> -->
+        <image bindtap="" class="userinfo-avatar cu-avatar radius" src="{{item.userHeaderUrl}}" mode="cover"></image>
+      </block>
+      <view class='date'>2018年3月23日 13:23</view>
+    </view>
+
+    <!-- 默认信息提示 -->
+    <view class="cu-info">
+      请您在2019年06月11日 16:00:00之前完成咨询。点击患者头像可查看病历、检查报告等信息。
+    </view>
+
+
+    <block wx:for="{{msgList}}" wx:for-index="index" wx:key="{{index}}">
+      <!-- 医生回复模板 -->
+      <view wx:if="{{item.classify == 0}}" class="cu-item" id='msg-{{index}}'>
+        <view class="cu-avatar radius" style="background-image:url(../../images/head1.jpg);"></view>
+        <view class="main">
+          <view class='content shadow'>
+            <text>{{item.content}}</text>
+          </view>
+        </view>
+        <view class='date '> 13:23</view>
+      </view>
+
+      <!-- 游客回复模板 -->
+      <view wx:elif="{{item.classify == 1}}" class="cu-item self" id='msg-{{index}}'>
+        <view class="main">
+          <view class='content shadow'>
+            {{item.content}}
+          </view>
+        </view>
+
+
+        <block wx:for="{{userList}}" wx:key="userList">
+          <!-- <text class="userinfo-nickname">{{item.userName}}</text> -->
+          <image bindtap="" class="userinfo-avatar cu-avatar radius" src="{{item.userHeaderUrl}}" mode="cover"></image>
+          <!-- <view class="cu-avatar radius" style="background-image:url({{item.userHeaderUrl}};"></view> -->
+        </block>
+
+        <view class='date'>13:23</view>
+      </view>
+    </block>
+
+    <!-- 游客结束咨询模板 -->
+    <!-- <view wx:if="{{isUserEndConsult}}" class='cu-info round'>您结束了咨询！</view> -->
+
+    <block wx:if="{{isDoctorEndConsult}}">
+      <!-- 医生结束咨询模板 -->
+      <view class='cu-info round'>医生结束了咨询！</view>
+
+    </block>
+
+    <!-- 游客评价后星星模板 -->
+    <view class='cu-info round'>
+    <text>患者已评价：</text>
+    <text class='icon-favorfill lg text-white' wx:for="{{5}}" wx:key="{{}}"></text>
+  </view>
+
+  <view class="cu-info" style='max-width:100%;'>
+    <view class='cu-tag radius bg-gray' wx:for="{{tagList}}" wx:key="{{tagList}}">{{item}}</view>
+    <view class='margin-top-sm'>回答很有用，很细仔，医生很不错。</view>
+  </view>
+  </view>
+</scroll-view>
+
+
+
+<!-- 底部再次咨询 -->
+<!-- <view wx:if="{{isUserEndConsult || isDoctorEndConsult}}" class='againConsult-box flex padding-right bg-white' style='align-items: center;' catchtap='toDoctorDetail'>
+  <view class='' style='flex:1;'>
+
+    <view class="cu-list menu menu-avatar">
+      <view class="cu-item">
+        <view class="cu-avatar radius lg" style="background-image:url(../../images/head1.jpg);"></view>
+        <view class='content'>
+          <view>
+            <text class='margin-right-sm text-xl'>陈恩德</text>
+          </view>
+          <view class='text-gray'>
+            <text class='margin-right-sm'>妇科</text>
+            <text>主治医师</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+  <view class='solids-left padding-left text-center text-main'>
+    <view class='text-lg'>再次咨询</view>
+    <view>（0元）</view>
+  </view>
+</view> -->
+
+<!-- <block wx:if="{{!isUserEndConsult || !isDoctorEndConsult}}"> -->
+  <!-- 底部导航 -->
+  <view class="cu-bar foot input" wx:if="{{true}}">
+    <input class='solid-bottom' focus="{{false}}" maxlength="300" cursor-spacing="10" value='{{userWriteMsg.content}}' bindinput="bindText"></input>
+    <view class='action'>
+      <text class='icon-roundadd text-grey' catchtap='isShowHideFootModel'></text>
+    </view>
+    <button class='cu-btn bg-main shadow' bindtap='userSendMsg'>发送</button>
+
+    <view wx:if="{{isShowFootModel}}" class='foot-model padding light solid-bottom flex align-center'>
+      <button class='cu-btn bg-main'>选择图片</button>
+      <button class='cu-btn bg-red margin-left' catchtap='showHideEndConsultModel'>结束咨询</button>
+    </view>
+  </view>
+
+  <!-- 结束咨询弹出层 -->
+  <view class="cu-modal {{isShowEndConsult?'show':''}}">
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white justify-end">
+        <view class='content'>结束咨询</view>
+        <view class='action' catchtap='showHideEndConsultModel'>
+          <text class='icon-close text-red'></text>
+        </view>
+      </view>
+      <view class='padding-xl'>
+        您确定要结束咨询吗？
+      </view>
+      <view class="cu-bar bg-white justify-end">
+        <view class='action'>
+          <button class='cu-btn line-main text-main' catchtap='showHideEndConsultModel'>取消</button>
+          <button class='cu-btn bg-main margin-left' catchtap='endConsult'>确定</button>
+
+        </view>
+      </view>
+    </view>
+  </view>
+<!-- </block> -->

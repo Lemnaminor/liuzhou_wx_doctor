@@ -1,0 +1,18 @@
+<!--pages/editDataSuccess/editDataSuccess.wxml-->
+<!-- 编辑资料成功提示页 -->
+<view class="editDataSuccess-box flex bg-white align-center">
+    <view class="editDataSuccess-cont text-center">
+        <view class="margin-bottom">
+            <text class='icon-roundcheckfill lg text-main' style='font-size:150rpx;'></text>
+        </view>
+        <view class="">
+            <view class="weui-msg__title">提交成功</view>
+            <view class="weui-msg__desc">手机号码之外的信息需要医院管理员审核，请等待审核结果。</view>
+        </view>
+        <view class="">
+            <view class="weui-btn-area flex flex-direction">
+                <button class='cu-btn bg-main lg' bindtap='toPersonCenter'>确定</button>
+            </view>
+        </view>
+    </view>
+</view>

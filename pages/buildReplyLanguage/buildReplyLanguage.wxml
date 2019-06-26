@@ -1,0 +1,13 @@
+<!--pages/buildReplyLanguage/buildReplyLanguage.wxml-->
+<!-- 新建常用回复语 -->
+<view class='buildReplayLanguage-box textarea-wrp bg-white padding'>
+  <textarea class='response' wx:if="{{isShowMask}}" value='{{content}}' placeholder="{{placeholder}}" maxlength="{{textMaxLength}}" bindinput="bindText" />
+  <view class='textLength text-right text-gray'>
+    <text>{{writeLength}}</text> /
+    <text>{{textMaxLength}}</text>
+  </view>
+</view>
+
+<view class='padding flex flex-direction'>
+  <button class='cu-btn bg-main lg' bindtap='formSubmit'>保存</button>
+</view>

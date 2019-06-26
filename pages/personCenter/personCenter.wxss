@@ -1,0 +1,78 @@
+/* pages/personCenter/personCenter.wxss */
+page {
+  background: #fff;
+}
+.depart-online {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.doctor-info {
+  position: relative;
+  background-image: linear-gradient(45deg, #11bb98, #4bbe81);
+  color: #fff;
+  padding: 60rpx 0 80rpx;
+}
+
+.doctor-info .cu-avatar {
+  width: 200rpx !important;
+  height: 200rpx !important;
+  font-size: 2.5em;
+  border: 2rpx solid #fff;
+}
+
+.doctor-box .cu-btn {
+  background: #68ca9d !important;
+}
+
+.wave-bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 70rpx;
+}
+
+.doctor-nav>view {
+  position: relative;
+}
+
+.doctor-nav>view:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  top: 15rpx;
+  right: 0;
+  width: 1rpx;
+  height: 30rpx;
+  background: #9fdec3;
+}
+
+.doctor-product .desc {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+  -webkit-box-orient: vertical;
+}
+
+/** 分类导航 **/
+.personCenter-nav .personCenter-icon {
+  width: 80rpx;
+  height: 80rpx;
+  justify-content: center;
+}
+
+
+
+switch.main[checked] .wx-switch-input, checkbox.main[checked] .wx-checkbox-input,
+radio.main[checked] .wx-radio-input {
+  border-color: #00d8a0 !important;
+}
+switch.main[checked] .wx-switch-input.wx-switch-input-checked,
+checkbox.main[checked] .wx-checkbox-input, radio.main[checked] .wx-radio-input {
+  background-color: #00d8a0 !important;
+  color: #fff !important;
+}

@@ -1,0 +1,8 @@
+{
+  "usingComponents": {},
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 50,
+  "backgroundTextStyle": "dark",
+  "backgroundColor": "#cccccc",
+  "navigationBarTitleText": "医生任务"
+}

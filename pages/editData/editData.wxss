@@ -1,0 +1,4 @@
+/* pages/editData/editData.wxss */
+.editdata-box textarea {
+  height: 175rpx;
+}
