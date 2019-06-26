@@ -1,17 +1,20 @@
 {
   "pages": [
     "pages/personCenter/personCenter",
-    "pages/openList/openList",
+    "pages/authorize/authorize",
+
     "pages/doctorTask/doctorTask",
-    "pages/userManageDetail/userManageDetail",
+    "pages/editData/editData",
+
     "pages/userManage/userManage",
+    "pages/openList/openList",
+    "pages/userManageDetail/userManageDetail",
     "pages/advice/advice",
     "pages/consult/consult",
     "pages/qrcode/qrcode",
     "pages/myMoney/myMoney",
     "pages/myEvaluate/myEvaluate",
     "pages/editDataSuccess/editDataSuccess",
-    "pages/editData/editData",
     "pages/buildReplyLanguage/buildReplyLanguage",
     "pages/replyLanguage/replyLanguage",
     "pages/index/index",

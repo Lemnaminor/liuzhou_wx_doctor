@@ -9,8 +9,17 @@ Page({
     // 路由传参
     doctorId: '000111', // 医生ID
 
+    //设置用户信息
+    userList: [{
+      userName: "未获取",
+      userHeaderUrl: ""
+    }],
+
     // 医生详情数据
     doctorDetail: '',
+
+    // 是否设置在线
+    isOnline: true,
 
   },
 
@@ -41,6 +50,18 @@ Page({
         // complete
       }
     })
+  },
+
+  // 设置是否上线
+  setOnline(e){
+    console.log(`***** 设置是否上线 *****`);
+    console.log(e)
+    var that = this;
+    var isOnline = e.currentTarget.id;
+    that.setData({
+      isOnline: !that.data.isOnline
+    })
+    console.log(that.data.isOnline)
   },
 
   // 跳转我的名片二维码
@@ -115,6 +136,41 @@ Page({
     })
 
     this.doctorDetail(); // 医生详情接口
+
+    let that = this;
+    //登录的信息创建
+    wx.login({
+      success: function(e) {
+        wx.setStorage({
+          key: "key",
+          data: e.errMsg
+        })
+      }
+    })
+    //获取用户的信息
+    wx.getUserInfo({
+      success: function(res) {
+        console.log(`获取用户的信息`);
+        console.log(res);
+        let userInfo = res.userInfo
+        let nickName = userInfo.nickName
+        let avatarUrl = userInfo.avatarUrl
+        //先将信息存放到本地
+        wx.setStorageSync('nickName', nickName);
+        wx.setStorageSync('avatarUrl', avatarUrl);
+
+        let user = [{
+          userName: nickName,
+          userHeaderUrl: avatarUrl,
+        }]
+        that.setData({
+          userList: user,
+        })
+      },
+      fail: function(res) {
+        console.log(res);
+      }
+    })
 
   },
 

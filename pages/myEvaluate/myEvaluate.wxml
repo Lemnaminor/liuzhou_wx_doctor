@@ -11,7 +11,7 @@
                <text class='icon-{{starActive >= item.id?"favorfill":"favor"}} lg text-{{starActive >= item.id?"yellow":"gray"}} margin-right-xs'></text>
         </text>
       </block>
-      <text class='margin-left-xs'>{{starActive}} 星</text>
+      <text class='margin-left-xs'>{{starActive}} 分</text>
     </view>
   </view>
 </view>

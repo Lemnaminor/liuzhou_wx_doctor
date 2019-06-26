@@ -6,6 +6,25 @@ Page({
    */
   data: {
 
+    // 职称列表数据
+    selectWorkList: [
+      '医师',
+      '主治医师',
+      '副主任医师',
+      '主任医师'
+    ],
+    selectWorkListIndex: 0,
+
+    // 科室列表数据
+    selectDepartmentList: [
+      '妇科',
+      '外科',
+      '内科',
+      '皮肤科',
+      '内分泌科'
+    ],
+    selectDepartmentListIndex: 0,
+
     // 医生简介-描述信息
     placeholder: "请填写医生简介描述信息...",
     textMaxLength: 1000,
@@ -25,6 +44,21 @@ Page({
   /**
    * 自定义函数事件
    */
+  // 选择职称
+  selectWorkList: function (e) {
+    console.log('选择职称改变，携带值为', e.detail.value);
+    this.setData({
+      selectWorkListIndex: e.detail.value
+    })
+  },
+
+  // 选择科室
+  selectDepartmentList: function (e) {
+    console.log('选择科室改变，携带值为', e.detail.value);
+    this.setData({
+      selectDepartmentListIndex: e.detail.value
+    })
+  },
 
   // 提交保存
   formSubmit() {

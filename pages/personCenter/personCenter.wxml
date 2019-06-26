@@ -4,11 +4,15 @@
   <view class='doctor-info'>
     <view class='flex align-center'>
       <view class='margin-right'>
-        <view class="cu-avatar xl round margin-left" style="background-image:url({{doctorDetail.doctorIcon}});"></view>
+        <block wx:for="{{userList}}" wx:key="userList">
+          <view class="cu-avatar xl round margin-left" style="background-image:url({{item.userHeaderUrl}});"></view>
+        </block>
       </view>
       <view>
         <view>
-          <text class='text-xl text-bold margin-right-sm'>{{doctorDetail.doctorName}}</text>
+          <block wx:for="{{userList}}" wx:key="userList">
+            <text class='text-xl text-bold margin-right-sm'>{{item.userName}}</text>
+          </block>
           <text>{{doctorDetail.doctorLevel}}</text>
         </view>
         <view>{{doctorDetail.hospitalName}}</view>
@@ -41,10 +45,10 @@
 <view class="cu-form-group margin-top">
   <view class='title'>咨询状态</view>
   <view class='flex-sub text-right'>
-    <text class='text-main'>在线（接受咨询）</text>
-    <!-- <text class='text-gray'>离线（不接受咨询）</text> -->
+    <text wx:if="{{isOnline}}" class='text-main'>在线（接受咨询）</text>
+    <text wx:else class='text-gray'>离线（不接受咨询）</text>
 
-    <switch class='main' checked></switch>
+    <switch class='main' checked bindtap='setOnline' id='{{isOnline}}'></switch>
   </view>
 </view>
 

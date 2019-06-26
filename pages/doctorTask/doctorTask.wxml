@@ -13,21 +13,104 @@
 
     <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
 
-      <!-- 全部 -->1
+      <!-- 全部 -->
+      <view class='padding'>
+
+        <view class='bg-white radius padding margin-bottom-sm' wx:for="{{allDoctorTaskList}}" wx:key="{{allDoctorTaskList.userId}}" bindtap='toConsult' id='{{item.userId}}'>
+          <view class='flex align-center padding-bottom-sm'>
+            <view class="cu-avatar lg radius margin-right-sm" style="background-image:url({{item.userIcon}});"></view>
+            <view class='flex-sub'>
+              <view class='text-black text-lg'>{{item.name}}</view>
+              <view>
+                <text class='text-df margin-right-sm'>{{item.sex}}</text>
+                <text class='text-df'>{{item.age}}岁</text>
+              </view>
+            </view>
+            <view>
+              <text class='icon-right lg text-gray'></text>
+            </view>
+          </view>
+          <view class='flex padding-top-sm solids-top text-df'>
+            <view>图文咨询</view>
+            <view wx:if="{{item.status == 0}}" class='margin-left text-main'>进行中</view>
+            <view wx:elif="{{item.status == 1}}" class='margin-left text-red'>未开始</view>
+            <view wx:if="{{item.status != 1}}" class='flex-sub text-right'>
+              <text class='icon-time lg text-gray margin-right-xs'></text>
+              <text>{{item.endTime}}小时结束</text>
+            </view>
+          </view>
+        </view>
+
+      </view>
 
     </view>
 
     <view class="weui-tab__content advice-complete" hidden="{{activeIndex != 1}}">
 
-      <!-- 进行中 -->2
+      <!-- 进行中 -->
+      <view class='padding'>
+
+        <view class='bg-white radius padding margin-bottom-sm' wx:for="{{beingDoctorTaskList}}" wx:key="{{beingDoctorTaskList.userId}}" bindtap='toConsult' id='{{item.userId}}'>
+          <view class='flex align-center padding-bottom-sm'>
+            <view class="cu-avatar lg radius margin-right-sm" style="background-image:url({{item.userIcon}});"></view>
+            <view class='flex-sub'>
+              <view class='text-black text-lg'>{{item.name}}</view>
+              <view>
+                <text class='text-df margin-right-sm'>{{item.sex}}</text>
+                <text class='text-df'>{{item.age}}岁</text>
+              </view>
+            </view>
+            <view>
+              <text class='icon-right lg text-gray'></text>
+            </view>
+          </view>
+          <view class='flex padding-top-sm solids-top text-df'>
+            <view>图文咨询</view>
+            <view wx:if="{{item.status == 0}}" class='margin-left text-main'>进行中</view>
+            <view wx:elif="{{item.status == 1}}" class='margin-left text-red'>未开始</view>
+            <view wx:if="{{item.status != 1}}" class='flex-sub text-right'>
+              <text class='icon-time lg text-gray margin-right-xs'></text>
+              <text>{{item.endTime}}小时结束</text>
+            </view>
+          </view>
+        </view>
+
+      </view>
 
 
     </view>
 
     <view class="weui-tab__content advice-complete" hidden="{{activeIndex != 2}}">
 
-      <!-- 未开始 -->3
+      <!-- 未开始 -->
+      <view class='padding'>
 
+        <view class='bg-white radius padding margin-bottom-sm' wx:for="{{noDoctorTaskList}}" wx:key="{{noDoctorTaskList.userId}}" bindtap='toConsult' id='{{item.userId}}'>
+          <view class='flex align-center padding-bottom-sm'>
+            <view class="cu-avatar lg radius margin-right-sm" style="background-image:url({{item.userIcon}});"></view>
+            <view class='flex-sub'>
+              <view class='text-black text-lg'>{{item.name}}</view>
+              <view>
+                <text class='text-df margin-right-sm'>{{item.sex}}</text>
+                <text class='text-df'>{{item.age}}岁</text>
+              </view>
+            </view>
+            <view>
+              <text class='icon-right lg text-gray'></text>
+            </view>
+          </view>
+          <view class='flex padding-top-sm solids-top text-df'>
+            <view>图文咨询</view>
+            <view wx:if="{{item.status == 0}}" class='margin-left text-main'>进行中</view>
+            <view wx:elif="{{item.status == 1}}" class='margin-left text-red'>未开始</view>
+            <view wx:if="{{item.status != 1}}" class='flex-sub text-right'>
+              <text class='icon-time lg text-gray margin-right-xs'></text>
+              <text>{{item.endTime}}小时结束</text>
+            </view>
+          </view>
+        </view>
+
+      </view>
 
     </view>
 
