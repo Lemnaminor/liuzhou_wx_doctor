@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/replyLanguage/replyLanguage",
     "pages/personCenter/personCenter",
     "pages/authorize/authorize",
 
@@ -16,7 +17,7 @@
     "pages/myEvaluate/myEvaluate",
     "pages/editDataSuccess/editDataSuccess",
     "pages/buildReplyLanguage/buildReplyLanguage",
-    "pages/replyLanguage/replyLanguage",
+
     "pages/index/index",
     "pages/logs/logs"
   ],

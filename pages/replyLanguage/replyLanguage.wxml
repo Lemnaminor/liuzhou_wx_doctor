@@ -2,7 +2,7 @@
 <!-- 常用语回复管理 -->
 <view class='replyLanguage-box cu-list menu'>
 
-  <view class='cu-item arrow' wx:for="{{replyLanguageList}}" wx:key="{{index}}">
+  <view class='cu-item arrow' wx:for="{{replyLanguageList}}" wx:key="{{index}}" bindtap='showHideReplyLanguageModel'>
     <text class='reply-cont text-cut response'>{{item}}</text>
   </view>
 
@@ -10,4 +10,26 @@
     <button class='cu-btn bg-main lg' bindtap='toBuildReplyLanguage'>新建回复语</button>
   </view>
 
+</view>
+
+<!-- 删除常用语弹出层 -->
+<view class="cu-modal {{isShowReplyLanguageModel?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class='content'>常用回复语管理</view>
+      <view class='action' bindtap='showHideReplyLanguageModel'>
+        <text class='icon-close text-red'></text>
+      </view>
+    </view>
+    <view class='padding-xl'>
+      是否删除此条回复语？
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class='action'>
+        <button class='cu-btn line-main text-main' bindtap='showHideReplyLanguageModel'>取消</button>
+        <button class='cu-btn bg-main margin-left' bindtap='deleteLanguage'>确定</button>
+
+      </view>
+    </view>
+  </view>
 </view>
