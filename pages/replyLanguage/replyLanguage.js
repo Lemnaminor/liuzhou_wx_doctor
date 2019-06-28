@@ -29,12 +29,14 @@ Page({
     })
   },
 
-  // 显示、隐藏常用回复语弹出层
-  showHideReplyLanguageModel() {
-    console.log(`***** 显示、隐藏常用回复语弹出层 *****`);
-    var that = this;
-    that.setData({
-      isShowReplyLanguageModel: !that.data.isShowReplyLanguageModel
+  // 跳转新建回复语页面
+  toBuildReplyLanguage(e){
+    console.log(`***** 跳转新建回复语页面 *****`);
+    console.log(e);
+    var msgId = e.currentTarget.id;
+    console.log(msgId);
+    wx.navigateTo({
+      url: `/pages/buildReplyLanguage/buildReplyLanguage?msgId=${msgId}`,
     })
   },
 
