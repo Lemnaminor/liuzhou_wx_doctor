@@ -2,7 +2,7 @@
 <!-- 常用语回复管理 -->
 <view class='replyLanguage-box cu-list menu'>
 
-  <view class='cu-item arrow' wx:for="{{replyLanguageList}}" wx:key="{{index}}">
+  <view class='cu-item arrow' wx:for="{{replyLanguageList}}" wx:key="{{index}}" bindtap='toBuildReplyLanguage' id='{{111111}}'>
     <text class='reply-cont text-cut response'>{{item}}</text>
   </view>
 
@@ -11,3 +11,4 @@
   </view>
 
 </view>
+
