@@ -8,6 +8,9 @@ Page({
    */
   data: {
 
+    // 路由传参
+    doctorId: '', // 医生ID
+
     // tab导航数据
     tabs: ["进行中", "已完成"],
     activeIndex: 0,
@@ -120,8 +123,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+
+    console.log(`***** 进入我的评价页面 *****`);
+    console.log(options);
+    this.setData({
+      doctorId: options.doctorId
+    })
+
+    wx.showLoading({
+      title: '数据加载中',
+    })
+
+    this.beingAdviceList(); // 进行中-咨询记录接口
+
+    wx.hideLoading();
     
-    this.beingAdviceList();
     //tab切换
     var that = this;
     wx.getSystemInfo({

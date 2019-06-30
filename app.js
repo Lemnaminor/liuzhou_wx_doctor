@@ -34,6 +34,8 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    //  path : `http://10.35.112.203:8080`
+    path: `http://172.28.17.11:8080`
   }
 })

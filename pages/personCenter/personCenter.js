@@ -7,7 +7,7 @@ Page({
   data: {
 
     // 路由传参
-    doctorId: '000111', // 医生ID
+    doctorId: '1', // 医生ID
 
     //设置用户信息
     userList: [{
@@ -19,7 +19,7 @@ Page({
     doctorDetail: '',
 
     // 是否设置在线
-    isOnline: true,
+    isOnline: '',
 
   },
 
@@ -29,9 +29,9 @@ Page({
   // 医生详情接口
   doctorDetail: function() {
     var that = this;
+    var doctorId = that.data.doctorId;
     wx.request({
-      // url: getApp().globalData.path + `/hospc/lgDoctor/doctor/detail/${that.data.doctorId}/openId`,
-      url: 'https://www.easy-mock.com/mock/5d09a09ce9fb5077ed6eb899/api/doctor/detail',
+      url: getApp().globalData.path + `/hospc/enterprise/mycenter?doctorId=${doctorId}`,
       data: {},
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
@@ -39,9 +39,17 @@ Page({
         console.log('***** 医生详情接口调用 *****');
         console.log(res);
         that.setData({
-          // doctorDetail: res.data.result
-          doctorDetail: res.data
+          doctorDetail: res.data.data
         });
+        if (res.data.data.onlineState == 0){
+          that.setData({
+            isOnline: true
+          })
+        }else{
+          that.setData({
+            isOnline: false
+          })
+        }
       },
       fail: function() {
         // fail
@@ -58,9 +66,38 @@ Page({
     console.log(e)
     var that = this;
     var isOnline = e.currentTarget.id;
-    that.setData({
-      isOnline: !that.data.isOnline
+    var doctorId = that.data.doctorId;
+    var consulStatus;
+
+    if(isOnline == true){
+      consulStatus = 1;
+    }else{
+      consulStatus = 0;
+    }
+
+    wx.request({
+      url: getApp().globalData.path + `/hospc/enterprise/exitonlinestate?doctorId=${doctorId}&consulStatus=${consulStatus}`,
+      data: {
+        doctorId: that.data.doctorId,
+        consulStatus: consulStatus
+      },
+      method: 'POST', 
+      // header: {}, // 设置请求的 header
+      success: function (res) {
+        console.log('***** 改变上线、离线状态成功 *****');
+        console.log(res);
+        that.setData({
+          isOnline: !that.data.isOnline
+        })
+      },
+      fail: function () {
+        // fail
+      },
+      complete: function () {
+        // complete
+      }
     })
+
     console.log(that.data.isOnline)
   },
 
@@ -78,9 +115,9 @@ Page({
   toEditData(e) {
     console.log('***** 跳转编辑资料页面 *****');
     console.log(e.currentTarget.id);
-    var personId = e.currentTarget.id; // 设置二维码页面路由ID
+    var doctorId = e.currentTarget.id;
     wx.navigateTo({
-      url: `/pages/editData/editData`,
+      url: `/pages/editData/editData?doctorId=${doctorId}`,
     })
   },
 
@@ -88,9 +125,9 @@ Page({
   toMyEvaluate(e) {
     console.log('***** 跳转我的评价页面 *****');
     console.log(e.currentTarget.id);
-    var personId = e.currentTarget.id; // 设置二维码页面路由ID
+    var doctorId = e.currentTarget.id;
     wx.navigateTo({
-      url: `/pages/myEvaluate/myEvaluate`,
+      url: `/pages/myEvaluate/myEvaluate?doctorId=${doctorId}`,
     })
   },
 
@@ -108,9 +145,9 @@ Page({
   toReplyLanguage(e) {
     console.log('***** 跳转常用回复页面 *****');
     console.log(e.currentTarget.id);
-    var personId = e.currentTarget.id; // 设置二维码页面路由ID
+    var doctorId = e.currentTarget.id;
     wx.navigateTo({
-      url: `/pages/replyLanguage/replyLanguage`,
+      url: `/pages/replyLanguage/replyLanguage?doctorId=${doctorId}`,
     })
   },
 
@@ -118,9 +155,9 @@ Page({
   toAdvice(e) {
     console.log('***** 跳转咨询记录页面 *****');
     console.log(e.currentTarget.id);
-    var personId = e.currentTarget.id; // 设置二维码页面路由ID
+    var doctorId = e.currentTarget.id;
     wx.navigateTo({
-      url: `/pages/advice/advice`,
+      url: `/pages/advice/advice?doctorId=${doctorId}`,
     })
   },
 

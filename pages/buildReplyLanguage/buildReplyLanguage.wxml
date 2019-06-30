@@ -1,21 +1,47 @@
 <!--pages/buildReplyLanguage/buildReplyLanguage.wxml-->
-<!-- 新建常用回复语 -->
-<view class='buildReplayLanguage-box textarea-wrp bg-white padding'>
-  <textarea class='response' wx:if="{{isShowMask}}" value='{{content}}' placeholder="{{placeholder}}" maxlength="{{textMaxLength}}" bindinput="bindText" />
-  <view class='textLength text-right text-gray'>
-    <text>{{writeLength}}</text> /
-    <text>{{textMaxLength}}</text>
+<form wx:if="{{isChangeRouter == false}}" bindsubmit='addReplyLanguage'>
+  <!-- 新建-常用回复语 -->
+  <input hidden value="{{doctorId}}" name="doctorId"></input>
+  <view class='buildReplayLanguage-box textarea-wrp bg-white padding'>
+    <textarea class='response' wx:if="{{isShowMask}}" value='{{content}}' placeholder="{{placeholder}}" maxlength="{{textMaxLength}}" bindinput="bindText" name="replieComent" />
+    <view class='textLength text-right text-gray'>
+      <text>{{writeLength}}</text> /
+      <text>{{textMaxLength}}</text>
+    </view>
   </view>
-</view>
 
-<view class='flex padding'>
-  <view class='flex-sub padding-lr-xs'>
-    <button class='cu-btn bg-red lg response' bindtap='showHideReplyLanguageModel'>删除</button>
+  <view  class='flex padding'>
+    <view class='flex-sub padding-lr-xs'>
+      <button class='cu-btn bg-red lg response' bindtap='resetForm'>重置</button>
+    </view>
+    <view class='flex-sub padding-lr-xs'>
+      <button class='cu-btn bg-main lg response' form-type='submit'>保存</button>
+    </view>
   </view>
-   <view class='flex-sub padding-lr-xs'>
-    <button class='cu-btn bg-main lg response' bindtap='formSubmit'>保存</button>
+</form>
+
+<form wx:if="{{isChangeRouter == true}}" bindsubmit='changeReplyLanguage'>
+  <!-- 修改-常用回复语 -->
+  <input hidden value="{{doctorId}}" name="doctorId"></input>
+  <input hidden value="{{replieID}}" name="replieID"></input>
+  <view class='buildReplayLanguage-box textarea-wrp bg-white padding'>
+    <textarea class='response' wx:if="{{isShowMask}}" value='{{content}}' placeholder="{{placeholder}}" maxlength="{{textMaxLength}}" bindinput="bindText" name="replieComent" />
+    <view class='textLength text-right text-gray'>
+      <text>{{writeLength}}</text> /
+      <text>{{textMaxLength}}</text>
+    </view>
   </view>
-</view>
+
+  <view class='flex padding'>
+    <view class='flex-sub padding-lr-xs'>
+      <button class='cu-btn bg-red lg response' bindtap='showHideReplyLanguageModel'>删除</button>
+    </view>
+    <view class='flex-sub padding-lr-xs'>
+      <button class='cu-btn bg-main lg response' form-type='submit'>保存</button>
+    </view>
+  </view>
+</form>
+
 
 <!-- 删除常用语弹出层 -->
 <view class="cu-modal {{isShowReplyLanguageModel?'show':''}}">
@@ -32,7 +58,7 @@
     <view class="cu-bar bg-white justify-end">
       <view class='action'>
         <button class='cu-btn line-main text-main' bindtap='showHideReplyLanguageModel'>取消</button>
-        <button class='cu-btn bg-main margin-left' bindtap='deleteLanguage'>确定</button>
+        <button class='cu-btn bg-main margin-left' bindtap='deleteReplyLanguage'>确定</button>
 
       </view>
     </view>

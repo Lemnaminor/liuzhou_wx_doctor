@@ -6,6 +6,9 @@ Page({
    */
   data: {
 
+    // 路由传参
+    doctorId: '', // 医生ID
+
     // 常用回复语数据
     replyLanguageList: [
       '这样的症状持续几天了？',
@@ -21,41 +24,78 @@ Page({
    * 自定义事件方法
    */
 
-  // 跳转新建回复语页面
-  toBuildReplyLanguage() {
-    console.log(`***** 跳转新建回复语页面 *****`);
+  // 常用回复语接口
+  replyLanguageList: function () {
+    var that = this;
+    var doctorId = that.data.doctorId;
+    wx.request({
+      url: getApp().globalData.path + `/hospc/enterprise/commonReplies?doctorId=${doctorId}`,
+      data: {},
+      method: 'GET',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        console.log("***** 常用回复语接口 *****")
+        console.log(res);
+        that.setData({
+          replyLanguageList: res.data.data.list
+        });
+      },
+      fail: function () {
+        // fail
+      },
+      complete: function () {
+        // complete
+      }
+    })
+  },
+
+  // 列表跳转新建回复语页面
+  listToBuildReplyLanguage(e){
+    console.log(`***** 列表跳转新建回复语页面 *****`);
+    console.log(e);
+    var that = this;
+    var doctorId = that.data.doctorId;
+    var replieID = e.currentTarget.dataset.replieid;
+    var repliecoment = e.currentTarget.dataset.repliecoment;
+    console.log(`replieID值：${replieID},repliecoment值：${repliecoment}`);
     wx.navigateTo({
-      url: '/pages/buildReplyLanguage/buildReplyLanguage',
+      url: `/pages/buildReplyLanguage/buildReplyLanguage?doctorId=${doctorId}&replieID=${replieID}&repliecoment=${repliecoment}`,
     })
   },
 
   // 跳转新建回复语页面
-  toBuildReplyLanguage(e){
+  toBuildReplyLanguage(e) {
     console.log(`***** 跳转新建回复语页面 *****`);
     console.log(e);
-    var msgId = e.currentTarget.id;
-    console.log(msgId);
+    var that = this;
+    var doctorId = that.data.doctorId;
+    console.log(doctorId);
     wx.navigateTo({
-      url: `/pages/buildReplyLanguage/buildReplyLanguage?msgId=${msgId}`,
+      url: `/pages/buildReplyLanguage/buildReplyLanguage?doctorId=${doctorId}`,
     })
   },
 
-  // 删除常用语
-  deleteLanguage() {
-    console.log(`***** 删除常用语 *****`);
-    var that = this;
-    that.setData({
-      isShowReplyLanguageModel: !that.data.isShowReplyLanguageModel
-    })
-    wx.showToast({
-      title: '删除成功',
-    })
-  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+
+    console.log(`***** 进入常用语回复页面 *****`);
+    console.log(options);
+    this.setData({
+      doctorId: options.doctorId
+    })
+
+    wx.showLoading({
+      title: '数据加载中',
+    })
+
+    this.replyLanguageList(); // 游客评论接口
+
+    wx.hideLoading();
 
   },
 

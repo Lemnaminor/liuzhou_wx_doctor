@@ -7,7 +7,7 @@ Page({
   data: {
 
     // 路由传参
-    doctorId: '000111', // 医生ID
+    doctorId: '', // 医生ID
 
     // 星星数量
     starList: [{
@@ -23,73 +23,11 @@ Page({
     }],
     starActive: 4,
 
+    // 评价总条数
+    evaluateCount: 0,
+
     // 游客评价数据
-    evaluateList: [{
-        "openId": "324223",
-        "thePatientId": "324223",
-        "evaluateLabelSeqText": [
-          "有帮助",
-          "回复及时"
-        ],
-      "evaluateContent": "回答很及时，回答很详细，很有帮助。回答很及时，回答很详细，很有帮助。",
-        "starLevel": 5,
-        "wxIcon": "../../images/head1.jpg",
-        "patientName": "张**"
-      },
-      {
-        "openId": "324223",
-        "thePatientId": "324223",
-        "evaluateLabelSeqText": [
-          "回复及时",
-          "有耐心",
-          "回答详细"
-        ],
-        "evaluateContent": "回答没有太多用处。",
-        "starLevel": 4,
-        "wxIcon": "../../images/head2.jpg",
-        "patientName": "李**"
-      },
-      {
-        "openId": "324223",
-        "thePatientId": "324223",
-        "evaluateLabelSeqText": [
-          "通俗易懂",
-          "有耐心",
-          "有帮助",
-          "回复详细",
-          "回复及时"
-        ],
-        "evaluateContent": "医生经验丰富，不错。",
-        "starLevel": 5,
-        "wxIcon": "../../images/head3.jpg",
-        "patientName": "梁**"
-      },
-      {
-        "openId": "324223",
-        "thePatientId": "324223",
-        "evaluateLabelSeqText": [
-          "通俗易懂",
-          "有帮助",
-          "回复详细"
-        ],
-        "evaluateContent": "没有耐心。",
-        "starLevel": 3,
-        "wxIcon": "../../images/head4.jpg",
-        "patientName": "廖**"
-      },
-      {
-        "openId": "324223",
-        "thePatientId": "324223",
-        "evaluateLabelSeqText": [
-          "通俗易懂",
-          "有帮助"
-        ],
-        "evaluateContent": "回复很快。回答很好。",
-        "starLevel": 5,
-        "wxIcon": "../../images/head5.jpg",
-        "patientName": "软**"
-      }
-    ],
+    evaluateList:[],
 
   },
 
@@ -99,16 +37,20 @@ Page({
   // 游客评价接口
   evaluateList: function() {
     var that = this;
+    var doctorId = that.data.doctorId;
     wx.request({
-      // url: `http://10.35.112.203:8080/hospc/lgDoctor/doctor/evaluateList/${that.data.doctorId}/1/20`,
+      url: getApp().globalData.path + `/hospc/enterprise/myEvaluateNum?doctorId=${doctorId}`,
       data: {},
-      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-      // header: {}, // 设置请求的 header
+      method: 'GET',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
       success: function(res) {
         console.log("***** 游客评价接口 *****")
-        console.log(res.data);
+        console.log(res);
         that.setData({
-          evaluateList: res.data.result.list
+          evaluateList: res.data.data,
+          evaluateCount: res.data.data.length
         });
       },
       fail: function() {
@@ -128,7 +70,7 @@ Page({
     console.log(`***** 进入我的评价页面 *****`);
     console.log(options);
     this.setData({
-      // doctorId: options.doctorId
+      doctorId: options.doctorId
     })
 
     wx.showLoading({
@@ -194,27 +136,7 @@ Page({
   onReachBottom: function() {
 
     console.log("上拉触底");
-    var that = this;
 
-    wx.request({
-      url: `http://10.35.112.203:8080/hospc/lgDoctor/doctor/evaluateList/${that.data.doctorId}/1/20`,
-      data: {},
-      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-      // header: {}, // 设置请求的 header
-      success: function(res) {
-        console.log("***** 游客评价接口 *****")
-        console.log(res.data);
-        that.setData({
-          evaluateList: that.data.evaluateList.concat(res.data.result.list)
-        });
-      },
-      fail: function() {
-        // fail
-      },
-      complete: function() {
-        // complete
-      }
-    })
 
 
 

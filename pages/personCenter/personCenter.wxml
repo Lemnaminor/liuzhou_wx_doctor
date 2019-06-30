@@ -13,9 +13,9 @@
           <block wx:for="{{userList}}" wx:key="userList">
             <text class='text-xl text-bold margin-right-sm'>{{item.userName}}</text>
           </block>
-          <text>{{doctorDetail.doctorLevel}}</text>
+          <text>{{doctorDetail.doctorLevelDict}}</text>
         </view>
-        <view>{{doctorDetail.hospitalName}}</view>
+        <view>{{doctorDetail.hosp_Name}}</view>
         <view>{{doctorDetail.deptName}}</view>
       </view>
     </view>
@@ -30,7 +30,7 @@
         <text>条评价</text>
       </view>
       <view>
-        <text class='text-xl text-bold margin-right-sm'>{{doctorDetail.collectionNum}}</text>
+        <text class='text-xl text-bold margin-right-sm'>{{doctorDetail.commentNum}}</text>
         <text>个收藏</text>
       </view>
     </view>
@@ -48,7 +48,7 @@
     <text wx:if="{{isOnline}}" class='text-main'>在线（接受咨询）</text>
     <text wx:else class='text-gray'>离线（不接受咨询）</text>
 
-    <switch class='main' checked bindtap='setOnline' id='{{isOnline}}'></switch>
+    <switch class='main' checked='{{isOnline}}' bindtap='setOnline' id='{{isOnline}}'></switch>
   </view>
 </view>
 
