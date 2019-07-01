@@ -41,13 +41,13 @@ Page({
         that.setData({
           doctorDetail: res.data.data
         });
-        if (res.data.data.onlineState == 0){
-          that.setData({
-            isOnline: true
-          })
-        }else{
+        if (res.data.data.onlineState == 0){ // 0-离线
           that.setData({
             isOnline: false
+          })
+        }else{
+          that.setData({// 1-在线
+            isOnline: true
           })
         }
       },
@@ -68,13 +68,13 @@ Page({
     var isOnline = e.currentTarget.id;
     var doctorId = that.data.doctorId;
     var consulStatus;
-
     if(isOnline == true){
-      consulStatus = 1;
+      consulStatus = 1
     }else{
-      consulStatus = 0;
+      consulStatus = 0
     }
-
+    // var consulStatus = that.data.consulStatus;
+    console.log(`在线状态：${consulStatus}`);
     wx.request({
       url: getApp().globalData.path + `/hospc/enterprise/exitonlinestate?doctorId=${doctorId}&consulStatus=${consulStatus}`,
       data: {
