@@ -11,6 +11,9 @@ Page({
     // 路由传参
     doctorId: '', // 医生ID
 
+    // 咨询状态数据
+    consulStatus: '',
+
     // tab导航数据
     tabs: ["进行中", "已完成"],
     activeIndex: 0,
@@ -18,31 +21,10 @@ Page({
     sliderLeft: 0,
 
     // 咨询记录-进行中数据
-    beingAdviceList: [{
-      doctorIcon: '../../images/head1.jpg',
-      doctorName: '张三',
-      sex: '男',
-      age: '20',
-      content: '请问手术大概多少费用？',
-      time: '2019-06-06',
-    }],
+    beingAdviceList: [],
 
     // 咨询记录-已完成数据
-    successAdviceList: [{
-      doctorIcon: '../../images/head2.jpg',
-      doctorName: '张三',
-      sex: '男',
-      age: '20',
-      content: '请问手术大概多少费用？',
-      time: '2019-06-06',
-    }, {
-      doctorIcon: '../../images/head4.jpg',
-      doctorName: '李四',
-      sex: '男',
-      age: '33',
-      content: '医生你好。',
-      time: '2019-06-06',
-    }],
+    successAdviceList: [],
 
   },
 
@@ -56,14 +38,21 @@ Page({
     });
 
     //tab切换判断内容是否为空请求数据
+    var that = this;
     var index = parseInt(e.currentTarget.id);
     switch (index) {
       case 0:
         console.log(`进行中`);
+        that.setData({
+          consulStatus: '1'
+        })
         this.beingAdviceList();
         break;
       case 1:
         console.log(`已完成`);
+        that.setData({
+          consulStatus: '2'
+        })
         this.successAdviceList();
         break;
     }
@@ -73,18 +62,23 @@ Page({
   // 进行中-数据请求
   beingAdviceList() {
     var that = this;
+    var doctorId = that.data.doctorId;
+    var consulStatus = that.data.consulStatus;
     wx.request({
-      url: app.globalData.path + '/hospc/lgDoctor/doctor/consultationRecords/openId/1/10/1',
+      url: app.globalData.path + `/hospc/enterprise/consultationRecords?doctorId=${doctorId}&consulStatus=${consulStatus}`,
       data: {},
-      method: 'GET',
-      success: function(res) {
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
         console.log('***** 进行中-数据请求 *****');
         console.log(res);
         that.setData({
-          beingAdviceList: res.data.result.list
+          beingAdviceList: res.data.data.list
         });
       },
-      fail: function() {
+      fail: function () {
 
       }
     })
@@ -93,18 +87,23 @@ Page({
   // 已完成-数据请求
   successAdviceList() {
     var that = this;
+    var doctorId = that.data.doctorId;
+    var consulStatus = that.data.consulStatus;
     wx.request({
-      url: '',
+      url: app.globalData.path + `/hospc/enterprise/consultationRecords?doctorId=${doctorId}&consulStatus=${consulStatus}`,
       data: {},
-      method: 'GET',
-      success: function(res) {
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
         console.log('***** 已完成-数据请求 *****');
         console.log(res);
         that.setData({
-          successAdviceList: res.data.result.list
+          successAdviceList: res.data.data.list
         });
       },
-      fail: function() {
+      fail: function () {
 
       }
     })

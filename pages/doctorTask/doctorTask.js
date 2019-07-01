@@ -8,6 +8,12 @@ Page({
    */
   data: {
 
+    // 路由传参
+    doctorId: '1', // 医生ID
+
+    // 任务状态数据
+    consulStatus: '',
+
     // tab导航数据
     tabs: ["全部", "进行中", "未开始"],
     activeIndex: 0,
@@ -15,45 +21,13 @@ Page({
     sliderLeft: 0,
 
     // 全部任务列表数据
-    allDoctorTaskList: [{
-      userId: '000001',
-      userIcon: '../../images/head1.jpg',
-      name: '张三',
-      sex: '男',
-      age: '20',
-      status: '0',
-      endTime: '6',
-    }, {
-      userId: '000002',
-      userIcon: '../../images/head2.jpg',
-      name: '李四',
-      sex: '男',
-      age: '30',
-      status: '1',
-      endTime: '3',
-    }],
+    allDoctorTaskList: [],
 
     // 进行中-任务列表数据
-    beingDoctorTaskList: [{
-      userId: '000001',
-      userIcon: '../../images/head1.jpg',
-      name: '张三',
-      sex: '男',
-      age: '20',
-      status: '0',
-      endTime: '6',
-    }],
+    beingDoctorTaskList: [],
 
     // 未开始-任务列表数据
-    noDoctorTaskList: [{
-      userId: '000002',
-      userIcon: '../../images/head2.jpg',
-      name: '李四',
-      sex: '男',
-      age: '30',
-      status: '1',
-      endTime: '3',
-    }],    
+    noDoctorTaskList: [],    
 
   },
 
@@ -67,6 +41,7 @@ Page({
     });
 
     //tab切换判断内容是否为空请求数据
+    var that = this;
     var index = parseInt(e.currentTarget.id);
     switch (index) {
       case 0:
@@ -75,10 +50,16 @@ Page({
         break;
       case 1:
         console.log(`进行中`);
+        that.setData({
+          consulStatus: '1'
+        })
         this.beingDoctorTaskList();
         break;
       case 2:
         console.log(`未开始`);
+        that.setData({
+          consulStatus: '2'
+        })
         this.noDoctorTaskList();
         break;
     }
@@ -88,15 +69,19 @@ Page({
   // 全部-数据请求
   allDoctorTaskList() {
     var that = this;
+    var doctorId = that.data.doctorId;
     wx.request({
-      url: app.globalData.path + '/hospc/lgDoctor/doctor/consultationRecords/openId/1/10/1',
+      url: app.globalData.path + `/hospc/doctorTask/finddoctorTask?doctorId=${doctorId}`,
       data: {},
       method: 'GET',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
       success: function (res) {
         console.log('***** 全部-数据请求 *****');
         console.log(res);
         that.setData({
-          allDoctorTaskList: res.data.result.list
+          allDoctorTaskList: res.data.data.list
         });
       },
       fail: function () {
@@ -108,15 +93,20 @@ Page({
   // 进行中-数据请求
   beingDoctorTaskList() {
     var that = this;
+    var doctorId = that.data.doctorId;
+    var consulStatus = that.data.consulStatus;
     wx.request({
-      url: app.globalData.path + '/hospc/lgDoctor/doctor/consultationRecords/openId/1/10/1',
+      url: app.globalData.path + `/hospc/doctorTask/finddoctorTaskBydoctorId?doctorId=${doctorId}&consulStatus=${consulStatus}`,
       data: {},
       method: 'GET',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
       success: function (res) {
         console.log('***** 进行中-数据请求 *****');
         console.log(res);
         that.setData({
-          beingDoctorTaskList: res.data.result.list
+          beingDoctorTaskList: res.data.data.list
         });
       },
       fail: function () {
@@ -128,15 +118,20 @@ Page({
   // 未开始-数据请求
   noDoctorTaskList() {
     var that = this;
+    var doctorId = that.data.doctorId;
+    var consulStatus = that.data.consulStatus;
     wx.request({
-      url: app.globalData.path + '/hospc/lgDoctor/doctor/consultationRecords/openId/1/10/1',
+      url: app.globalData.path + `/hospc/doctorTask/finddoctorTaskBydoctorId?doctorId=${doctorId}&consulStatus=${consulStatus}`,
       data: {},
       method: 'GET',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
       success: function (res) {
         console.log('***** 未开始-数据请求 *****');
         console.log(res);
         that.setData({
-          noDoctorTaskList: res.data.result.list
+          noDoctorTaskList: res.data.data.list
         });
       },
       fail: function () {

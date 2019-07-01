@@ -15,18 +15,18 @@
 
       <!-- 咨询-进行中 -->
       <view class='cu-list menu menu-avatar'>
-        <view class="cu-item" wx:for="{{beingAdviceList}}" wx:key="{{beingAdviceList.doctorId}}" bindtap='toConsult'>
-          <view class="cu-avatar radius lg" style="background-image:url({{item.doctorIcon}});"></view>
+        <view class="cu-item" wx:for="{{beingAdviceList}}" wx:key="{{beingAdviceList.patientId}}" bindtap='toConsult' data-patientId="{{item.patientId}}">
+          <view class="cu-avatar radius lg" style="background-image:url({{item.wxIcon}});"></view>
           <view class='content'>
             <view class='text-cut' style='width:400rpx;'>
-              <text class='text-xl'>{{item.doctorName}}</text>
-              <text class='margin-lr-sm text-gray'>{{item.sex}}</text>
-              <text class='text-gray'>{{item.age}}</text>
+              <text class='text-xl'>{{item.patientName}}</text>
+              <text class='margin-lr-sm text-gray'>{{item.genderDict}}</text>
+              <text class='text-gray'>{{item.patientAge}}</text>
             </view>
-            <view class='text-gray text-cut' style='width:400rpx;'>{{item.content}}</view>
+            <view class='text-gray text-cut' style='width:400rpx;'>{{item.lastReplieWord}}</view>
           </view>
           <view class='action'>
-            <view class='text-gray text-sm'>{{item.time}}</view>
+            <view class='text-gray text-sm'>{{item.consulTime}}</view>
             <button class='cu-btn radius line sm text-main'>进入聊天</button>
           </view>
         </view>
@@ -39,18 +39,18 @@
       <!-- 咨询-已完成 -->
       <view class='cu-list menu menu-avatar'>
 
-        <view class="cu-item" wx:for="{{successAdviceList}}" wx:key="{{successAdviceList.doctorId}}" bindtap='toConsult'>
-          <view class="cu-avatar radius lg" style="background-image:url({{item.doctorIcon}});"></view>
+        <view class="cu-item" wx:for="{{successAdviceList}}" wx:key="{{successAdviceList.patientId}}" bindtap='toConsult' data-patientId="{{item.patientId}}">
+          <view class="cu-avatar radius lg" style="background-image:url({{item.wxIcon}});"></view>
           <view class='content'>
             <view class='text-cut' style='width:400rpx;'>
-              <text class='text-xl'>{{item.doctorName}}</text>
-              <text class='margin-lr-sm text-gray'>{{item.sex}}</text>
+              <text class='text-xl'>{{item.patientName}}</text>
+              <text class='margin-lr-sm text-gray'>{{item.genderDict}}</text>
               <text class='text-gray'>{{item.age}}</text>
             </view>
-            <view class='text-gray text-cut' style='width:400rpx;'>{{item.content}}</view>
+            <view class='text-gray text-cut' style='width:400rpx;'>{{item.lastReplieWord}}</view>
           </view>
           <view class='action'>
-            <view class='text-gray text-sm'>{{item.time}}</view>
+            <view class='text-gray text-sm'>{{item.consulTime}}</view>
           </view>
         </view>
         <!-- <view class='text-right bg-white solids-bottom padding-bottom-sm'>

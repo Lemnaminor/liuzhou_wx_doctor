@@ -1,14 +1,12 @@
 {
   "pages": [
     "pages/personCenter/personCenter",
-      "pages/replyLanguage/replyLanguage",
-    "pages/buildReplyLanguage/buildReplyLanguage",
-  
-
-    "pages/authorize/authorize",
     "pages/doctorTask/doctorTask",
-    "pages/editData/editData",
     "pages/userManage/userManage",
+    "pages/replyLanguage/replyLanguage",
+    "pages/buildReplyLanguage/buildReplyLanguage",
+    "pages/authorize/authorize",
+    "pages/editData/editData",
     "pages/openList/openList",
     "pages/userManageDetail/userManageDetail",
     "pages/advice/advice",

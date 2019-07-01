@@ -18,23 +18,23 @@
         <view class='userManage-list padding bg-white radius margin-top-sm' wx:for="{{allUserManageList}}" wx:key="{{allUserManageList.id}}" bindtap='toUserManageDetail' id='{{item.id}}'>
           <view class='flex align-center solids-bottom padding-bottom-sm margin-bottom-sm'>
             <view>
-              <view class="cu-avatar radius margin-right-sm" style="background-image:url({{item.userIcon}});"></view>
+              <view class="cu-avatar radius margin-right-sm" style="background-image:url({{item.wxIcon}});"></view>
             </view>
             <view>
-              <text class='text-bold text-lg text-black margin-right-sm'>{{item.name}}</text>
-              <text class='margin-right-sm'>{{item.sex}}</text>
+              <text class='text-bold text-lg text-black margin-right-sm'>{{item.patientName}}</text>
+              <text class='margin-right-sm'>{{item.genderDict}}</text>
               <text>{{item.age}}岁</text>
             </view>
-            <view wx:if="{{item.isStar == 0}}" class='flex-sub text-right'>
+            <view wx:if="{{item.isStar == 1}}" class='flex-sub text-right'>
               <view class='text-xxl'>
                 <text class='icon-favorfill lg text-yellow'></text>
               </view>
             </view>
           </view>
-          <view>就诊卡号：{{item.hospitalCard}}</view>
-          <view>最近咨询：{{item.lastTime}}</view>
-          <view>病历：{{item.hospitalRecode}} 份</view>
-          <view>检查检验报告：{{item.checkReport}} 份</view>
+          <view>就诊卡号：{{item.visitCardNum}}</view>
+          <view>最近咨询：{{item.consulTime}}</view>
+          <view>病历：{{item.medicalRecordNum}} 份</view>
+          <view>检查检验报告：{{item.inspectionReportNum}} 份</view>
         </view>
       </view>
 
@@ -47,23 +47,23 @@
         <view class='userManage-list padding bg-white radius margin-top-sm' wx:for="{{starUserManageList}}" wx:key="{{starUserManageList.id}}" bindtap='toUserManageDetail'>
           <view class='flex align-center solids-bottom padding-bottom-sm margin-bottom-sm'>
             <view>
-              <view class="cu-avatar radius margin-right-sm" style="background-image:url({{item.userIcon}});"></view>
+              <view class="cu-avatar radius margin-right-sm" style="background-image:url({{item.wxIcon}});"></view>
             </view>
             <view>
-              <text class='text-bold text-lg text-black margin-right-sm'>{{item.name}}</text>
-              <text class='margin-right-sm'>{{item.sex}}</text>
+              <text class='text-bold text-lg text-black margin-right-sm'>{{item.patientName}}</text>
+              <text class='margin-right-sm'>{{item.genderDict}}</text>
               <text>{{item.age}}岁</text>
             </view>
-            <view wx:if="{{item.isStar == 0}}" class='flex-sub text-right'>
+            <view wx:if="{{item.isStar == 1}}" class='flex-sub text-right'>
               <view class='text-xxl'>
                 <text class='icon-favorfill lg text-yellow'></text>
               </view>
             </view>
           </view>
-          <view>就诊卡号：{{item.hospitalCard}}</view>
-          <view>最近咨询：{{item.lastTime}}</view>
-          <view>病历：{{item.hospitalRecode}} 份</view>
-          <view>检查检验报告：{{item.checkReport}} 份</view>
+          <view>就诊卡号：{{item.visitCardNum}}</view>
+          <view>最近咨询：{{item.consulTime}}</view>
+          <view>病历：{{item.medicalRecordNum}} 份</view>
+          <view>检查检验报告：{{item.inspectionReportNum}} 份</view>
         </view>
       </view>
 

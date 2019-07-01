@@ -4,12 +4,12 @@
   <view class='doctor-info'>
     <view class='flex align-center'>
       <view class='margin-right'>
-        <view class="cu-avatar xl round margin-left" style="background-image:url({{userDetailList.userIcon}});"></view>
+        <view class="cu-avatar xl round margin-left" style="background-image:url({{userDetailList.wxIcon}});"></view>
       </view>
       <view class='flex-sub'>
         <view class='flex'>
           <view>
-            <text class='text-xl text-bold margin-right-sm'>{{userDetailList.name}}</text>
+            <text class='text-xl text-bold margin-right-sm'>{{userDetailList.patientName}}</text>
           </view>
           <view class='flex-sub text-right'>
             <button class='cu-btn margin-right-sm text-white' bindtap='changeCollection'>
@@ -17,10 +17,10 @@
           </view>
         </view>
         <view>
-          <text class='margin-right-sm'>{{userDetailList.sex}}</text>
+          <text class='margin-right-sm'>{{userDetailList.genderDict}}</text>
           <text>{{userDetailList.age}}岁</text>
         </view>
-        <view>就诊卡号：{{userDetailList.hospitalCard}}</view>
+        <view>就诊卡号：{{userDetailList.visitCardNum}}</view>
 
       </view>
     </view>
@@ -34,7 +34,7 @@
   <view class='flex margin-tb-lg'>
     <view class='flex-sub flex align-center'>
       <view class='personCenter-icon bg-{{isDisabled?"gray":"blue"}} round margin-right-sm text-center flex align-center'>
-        <text class='text-xxl'><text class='icon-profilefill lg text-white'></text></text>
+        <text class='text-xxl'><text class='icon-formfill lg text-white'></text></text>
       </view>
       <view class='flex-sub'>
         <view class='text-{{isDisabled?"gray":"black"}} text-lg'>电子病历</view>
@@ -43,7 +43,7 @@
     </view>
     <view class='flex-sub flex align-center'>
       <view class='personCenter-icon bg-{{isDisabled?"gray":"purple"}} round margin-right-sm text-center flex align-center'>
-        <text class='text-xxl'><text class='icon-settingsfill lg text-white'></text></text>
+        <text class='text-xxl'><text class='icon-formfill lg text-white'></text></text>
       </view>
       <view class='flex-sub'>
         <view class='text-{{isDisabled?"gray":"black"}} text-lg'>检查检验</view>
@@ -53,18 +53,18 @@
   </view>
 
   <view class='flex margin-tb-lg'>
-    <view class='flex-sub flex align-center' bindtap='toConsult' id="{{userId}}">
+    <view class='flex-sub flex align-center' bindtap='toConsult' id="{{thePatientId}}">
       <view class='personCenter-icon bg-orange round margin-right-sm text-center flex align-center'>
-        <text class='text-xxl'><text class='icon-appreciatefill lg text-white'></text></text>
+        <text class='text-xxl'><text class='icon-samefill lg text-white'></text></text>
       </view>
       <view class='flex-sub'>
         <view class='text-black text-lg'>咨询记录</view>
         <view class='text-gray'>我与该患者的线上咨询记录</view>
       </view>
     </view>
-    <view class='flex-sub flex align-center' bindtap='toOpenList' id="{{userId}}">
+    <view class='flex-sub flex align-center' bindtap='toOpenList' id="{{thePatientId}}">
       <view class='personCenter-icon bg-yellow round margin-right-sm text-center flex align-center'>
-        <text class='text-xxl'><text class='icon-moneybagfill lg text-white'></text></text>
+        <text class='text-xxl'><text class='icon-formfill lg text-white'></text></text>
       </view>
       <view class='flex-sub'>
         <view class='text-black text-lg'>已开处方</view>

@@ -8,6 +8,9 @@ Page({
    */
   data: {
 
+    // 路由传参
+    doctorId: '1', // 医生ID
+
     // tab导航数据
     tabs: ["全部患者", "星标患者"],
     activeIndex: 0,
@@ -15,43 +18,10 @@ Page({
     sliderLeft: 0,
 
     // 全部患者数据
-    allUserManageList: [{
-      id: '000001',
-      userIcon: '../../images/head1.jpg',
-      name: '张三',
-      sex: '男',
-      age: '20',
-      isStar: '1',
-      hospitalCard: '211965465455',
-      lastTime: '2019-06-06',
-      hospitalRecode: '0',
-      checkReport: '0'
-    }, {
-      id: '000001',
-      userIcon: '../../images/head1.jpg',
-      name: '李四',
-      sex: '男',
-      age: '33',
-      isStar: '0',
-      hospitalCard: '211965465455',
-      lastTime: '2019-06-06',
-      hospitalRecode: '0',
-      checkReport: '0'
-    }],
+    allUserManageList: [],
 
     // 星标患者数据
-    starUserManageList: [{
-      id: '000001',
-      userIcon: '../../images/head1.jpg',
-      name: '李四',
-      sex: '男',
-      age: '33',
-      isStar: '0',
-      hospitalCard: '211965465455',
-      lastTime: '2019-06-06',
-      hospitalRecode: '0',
-      checkReport: '0'
-    }],
+    starUserManageList: [],
 
   },
 
@@ -82,15 +52,20 @@ Page({
   // 全部患者-数据请求
   allUserManageList() {
     var that = this;
+    var doctorId = that.data.doctorId;
+    console.log(doctorId);
     wx.request({
-      url: app.globalData.path + '/hospc/lgDoctor/doctor/consultationRecords/openId/1/10/1',
+      url: app.globalData.path + `/hospc/enterprise/findPatients?doctorId=${doctorId}`,
       data: {},
       method: 'GET',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
       success: function(res) {
         console.log('***** 全部患者-数据请求 *****');
         console.log(res);
         that.setData({
-          allUserManageList: res.data.result.list
+          allUserManageList: res.data.data.list
         });
       },
       fail: function() {
@@ -102,18 +77,23 @@ Page({
   // 星标患者-数据请求
   starUserManageList() {
     var that = this;
+    var doctorId = that.data.doctorId;
+    console.log(doctorId);
     wx.request({
-      url: '',
+      url: app.globalData.path + `/hospc/enterprise/findPatManById?doctorId=${doctorId}`,
       data: {},
       method: 'GET',
-      success: function(res) {
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
         console.log('***** 星标患者-数据请求 *****');
         console.log(res);
         that.setData({
-          starUserManageList: res.data.result.list
+          starUserManageList: res.data.data.list
         });
       },
-      fail: function() {
+      fail: function () {
 
       }
     })
@@ -123,10 +103,12 @@ Page({
   toUserManageDetail(e) {
     console.log('***** 跳转患者管理详情 *****');
     console.log(e);
-    var userId = e.currentTarget.id;
-    console.log(userId);
+    var that = this;
+    var doctorId = that.data.doctorId;
+    var thePatientId = e.currentTarget.id;
+    console.log(thePatientId);
     wx.navigateTo({
-      url: `/pages/userManageDetail/userManageDetail?userId=${userId}`,
+      url: `/pages/userManageDetail/userManageDetail?doctorId=${doctorId}&thePatientId=${thePatientId}`,
     })
   },
 
@@ -135,7 +117,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.allUserManageList();
+
+    console.log(`***** 进入患者管理页面 *****`);
+    // console.log(options);
+    // this.setData({
+    //   doctorId: options.doctorId
+    // })
+
+    wx.showLoading({
+      title: '数据加载中',
+    })
+
+    this.allUserManageList(); // 全部患者接口
+
+    wx.hideLoading();
+
+
     //tab切换
     var that = this;
     wx.getSystemInfo({

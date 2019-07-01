@@ -82,7 +82,9 @@ Page({
         consulStatus: consulStatus
       },
       method: 'POST', 
-      // header: {}, // 设置请求的 header
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
       success: function (res) {
         console.log('***** 改变上线、离线状态成功 *****');
         console.log(res);

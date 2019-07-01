@@ -10,10 +10,7 @@ Page({
     doctorId: '', // 医生ID
 
     // 常用回复语数据
-    replyLanguageList: [
-      '这样的症状持续几天了？',
-      '祝您健康。'
-    ],
+    replyLanguageList: [],
 
     // 显示隐藏弹出层数据
     isShowReplyLanguageModel: false,

@@ -7,7 +7,8 @@ Page({
   data: {
 
     // 路由传参
-    userId: '', // 患者ID
+    doctorId: '', // 医生ID
+    thePatientId: '', // 患者ID
 
     // 收藏
     isCollection: '0', // 备注：是否收藏，0-已收藏，1-收藏
@@ -15,14 +16,7 @@ Page({
     collectionName: '加星',
 
     // 患者详情数据
-    userDetailList: {
-      id: '000001',
-      userIcon: '../../images/head1.jpg',
-      name: '张三',
-      sex: '男',
-      age: '20',
-      hospitalCard: '211936546522',
-    },
+    userDetailList: {},
 
     // 禁止点击样式
     isDisabled: true,
@@ -35,17 +29,28 @@ Page({
   // 患者详情接口
   userDetail: function () {
     var that = this;
+    var doctorId = that.data.doctorId;
+    var thePatientId = that.data.thePatientId;
     wx.request({
-      url: getApp().globalData.path + `/hospc/lgDoctor/doctor/detail/${that.data.doctorId}/openId`,
+      url: getApp().globalData.path + `/hospc/enterprise/getPatientInfo?doctorId=${doctorId}&thePatientId=${thePatientId}`,
       data: {},
-      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-      // header: {}, // 设置请求的 header
+      method: 'GET',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
       success: function (res) {
-        console.log('***** 医生详情接口调用 *****');
+        console.log('***** 患者详情接口调用 *****');
         console.log(res);
         that.setData({
-          userDetailList: res.data.result
+          userDetailList: res.data.data
         });
+        if(res.data.data.isStar == 1){
+          that.setData({
+            isCollection: res.data.data.isStar,
+            collectionIcon: 'favorfill',
+            collectionName: '已加星',
+          })
+        }
       },
       fail: function () {
         // fail
@@ -130,13 +135,24 @@ Page({
    */
   onLoad: function (options) {
 
-    console.log(`***** 进入医生详情页面 *****`);
+    console.log(`***** 进入患者详情页面 *****`);
     console.log(options);
-    var userId = options.userId;
+    var that = this;
+    var doctorId = options.doctorId;
+    var thePatientId = options.thePatientId;
     this.setData({
-      userId: userId
+      doctorId: doctorId,
+      thePatientId: thePatientId
     })
-    console.log(`获取患者ID值：${that.data.userId}`);
+    console.log(`获取医生ID值：${that.data.doctorId}，获取患者ID值：${that.data.thePatientId}`);
+
+    wx.showLoading({
+      title: '数据加载中',
+    })
+
+    this.userDetail(); // 患者详情接口
+
+    wx.hideLoading();
 
   },
 
