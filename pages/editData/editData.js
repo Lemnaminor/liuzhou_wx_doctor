@@ -145,8 +145,17 @@ Page({
     var doctorId = that.data.doctorId;
 
     wx.request({
-      url: getApp().globalData.path + `/hospc/enterprise/edictDoctor?doctorId=${doctorId}`,
-      data: editDataFormList,
+      url: getApp().globalData.path + `/hospc/enterprise/submitEdictDoctor?id=${doctorId}`,
+      data: {
+        'id': e.detail.value.id,
+        'telPhone': e.detail.value.telPhone,
+        'doctorLevel': e.detail.value.doctorLevel,
+        'doctorLevelDict': e.detail.value.doctorLevel,
+        'dept_Id': e.detail.value.dept_Id,
+        'workerNumber': e.detail.value.workerNumber,
+        'doctorIntroduction': e.detail.value.doctorIntroduction,
+        'doctorSkill': e.detail.value.doctorSkill
+      },
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },

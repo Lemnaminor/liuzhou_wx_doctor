@@ -32,21 +32,21 @@
 <view class='personCenter-nav padding'>
 
   <view class='flex margin-tb-lg'>
-    <view class='flex-sub flex align-center'>
-      <view class='personCenter-icon bg-{{isDisabled?"gray":"blue"}} round margin-right-sm text-center flex align-center'>
+   <view class='flex-sub flex align-center' bindtap='toCheckUp' id="{{thePatientId}}">
+      <view class='personCenter-icon bg-blue round margin-right-sm text-center flex align-center'>
         <text class='text-xxl'><text class='icon-formfill lg text-white'></text></text>
       </view>
       <view class='flex-sub'>
-        <view class='text-{{isDisabled?"gray":"black"}} text-lg'>电子病历</view>
-        <view class='text-gray'>该患者在医院的历史病历</view>
+        <view class='text-black text-lg'>检查</view>
+        <view class='text-gray'>该患者在医院的相关报告</view>
       </view>
     </view>
-    <view class='flex-sub flex align-center'>
-      <view class='personCenter-icon bg-{{isDisabled?"gray":"purple"}} round margin-right-sm text-center flex align-center'>
+    <view class='flex-sub flex align-center' bindtap='toInspect' id="{{thePatientId}}">
+      <view class='personCenter-icon bg-purple round margin-right-sm text-center flex align-center'>
         <text class='text-xxl'><text class='icon-formfill lg text-white'></text></text>
       </view>
       <view class='flex-sub'>
-        <view class='text-{{isDisabled?"gray":"black"}} text-lg'>检查检验</view>
+        <view class='text-black text-lg'>检验</view>
         <view class='text-gray'>该患者在医院的相关报告</view>
       </view>
     </view>
@@ -71,6 +71,19 @@
         <view class='text-gray'>我在线上为该患者开具的处方</view>
       </view>
     </view>
+  </view>
+
+    <view class='flex margin-tb-lg'>
+    <view class='flex-sub flex align-center'>
+      <view class='personCenter-icon bg-{{isDisabled?"gray":"blue"}} round margin-right-sm text-center flex align-center'>
+        <text class='text-xxl'><text class='icon-formfill lg text-white'></text></text>
+      </view>
+      <view class='flex-sub'>
+        <view class='text-{{isDisabled?"gray":"black"}} text-lg'>电子病历</view>
+        <view class='text-gray'>该患者在医院的历史病历</view>
+      </view>
+    </view>
+
   </view>
 
 </view>

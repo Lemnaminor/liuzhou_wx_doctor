@@ -110,13 +110,33 @@ Page({
     }
   },
 
+  // 跳转检查页面
+  toCheckUp(e) {
+    console.log(`***** 跳转检查页面 *****`);
+    console.log(e);
+    var thePatientId = e.currentTarget.id;
+    wx.navigateTo({
+      url: `/pages/checkUp/checkUp?userId=${thePatientId}`,
+    })
+  },
+
+  // 跳转检验页面
+  toInspect(e) {
+    console.log(`***** 跳转检验页面 *****`);
+    console.log(e);
+    var thePatientId = e.currentTarget.id;
+    wx.navigateTo({
+      url: `/pages/inspect/inspect?userId=${thePatientId}`,
+    })
+  },
+
   // 跳转咨询记录页面
   toConsult(e){
     console.log(`***** 跳转咨询记录页面 *****`);
     console.log(e);
-    var userId = e.currentTarget.id;
+    var thePatientId = e.currentTarget.id;
     wx.navigateTo({
-      url: `/pages/consult/consult?userId=${userId}`,
+      url: `/pages/consult/consult?userId=${thePatientId}`,
     })
   },
 
@@ -124,9 +144,9 @@ Page({
   toOpenList(e) {
     console.log(`***** 跳转已开处方页面 *****`);
     console.log(e);
-    var userId = e.currentTarget.id;
+    var thePatientId = e.currentTarget.id;
     wx.navigateTo({
-      url: `/pages/openList/openList?userId=${userId}`,
+      url: `/pages/openList/openList?userId=${thePatientId}`,
     })
   },
 
