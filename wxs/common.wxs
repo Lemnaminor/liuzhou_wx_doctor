@@ -1,0 +1,8 @@
+// 字符串转数组
+function strInArr(str){
+  return str.split(',');
+}
+
+module.exports = {
+  strInArr: strInArr
+}

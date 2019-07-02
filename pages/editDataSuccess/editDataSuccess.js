@@ -25,6 +25,15 @@ Page({
    */
   onLoad: function(options) {
 
+    var pages = getCurrentPages();
+    console.log(`路由数据：${pages.length}`);
+    if (pages.length > 2) {
+      // 父级页面实例对象 
+      var prePage = pages[pages.length - 3];
+      // 触发上个界面的方法 
+      prePage.doctorDetail() // 调用个人中心医生详情接口方法
+    }
+
   },
 
   /**

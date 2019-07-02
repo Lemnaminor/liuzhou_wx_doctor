@@ -6,9 +6,8 @@
     <text class='reply-cont text-cut response'>{{item.replieComent}}</text>
   </view>
 
-  <view class='foot-btn padding flex flex-direction'>
-    <button class='cu-btn bg-main lg' bindtap='toBuildReplyLanguage'>新建回复语</button>
-  </view>
-
 </view>
 
+<view class='foot-btn padding flex flex-direction'>
+  <button class='cu-btn bg-main lg' bindtap='toBuildReplyLanguage'>新建回复语</button>
+</view>

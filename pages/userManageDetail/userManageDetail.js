@@ -9,9 +9,10 @@ Page({
     // 路由传参
     doctorId: '', // 医生ID
     thePatientId: '', // 患者ID
+    // isy: '0', // 标星 0-取消 1-标记
 
     // 收藏
-    isCollection: '0', // 备注：是否收藏，0-已收藏，1-收藏
+    isCollection: '0', // 标星 0-取消 1-标记
     collectionIcon: 'favor',
     collectionName: '加星',
 
@@ -29,11 +30,12 @@ Page({
   // 患者详情接口
   userDetail: function () {
     var that = this;
-    var doctorId = that.data.doctorId;
-    var thePatientId = that.data.thePatientId;
     wx.request({
-      url: getApp().globalData.path + `/hospc/enterprise/getPatientInfo?doctorId=${doctorId}&thePatientId=${thePatientId}`,
-      data: {},
+      url: getApp().globalData.path + `/hospc/enterprise/getPatientInfo`,
+      data: {
+        doctorId: that.data.doctorId,
+        thePatientId: that.data.thePatientId
+      },
       method: 'GET',
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -61,53 +63,67 @@ Page({
     })
   },
 
-  // 收藏接口
-  isCollection: function () {
-    console.log("***** 收藏接口 *****")
-    var that = this;
-
-    if (that.data.doctorDetail.isCollection == '0') {
-      that.setData({
-        collectionIcon: 'favorfill',
-        collectionName: '已加星',
-        isCollection: '1',
-      })
-    } else {
-      that.setData({
-        collectionIcon: 'favor',
-        collectionName: '加星',
-        isCollection: '0',
-      })
-    }
-  },
-
-  // 改变收藏状态
+  // 星标接口
   changeCollection: function () {
-    console.log("***** 改变收藏状态 *****")
+    console.log("***** 星标接口 *****");
     var that = this;
-    if (that.data.isCollection == '0') {
-      that.setData({
-        collectionIcon: 'favorfill',
-        collectionName: '已加星',
-        isCollection: '1',
-      })
-      wx.showToast({
-        title: '已加星',
-        icon: 'none',
-        duration: 1500
-      })
-    } else {
-      that.setData({
-        collectionIcon: 'favor',
-        collectionName: '加星',
-        isCollection: '0',
-      })
-      wx.showToast({
-        title: '已取消',
-        icon: 'none',
-        duration: 1500
-      })
+    var isy = '';
+    if (that.data.isCollection == 0){
+      isy = 1;
+    }else{
+      isy = 0;
     }
+
+    console.log(`doctorId值:${that.data.doctorId},thePatientId值：${that.data.thePatientId}，isy值：${isy}`);
+
+    wx.request({
+      url: getApp().globalData.path + `/hospc/enterprise/savePatMan?doctorID=${that.data.doctorId}&thePatientId=${that.data.thePatientId}&isy=${isy}`,
+      data: {},
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        console.log('***** 星标接口调用成功 *****');
+        console.log(res);
+        if(res.data.code == 0){
+          if (that.data.isCollection == '0') {
+            that.setData({
+              collectionIcon: 'favorfill',
+              collectionName: '已加星',
+              isCollection: '1',
+            })
+            wx.showToast({
+              title: '已加星',
+              icon: 'none',
+              duration: 1500
+            })
+          } else {
+            that.setData({
+              collectionIcon: 'favor',
+              collectionName: '加星',
+              isCollection: '0',
+            })
+            wx.showToast({
+              title: '已取消',
+              icon: 'none',
+              duration: 1500
+            })
+          }
+        }else{
+          wx.showToast({
+            title: '网络请求错误',
+            icon: 'none'
+          })
+        }
+      },
+      fail: function () {
+        // fail
+      },
+      complete: function () {
+        // complete
+      }
+    })
   },
 
   // 跳转检查页面
@@ -136,7 +152,7 @@ Page({
     console.log(e);
     var thePatientId = e.currentTarget.id;
     wx.navigateTo({
-      url: `/pages/consult/consult?userId=${thePatientId}`,
+      url: `/pages/userAdvice/userAdvice?userId=${thePatientId}`,
     })
   },
 
@@ -158,11 +174,9 @@ Page({
     console.log(`***** 进入患者详情页面 *****`);
     console.log(options);
     var that = this;
-    var doctorId = options.doctorId;
-    var thePatientId = options.thePatientId;
     this.setData({
-      doctorId: doctorId,
-      thePatientId: thePatientId
+      doctorId: options.doctorId,
+      thePatientId: options.thePatientId
     })
     console.log(`获取医生ID值：${that.data.doctorId}，获取患者ID值：${that.data.thePatientId}`);
 

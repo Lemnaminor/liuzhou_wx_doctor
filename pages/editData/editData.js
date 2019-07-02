@@ -17,11 +17,11 @@ Page({
 
     // 职称列表数据
     selectWorkList: [],
-    selectWorkListIndex: 0,
+    selectWorkListIndex: null,
 
     // 科室列表数据
     selectDepartmentList: [],
-    selectDepartmentListIndex: 0,
+    selectDepartmentListIndex: null,
 
 
     // 医生简介-描述信息
@@ -60,6 +60,8 @@ Page({
         console.log(res);
         that.setData({
           doctorDetail: res.data.data,
+          selectWorkListIndex: res.data.data.doctorLevel,
+          selectDepartmentListIndex: res.data.data.dept_Id,
           content: res.data.data.doctorIntroduction,
           content2: res.data.data.doctorSkill
         });
@@ -99,6 +101,7 @@ Page({
 
   // 选择职称
   selectWorkList: function(e) {
+    console.log(e);
     console.log('选择职称改变，携带值为', e.detail.value);
     this.setData({
       selectWorkListIndex: e.detail.value
@@ -139,19 +142,19 @@ Page({
   // 提交保存
   editDataFormSubmit(e) {
     console.log(`***** 提交保存 *****`);
-    console.log(e);
     var that = this;
     var editDataFormList = e.detail.value;
     var doctorId = that.data.doctorId;
 
     wx.request({
-      url: getApp().globalData.path + `/hospc/enterprise/submitEdictDoctor?id=${doctorId}`,
+      url: getApp().globalData.path + `/hospc/enterprise/submitEdictDoctor`,
       data: {
         'id': e.detail.value.id,
         'telPhone': e.detail.value.telPhone,
         'doctorLevel': e.detail.value.doctorLevel,
-        'doctorLevelDict': e.detail.value.doctorLevel,
+        'doctorLevelDict': e.detail.value.doctorLevelDict,
         'dept_Id': e.detail.value.dept_Id,
+        // 'deptName': e.detail.value.deptName,
         'workerNumber': e.detail.value.workerNumber,
         'doctorIntroduction': e.detail.value.doctorIntroduction,
         'doctorSkill': e.detail.value.doctorSkill
@@ -163,6 +166,20 @@ Page({
       success: function(res) {
         console.log('***** 编辑资料表单提交成功 *****');
         console.log(res);
+        if(res.data.code == 0){
+          wx.showToast({
+            title: '保存成功',
+            icon: 'success'
+          })
+          wx.navigateTo({
+            url: '/pages/editDataSuccess/editDataSuccess',
+          })
+        }else{
+          wx.showToast({
+            title: '保存失败',
+            icon: 'none'
+          })
+        }
       },
       fail: function() {
 

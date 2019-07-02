@@ -32,7 +32,7 @@
 <view class='personCenter-nav padding'>
 
   <view class='flex margin-tb-lg'>
-   <view class='flex-sub flex align-center' bindtap='toCheckUp' id="{{thePatientId}}">
+   <view class='flex-sub flex align-center padding-right-sm' bindtap='toCheckUp' id="{{thePatientId}}">
       <view class='personCenter-icon bg-blue round margin-right-sm text-center flex align-center'>
         <text class='text-xxl'><text class='icon-formfill lg text-white'></text></text>
       </view>
@@ -53,7 +53,7 @@
   </view>
 
   <view class='flex margin-tb-lg'>
-    <view class='flex-sub flex align-center' bindtap='toConsult' id="{{thePatientId}}">
+    <view class='flex-sub flex align-center padding-right-sm' bindtap='toConsult' id="{{thePatientId}}">
       <view class='personCenter-icon bg-orange round margin-right-sm text-center flex align-center'>
         <text class='text-xxl'><text class='icon-samefill lg text-white'></text></text>
       </view>

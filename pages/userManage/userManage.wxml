@@ -44,7 +44,7 @@
 
       <!-- 星标患者 -->
     <view class='padding'>
-        <view class='userManage-list padding bg-white radius margin-top-sm' wx:for="{{starUserManageList}}" wx:key="{{starUserManageList.id}}" bindtap='toUserManageDetail'>
+        <view class='userManage-list padding bg-white radius margin-top-sm' wx:for="{{starUserManageList}}" wx:key="{{starUserManageList.id}}" bindtap='toUserManageDetail' id='{{item.id}}'>
           <view class='flex align-center solids-bottom padding-bottom-sm margin-bottom-sm'>
             <view>
               <view class="cu-avatar radius margin-right-sm" style="background-image:url({{item.wxIcon}});"></view>
@@ -71,3 +71,6 @@
 
   </view>
 </view>
+
+<!-- top -->
+<top></top>

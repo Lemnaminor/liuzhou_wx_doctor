@@ -12,6 +12,11 @@ Page({
     // 常用回复语数据
     replyLanguageList: [],
 
+    pageIndex: 1, // 请求页索引
+    pageNum: 15, // 请求数据条数
+    pageCount: 0, // 总页数
+    amount: 0, // 总条数
+
     // 显示隐藏弹出层数据
     isShowReplyLanguageModel: false,
 
@@ -25,9 +30,16 @@ Page({
   replyLanguageList: function () {
     var that = this;
     var doctorId = that.data.doctorId;
+    var pageIndex = that.data.pageIndex;
+    var pageNum = that.data.pageNum;
+    console.log(`常用回复语接口：当前页：${pageIndex},显示条数：${pageNum}`);
     wx.request({
-      url: getApp().globalData.path + `/hospc/enterprise/commonReplies?doctorId=${doctorId}`,
-      data: {},
+      url: getApp().globalData.path + `/hospc/enterprise/commonReplies`,
+      data: {
+        doctorId: doctorId,
+        pageIndex: that.data.pageIndex,
+        pageNum: that.data.pageNum
+      },
       method: 'GET',
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -35,9 +47,34 @@ Page({
       success: function (res) {
         console.log("***** 常用回复语接口 *****")
         console.log(res);
-        that.setData({
-          replyLanguageList: res.data.data.list
-        });
+        if (res.data.code == 0) {
+          wx.showLoading({
+            title: '数据加载中',
+          })
+          var tempList = that.data.replyLanguageList
+          var tempPageIndex = that.data.pageIndex;
+          if (that.data.pageIndex == 1) {
+            tempList = res.data.data.list;
+            tempPageIndex = 1;
+          } else {
+            tempList = tempList.concat(res.data.data.list);
+            tempPageIndex = tempPageIndex + 1;
+          }
+          that.setData({
+            pageIndex: tempPageIndex,
+            pageNum: res.data.data.pageSize,
+            pageCount: res.data.data.pages,
+            amount: res.data.data.total,
+            replyLanguageList: tempList
+          });
+          wx.hideLoading();
+
+        } else {
+          wx.showToast({
+            title: '网络请求错误',
+          })
+        }
+  
       },
       fail: function () {
         // fail
@@ -129,12 +166,41 @@ Page({
    */
   onPullDownRefresh: function() {
 
+    console.log('下拉刷新');
+    wx.showLoading({
+      title: '数据加载中',
+    })
+    this.data.pageIndex = 1;
+    this.replyLanguageList(); 
+    wx.hideLoading();
+    wx.showToast({
+      title: '数据已刷新',
+      icon: 'success',
+      duration: 1500
+    })
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
+
+    console.log("上拉触底");
+    var that = this;
+    if (this.data.pageIndex < this.data.pageCount) {
+  
+      this.data.pageIndex++;
+      this.replyLanguageList();
+      var that = this;
+
+    } else {
+      wx.showToast({
+        title: '没有更多数据了',
+        icon: 'none'
+      })
+    }
+
 
   },
 

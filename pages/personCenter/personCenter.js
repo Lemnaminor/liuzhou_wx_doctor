@@ -21,6 +21,9 @@ Page({
     // 是否设置在线
     isOnline: '',
 
+    // 禁止点击样式
+    isDisabled: true,
+
   },
 
   /**
@@ -68,15 +71,14 @@ Page({
     var isOnline = e.currentTarget.id;
     var doctorId = that.data.doctorId;
     var consulStatus;
-    if(isOnline == true){
-      consulStatus = 1
-    }else{
+    if (isOnline == 'true'){
       consulStatus = 0
+    }else{
+      consulStatus = 1
     }
-    // var consulStatus = that.data.consulStatus;
     console.log(`在线状态：${consulStatus}`);
     wx.request({
-      url: getApp().globalData.path + `/hospc/enterprise/exitonlinestate?doctorId=${doctorId}&consulStatus=${consulStatus}`,
+      url: getApp().globalData.path + `/hospc/enterprise/exitonlinestate`,
       data: {
         doctorId: that.data.doctorId,
         consulStatus: consulStatus
@@ -88,9 +90,22 @@ Page({
       success: function (res) {
         console.log('***** 改变上线、离线状态成功 *****');
         console.log(res);
-        that.setData({
-          isOnline: !that.data.isOnline
-        })
+        console.log(res.data.code);
+        if(res.data.code == 0){
+          wx.showToast({
+            title: '设置成功',
+            icon: 'none'
+          })
+          that.setData({
+            isOnline: !that.data.isOnline
+          })
+        }else{
+          wx.showToast({
+            title: '设置失败',
+            icon: 'none'
+          })
+          isOnline: isOnline
+        }
       },
       fail: function () {
         // fail

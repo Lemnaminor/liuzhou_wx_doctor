@@ -9,7 +9,7 @@ Page({
   data: {
 
     // 路由传参
-    doctorId: '', // 医生ID
+    doctorId: '1', // 患者ID
 
     // 咨询状态数据
     consulStatus: '2',
@@ -39,7 +39,7 @@ Page({
   /**
    * 自定义事件方法
    */
-  tabClick: function(e) {
+  tabClick: function (e) {
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
@@ -191,12 +191,12 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
 
     console.log(`***** 进入我的评价页面 *****`);
     console.log(options);
     this.setData({
-      doctorId: options.doctorId
+      // doctorId: options.thePatientId
     })
 
     wx.showLoading({
@@ -206,11 +206,11 @@ Page({
     this.beingAdviceList(); // 进行中-咨询记录接口
 
     wx.hideLoading();
-    
+
     //tab切换
     var that = this;
     wx.getSystemInfo({
-      success: function(res) {
+      success: function (res) {
         that.setData({
           sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
           sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
@@ -223,35 +223,35 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
     console.log('下拉刷新');
 
@@ -286,7 +286,7 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
     console.log("上拉触底");
     var that = this;
@@ -317,7 +317,7 @@ Page({
             title: '没有更多数据了',
             icon: 'none'
           })
-        }        
+        }
         break;
     }
 
@@ -326,7 +326,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })

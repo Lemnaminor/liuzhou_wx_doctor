@@ -7,7 +7,7 @@ Page({
   data: {
 
     // 路由传参
-    doctorId: '', // 医生ID
+    doctorId: '1', // 医生ID
 
     // 判断是 新建or修改 入口
     isChangeRouter: '',
@@ -33,12 +33,12 @@ Page({
     console.log(`***** 新建-表单提交保存 *****`);
     console.log(e);
     var that = this;
-    var addReplyLanguage = e.detail.value;
     var doctorId = that.data.doctorId;
     wx.request({
-      url: getApp().globalData.path + `/hospc/enterprise/addReplie?doctorId=${doctorId}`,
+      url: getApp().globalData.path + `/hospc/enterprise/addReplie`,
       data: {
-        addReplyLanguage
+        doctorId: e.detail.value.doctorId,
+        replieComent: e.detail.value.replieComent
       },
       method: 'POST',
       header: {
@@ -47,6 +47,22 @@ Page({
       success: function(res) {
         console.log("***** 新建-表单提交保存 *****")
         console.log(res);
+        if(res.data.code == 0){
+          wx.showToast({
+            title: '添加成功',
+            icon: 'success'
+          })
+          setTimeout(()=>{
+            wx.navigateTo({
+              url: `/pages/replyLanguage/replyLanguage?doctorId=${that.data.doctorId}`,
+            })
+          },1000)
+        }else{
+          wx.showToast({
+            title: '添加失败',
+            icon: 'none'
+          })
+        }
       },
       fail: function() {
         // fail
@@ -62,12 +78,13 @@ Page({
     console.log(`***** 修改-表单提交保存 *****`);
     console.log(e);
     var that = this;
-    var changeReplyLanguage = e.detail.value;
-    var doctorId = that.data.doctorId;
+
     wx.request({
-      url: getApp().globalData.path + `/hospc/enterprise/editReplie?doctorId=${doctorId}`,
+      url: getApp().globalData.path + `/hospc/enterprise/editReplie`,
       data: {
-        changeReplyLanguage
+        doctorId: e.detail.value.doctorId,
+        replieComent: e.detail.value.replieComent,
+        replieID: e.detail.value.replieID
       },
       method: 'POST',
       header: {
@@ -76,6 +93,22 @@ Page({
       success: function (res) {
         console.log("***** 修改-表单提交保存 *****")
         console.log(res);
+        if (res.data.code == 0) {
+          wx.showToast({
+            title: '修改成功',
+            icon: 'success'
+          })
+          setTimeout(() => {
+            wx.navigateTo({
+              url: `/pages/replyLanguage/replyLanguage?doctorId=${that.data.doctorId}`,
+            })
+          }, 1000)
+        } else {
+          wx.showToast({
+            title: '修改失败',
+            icon: 'none'
+          })
+        }
       },
       fail: function () {
         // fail
@@ -91,12 +124,11 @@ Page({
     console.log(`***** 删除-表单提交保存 *****`);
     console.log(e);
     var that = this;
-    var replieID = that.data.replieID;
-    var doctorId = that.data.doctorId;
     wx.request({
-      url: getApp().globalData.path + `/hospc/enterprise/deleteReplie?doctorId=${doctorId}&replieID=${replieID}`,
+      url: getApp().globalData.path + `/hospc/enterprise/deleteReplie`,
       data: {
-        deleteReplyLanguage
+        doctorId: that.data.doctorId,
+        replieID: that.data.replieID
       },
       method: 'POST',
       header: {
@@ -105,6 +137,22 @@ Page({
       success: function (res) {
         console.log("***** 删除-表单提交保存 *****")
         console.log(res);
+        if (res.data.code == 0) {
+          wx.showToast({
+            title: '删除成功',
+            icon: 'success'
+          })
+          setTimeout(() => {
+            wx.navigateTo({
+              url: `/pages/replyLanguage/replyLanguage?doctorId=${that.data.doctorId}`,
+            })
+          }, 1000)
+        } else {
+          wx.showToast({
+            title: '删除失败',
+            icon: 'none'
+          })
+        }
       },
       fail: function () {
         // fail
@@ -159,7 +207,8 @@ Page({
     console.log(`***** 进入新建常用语回复页面 *****`);
     console.log(options);
     this.setData({
-      doctorId: options.doctorId
+      doctorId: options.doctorId,
+      replieID: options.replieID
     })
 
     // 判断是 新建or修改 入口

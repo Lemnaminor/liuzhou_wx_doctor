@@ -1,0 +1,4 @@
+<!--components/top/top.wxml-->
+<view class="backTop" bindtap='backTop' wx:if="{{backTopValue ==true}}">
+  <text class='icon-top lg text-gray text-black'></text>
+</view>

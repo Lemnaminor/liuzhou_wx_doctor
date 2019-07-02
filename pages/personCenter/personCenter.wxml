@@ -86,15 +86,16 @@
         <view class='text-gray'>患者的肯定</view>
       </view>
     </view>
-    <view class='flex-sub flex align-center' bindtap='toMyMoney' id="{{doctorId}}">
-      <view class='personCenter-icon bg-yellow round margin-right-sm text-center flex align-center'>
-        <text class='text-xxl'><text class='icon-moneybagfill lg text-white'></text></text>
+    <view class='flex-sub flex align-center' bindtap='toAdvice' id="{{doctorId}}">
+      <view class='personCenter-icon bg-olive round margin-right-sm text-center flex align-center'>
+        <text class='text-xxl'><text class='icon-samefill lg text-white'></text></text>
       </view>
       <view class='flex-sub'>
-        <view class='text-black text-lg'>我的收入</view>
-        <view class='text-gray'>详单查询</view>
+        <view class='text-black text-lg'>咨询记录</view>
+        <view class='text-gray'>全部咨询订单</view>
       </view>
     </view>
+
   </view>
 
   <view class='flex'>
@@ -107,13 +108,13 @@
         <view class='text-gray'>省时省力</view>
       </view>
     </view>
-    <view class='flex-sub flex align-center' bindtap='toAdvice' id="{{doctorId}}">
-      <view class='personCenter-icon bg-olive round margin-right-sm text-center flex align-center'>
-        <text class='text-xxl'><text class='icon-samefill lg text-white'></text></text>
+    <view class='flex-sub flex align-center' bindtap='' id="{{doctorId}}">
+      <view class='personCenter-icon bg-{{isDisabled?"gray":"yellow"}} round margin-right-sm text-center flex align-center'>
+        <text class='text-xxl'><text class='icon-moneybagfill lg text-white'></text></text>
       </view>
       <view class='flex-sub'>
-        <view class='text-black text-lg'>咨询记录</view>
-        <view class='text-gray'>全部咨询订单</view>
+        <view class='text-{{isDisabled?"gray":"black"}} text-lg'>我的收入</view>
+        <view class='text-gray'>详单查询</view>
       </view>
     </view>
   </view>

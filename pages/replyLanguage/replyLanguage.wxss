@@ -1,5 +1,11 @@
 /* pages/replyLanguage/replyLanguage.wxss */
-.replyLanguage-box .foot-btn {
+.replyLanguage-box {
+  position: flxed;
+  top: 0;
+  height: 100%;
+  padding-bottom: 140rpx;
+}
+.foot-btn {
   position: fixed;
   left: 0;
   bottom: 0;

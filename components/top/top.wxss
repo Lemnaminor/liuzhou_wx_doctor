@@ -1,0 +1,22 @@
+/* components/top/top.wxss */
+
+.backTop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 30rpx;
+  right: 30rpx;
+  text-align: center;
+  width: 80rpx;
+  height: 80rpx;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 3rpx 3rpx 10rpx 3rpx rgba(0, 0, 0, 0.2);
+  margin: 13rpx 0;
+  overflow: hidden;
+}
+
+.backTop text {
+  font-size: 45rpx;
+}

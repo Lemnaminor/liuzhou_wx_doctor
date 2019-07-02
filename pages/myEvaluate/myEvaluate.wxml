@@ -1,4 +1,7 @@
 <!--pages/myEvaluate/myEvaluate.wxml-->
+<!-- wxs -->
+<wxs src="../../wxs/common.wxs" module="common" />
+
 <!-- 评价总数、星级 -->
 <view class='padding-tb-xl padding-lr bg-white text-black'>
   <view class='margin-bottom-xs'>评价总数：
@@ -36,7 +39,7 @@
           </view>
         </view>
         <view class='text-gray text-sm tag-box'>
-          <view class='cu-tag radius bg-grey margin-bottom-xs' wx:for="{{item.evalueteLabelSeqText}}" wx:key="{{index}}">{{item}}</view>
+          <view class='cu-tag radius bg-grey margin-bottom-xs' wx:for="{{common.strInArr(item.evalueteLabelSeqText)}}" wx:key="{{index}}">{{item}}</view>
         </view>
         <view>{{item.evalueteContent}}</view>
       </view>
@@ -44,3 +47,4 @@
   </view>
 
 </view>
+

@@ -1,7 +1,7 @@
 <!--pages/editDataSuccess/editDataSuccess.wxml-->
 <!-- 编辑资料成功提示页 -->
 <view class="editDataSuccess-box flex bg-white align-center">
-    <view class="editDataSuccess-cont text-center">
+    <view class="editDataSuccess-cont text-center response">
         <view class="margin-bottom">
             <text class='icon-roundcheckfill lg text-main' style='font-size:150rpx;'></text>
         </view>

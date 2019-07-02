@@ -1,16 +1,19 @@
 {
   "pages": [
-    "pages/personCenter/personCenter",
-    "pages/checkUp/checkUp",
-    "pages/inspect/inspect",
+
+        "pages/personCenter/personCenter",
     "pages/doctorTask/doctorTask",
     "pages/userManage/userManage",
+
+    "pages/checkUp/checkUp",
+    "pages/inspect/inspect",
     "pages/replyLanguage/replyLanguage",
     "pages/buildReplyLanguage/buildReplyLanguage",
     "pages/authorize/authorize",
     "pages/editData/editData",
     "pages/openList/openList",
     "pages/userManageDetail/userManageDetail",
+        "pages/userAdvice/userAdvice",
     "pages/advice/advice",
     "pages/consult/consult",
     "pages/qrcode/qrcode",
@@ -51,6 +54,9 @@
         "text": "个人中心"
       }
     ]
+  },
+  "usingComponents":{
+    "top": "/components/top/top"
   },
   "sitemapLocation": "sitemap.json"
 }
