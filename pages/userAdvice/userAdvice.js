@@ -9,7 +9,8 @@ Page({
   data: {
 
     // 路由传参
-    doctorId: '1', // 患者ID
+    doctorId: getApp().globalData.doctorId, // 医生ID
+    thePatientId: '', // 患者ID
 
     // 咨询状态数据
     consulStatus: '2',
@@ -74,14 +75,15 @@ Page({
     var pageNum = that.data.pageNum;
     console.log(`进行中：当前页：${pageIndex},显示条数：${pageNum}`);
     wx.request({
-      url: app.globalData.path + `/hospc/enterprise/consultationRecords`,
+      url: app.globalData.path + `/hospc/enterprise/findPerCenterConRecordlist`,
       data: {
         doctorId: that.data.doctorId,
+        thePatientId: that.data.thePatientId,
         consulStatus: that.data.consulStatus,
         pageIndex: that.data.pageIndex,
         pageNum: that.data.pageNum
       },
-      method: 'POST',
+      method: 'GET',
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
@@ -130,14 +132,15 @@ Page({
     var pageNum = that.data.pageNum2;
     console.log(`已完成：当前页：${pageIndex},显示条数：${pageNum}`);
     wx.request({
-      url: app.globalData.path + `/hospc/enterprise/consultationRecords`,
+      url: app.globalData.path + `/hospc/enterprise/findPerCenterConRecordlist`,
       data: {
         doctorId: that.data.doctorId,
+        thePatientId: that.data.thePatientId,
         consulStatus: that.data.consulStatus,
         pageIndex: that.data.pageIndex2,
         pageNum: that.data.pageNum2
       },
-      method: 'POST',
+      method: 'GET',
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
@@ -196,7 +199,7 @@ Page({
     console.log(`***** 进入我的评价页面 *****`);
     console.log(options);
     this.setData({
-      // doctorId: options.thePatientId
+      thePatientId: options.thePatientId
     })
 
     wx.showLoading({

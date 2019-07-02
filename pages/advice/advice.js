@@ -310,7 +310,7 @@ Page({
       case 1:
         console.log(`已完成`);
         if (this.data.pageIndex2 < this.data.pageCount2) {
-          this.data.pageIndex += 1;
+          this.data.pageIndex2 += 1;
           console.log(`当前页数：${this.data.pageIndex}`);
           this.successAdviceList();
           var that = this;

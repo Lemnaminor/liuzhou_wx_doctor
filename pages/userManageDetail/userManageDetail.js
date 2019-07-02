@@ -131,8 +131,9 @@ Page({
     console.log(`***** 跳转检查页面 *****`);
     console.log(e);
     var thePatientId = e.currentTarget.id;
+    console.log(`患者ID值：${thePatientId}`);
     wx.navigateTo({
-      url: `/pages/checkUp/checkUp?userId=${thePatientId}`,
+      url: `/pages/checkUp/checkUp?thePatientId=${thePatientId}`,
     })
   },
 
@@ -152,7 +153,7 @@ Page({
     console.log(e);
     var thePatientId = e.currentTarget.id;
     wx.navigateTo({
-      url: `/pages/userAdvice/userAdvice?userId=${thePatientId}`,
+      url: `/pages/userAdvice/userAdvice?thePatientId=${thePatientId}`,
     })
   },
 

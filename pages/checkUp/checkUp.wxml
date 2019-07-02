@@ -1,2 +1,2 @@
 <!--pages/checkUp/checkUp.wxml-->
-<text>pages/checkUp/checkUp.wxml</text>
+<web-view src="{{toCheckUpUrl}}"></web-view>
