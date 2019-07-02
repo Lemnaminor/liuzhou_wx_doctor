@@ -9,7 +9,7 @@ Page({
   data: {
 
     // 路由传参
-    doctorId: '1', // 医生ID
+    doctorId: getApp().globalData.doctorId, // 医生ID
 
     // 任务状态数据
     consulStatus: '',
@@ -109,7 +109,7 @@ Page({
             tempPageIndex = 1;
           } else {
             tempList = tempList.concat(res.data.data.list);
-            tempPageIndex = tempPageIndex + 1;
+            // tempPageIndex = tempPageIndex + 1;
           }
           that.setData({
             pageIndex: tempPageIndex,
@@ -165,7 +165,7 @@ Page({
             tempPageIndex = 1;
           } else {
             tempList = tempList.concat(res.data.data.list);
-            tempPageIndex = tempPageIndex + 1;
+            // tempPageIndex = tempPageIndex + 1;
           }
           that.setData({
             pageIndex2: tempPageIndex,
@@ -221,7 +221,7 @@ Page({
             tempPageIndex = 1;
           } else {
             tempList = tempList.concat(res.data.data.list);
-            tempPageIndex = tempPageIndex + 1;
+            // tempPageIndex = tempPageIndex + 1;
           }
           that.setData({
             pageIndex3: tempPageIndex,

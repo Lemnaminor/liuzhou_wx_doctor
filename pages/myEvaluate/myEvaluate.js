@@ -7,7 +7,7 @@ Page({
   data: {
 
     // 路由传参
-    doctorId: '', // 医生ID
+    doctorId: getApp().globalData.doctorId, // 医生ID
 
     // 星星数量
     starList: [{
@@ -21,7 +21,7 @@ Page({
     }, {
       id: 5
     }],
-    starActive: 4,
+    starActive: 0,
 
     // 评价总条数
     evaluateCount: 0,
@@ -30,7 +30,7 @@ Page({
     evaluateList:[],
 
     pageIndex: 1, // 请求页索引
-    pageSize: 10, // 请求数据条数
+    pageNum: 5, // 请求数据条数
     pageCount: 0, // 总页数
     amount: 0, // 总条数
 
@@ -42,15 +42,13 @@ Page({
   // 游客评价接口
   evaluateList: function() {
     var that = this;
-    var pageIndex = that.data.pageIndex;
-    var pageSize = that.data.pageSize;
-    console.log(`游客评价接口：当前页：${pageIndex},显示条数：${pageSize}`);
+    console.log(`游客评价接口：当前页：${that.data.pageIndex},总页数：${that.data.pageCount},显示条数：${that.data.pageNum}`);
     wx.request({
       url: getApp().globalData.path + `/hospc/enterprise/myEvaluateNum`,
       data: {
         doctorId: that.data.doctorId,
         pageIndex: that.data.pageIndex,
-        pageSize: that.data.pageSize
+        pageNum: that.data.pageNum
       },
       method: 'GET',
       header: {
@@ -63,6 +61,10 @@ Page({
           wx.showLoading({
             title: '数据加载中',
           })
+          that.setData({
+            starActive: res.data.data.list[0].avgSocre,
+            evaluateCount: res.data.data.list[0].evaluateNum
+          })
           var tempList = that.data.evaluateList
           var tempPageIndex = that.data.pageIndex;
           if (that.data.pageIndex == 1) {
@@ -70,7 +72,6 @@ Page({
             tempPageIndex = 1;
           } else {
             tempList = tempList.concat(res.data.data.list);
-            tempPageIndex = tempPageIndex + 1;
           }
           that.setData({
             pageIndex: tempPageIndex,
@@ -173,8 +174,10 @@ Page({
 
     console.log("上拉触底");
 
+    console.log(`页数：${this.data.pageIndex}，总页数：${this.data.pageCount}`);
     if (this.data.pageIndex < this.data.pageCount) {
-      this.data.pageIndex++;
+      this.data.pageIndex += 1;
+      console.log(`当前页数：${this.data.pageIndex}`);
       this.evaluateList();
     } else {
       wx.showToast({

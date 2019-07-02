@@ -7,7 +7,7 @@ Page({
   data: {
 
     // 路由传参
-    doctorId: '', // 医生ID
+    doctorId: getApp().globalData.doctorId, // 医生ID
 
     //设置用户信息
     userList: [{
@@ -109,35 +109,35 @@ Page({
   },
 
   // 获取科室列表数据
-  getDepartmentList() {
-    var that = this;
-    wx.request({
-      url: getApp().globalData.path + `/hospc/enterprise/departmentlist`,
-      data: {},
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      method: 'GET',
-      success: function(res) {
-        console.log('***** 获取科室列表数据 *****');
-        console.log(res);
-        that.setData({
-          selectDepartmentList: res.data.data
-        })
-      },
-      fail: function() {
+  // getDepartmentList() {
+  //   var that = this;
+  //   wx.request({
+  //     url: getApp().globalData.path + `/hospc/enterprise/departmentlist`,
+  //     data: {},
+  //     header: {
+  //       'Content-Type': 'application/x-www-form-urlencoded'
+  //     },
+  //     method: 'GET',
+  //     success: function(res) {
+  //       console.log('***** 获取科室列表数据 *****');
+  //       console.log(res);
+  //       that.setData({
+  //         selectDepartmentList: res.data.data
+  //       })
+  //     },
+  //     fail: function() {
 
-      }
-    })
-  },
+  //     }
+  //   })
+  // },
 
   // 选择科室
-  selectDepartmentList: function(e) {
-    console.log('选择科室改变，携带值为', e.detail.value);
-    this.setData({
-      selectDepartmentListIndex: e.detail.value
-    })
-  },
+  // selectDepartmentList: function(e) {
+  //   console.log('选择科室改变，携带值为', e.detail.value);
+  //   this.setData({
+  //     selectDepartmentListIndex: e.detail.value
+  //   })
+  // },
 
   // 提交保存
   editDataFormSubmit(e) {
@@ -226,7 +226,7 @@ Page({
       doctorId: options.doctorId
     })
     this.doctorDetail(); // 调用医生详情接口
-    this.getDepartmentList(); // 调用科室列表接口
+    // this.getDepartmentList(); // 调用科室列表接口
     this.getWorkList(); // 调用职称列表接口
 
     let that = this;

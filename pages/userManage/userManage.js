@@ -9,7 +9,7 @@ Page({
   data: {
 
     // 路由传参
-    doctorId: '1', // 医生ID
+    doctorId: getApp().globalData.doctorId, // 医生ID
 
     // tab导航数据
     tabs: ["全部患者", "星标患者"],
@@ -88,7 +88,7 @@ Page({
             tempPageIndex = 1;
           } else {
             tempList = tempList.concat(res.data.data.list);
-            tempPageIndex = tempPageIndex + 1;
+            // tempPageIndex = tempPageIndex + 1;
           }
           that.setData({
             pageIndex: tempPageIndex,
@@ -144,7 +144,7 @@ Page({
             tempPageIndex = 1;
           } else {
             tempList = tempList.concat(res.data.data.list);
-            tempPageIndex = tempPageIndex + 1;
+            // tempPageIndex = tempPageIndex + 1;
           }
           that.setData({
             pageIndex2: tempPageIndex,
@@ -291,7 +291,7 @@ Page({
       case 0:
         console.log(`进行中`);
         if (this.data.pageIndex < this.data.pageCount) {
-          this.data.pageIndex++;
+          this.data.pageIndex += 1;
           this.allUserManageList();
           var that = this;
         } else {
@@ -304,7 +304,7 @@ Page({
       case 1:
         console.log(`已完成`);
         if (this.data.pageIndex2 < this.data.pageCount2) {
-          this.data.pageIndex2++;
+          this.data.pageIndex2 += 1;
           this.starUserManageList();
           var that = this;
         } else {

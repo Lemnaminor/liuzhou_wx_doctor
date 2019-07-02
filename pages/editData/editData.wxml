@@ -35,12 +35,12 @@
   </view>
   <view class="cu-form-group">
     <view class='title'>科室</view>
-    <picker bindchange="selectDepartmentList" value="{{selectDepartmentListIndex}}" range="{{selectDepartmentList}}" range-key="{{'deptName'}}" name="dept_Id">
+    <!-- <picker bindchange="selectDepartmentList" value="{{selectDepartmentListIndex}}" range="{{selectDepartmentList}}" range-key="{{'deptName'}}" name="dept_Id">
       <view class="picker">
         {{selectDepartmentListIndex != null?selectDepartmentList[selectDepartmentListIndex].deptName:'请选择科室'}}
-        <!-- <input hidden value="{{selectDepartmentList[selectDepartmentListIndex].deptName}}" name="deptName"></input> -->
       </view>
-    </picker>
+    </picker> -->
+    <input value='{{doctorDetail.dept_Name}}' class='radius' name='dept_Name' disabled></input>
   </view>
   <view class="cu-form-group">
     <view class='title'>

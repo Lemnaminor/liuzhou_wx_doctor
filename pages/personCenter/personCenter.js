@@ -7,7 +7,7 @@ Page({
   data: {
 
     // 路由传参
-    doctorId: '1', // 医生ID
+    doctorId: getApp().globalData.doctorId, // 医生ID
 
     //设置用户信息
     userList: [{

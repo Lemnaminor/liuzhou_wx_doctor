@@ -35,6 +35,7 @@ App({
   },
   globalData: {
     userInfo: null,
+    doctorId: '1',
     //  path : `http://10.35.112.203:8080`
     // path: `http://172.28.17.11:8080`
     path: `http://111.12.86.168:8081`

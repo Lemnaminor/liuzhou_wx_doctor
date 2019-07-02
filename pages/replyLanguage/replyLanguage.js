@@ -58,7 +58,7 @@ Page({
             tempPageIndex = 1;
           } else {
             tempList = tempList.concat(res.data.data.list);
-            tempPageIndex = tempPageIndex + 1;
+            // tempPageIndex = tempPageIndex + 1;
           }
           that.setData({
             pageIndex: tempPageIndex,
@@ -190,7 +190,7 @@ Page({
     var that = this;
     if (this.data.pageIndex < this.data.pageCount) {
   
-      this.data.pageIndex++;
+      this.data.pageIndex += 1;
       this.replyLanguageList();
       var that = this;
 
