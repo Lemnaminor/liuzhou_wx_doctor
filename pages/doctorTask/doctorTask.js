@@ -1,4 +1,4 @@
-// pages/doctorTask/doctorTask.js
+  // pages/doctorTask/doctorTask.js
 const app = getApp()
 var sliderWidth = 100; // 需要设置slider的宽度，用于计算中间位置
 Page({
