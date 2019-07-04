@@ -18,7 +18,7 @@
       <input value='{{item.userName}}' placeholder="请填写监护人姓名" class='radius' disabled></input>
     </block>
   </view>
-  <view class="cu-form-group">
+  <view class="cu-form-group tel-list">
     <view class='title'>
       <text>手机号码</text>
     </view>
@@ -26,27 +26,28 @@
   </view>
   <view class="cu-form-group">
     <view class='title'>职称</view>
-    <picker bindchange="selectWorkList" value="{{selectWorkListIndex}}" range="{{selectWorkList}}" range-key="{{'doctorLevelDict'}}" name="doctorLevel">
+    <input value='{{doctorDetail.doctorLevelDict}}' class='radius' name='doctorLevelDict' disabled></input>
+    <!-- <picker bindchange="selectWorkList" value="{{selectWorkListIndex}}" range="{{selectWorkList}}" range-key="{{'doctorLevelDict'}}" name="doctorLevel">
       <view class="picker">
         {{selectWorkListIndex != null?selectWorkList[selectWorkListIndex].doctorLevelDict:'请选择职称'}}
         <input hidden value="{{selectWorkList[selectWorkListIndex].doctorLevelDict}}" name="doctorLevelDict"></input>
       </view>
-    </picker>
+    </picker> -->
   </view>
   <view class="cu-form-group">
     <view class='title'>科室</view>
+    <input value='{{doctorDetail.dept_Name}}' class='radius' name='dept_Name' disabled></input>
     <!-- <picker bindchange="selectDepartmentList" value="{{selectDepartmentListIndex}}" range="{{selectDepartmentList}}" range-key="{{'deptName'}}" name="dept_Id">
       <view class="picker">
         {{selectDepartmentListIndex != null?selectDepartmentList[selectDepartmentListIndex].deptName:'请选择科室'}}
       </view>
     </picker> -->
-    <input value='{{doctorDetail.dept_Name}}' class='radius' name='dept_Name' disabled></input>
   </view>
   <view class="cu-form-group">
     <view class='title'>
       <text>工号</text>
     </view>
-    <input placeholder="请填写工号，如不知道，可不填写" value='{{doctorDetail.workerNumber}}' class='radius' name='workerNumber'></input>
+    <input placeholder="请填写工号，如不知道，可不填写" value='{{doctorDetail.workerNumber}}' class='radius' name='workerNumber'  disabled></input>
   </view>
 
 

@@ -10,7 +10,7 @@ Page({
     canvasHidden: false,
     maskHidden: true,
     imagePath: '',
-    placeholder: 'https://www.baidu.com',//默认二维码生成文本
+    placeholder: '',//默认二维码生成文本
     canvasObj: {
       width: 600,
       height: 600
@@ -36,9 +36,17 @@ Page({
       success: function (res) {
         console.log('***** 医生详情接口调用 *****');
         console.log(res);
-        that.setData({
-          doctorDetail: res.data.result
-        });
+        if(res.data.code == 0){
+          that.setData({
+            doctorDetail: res.data.result,
+            placeholder: res.data.result.qrCodeImg
+          });
+          console.log(`二维码地址：${res.data.result.qrCodeImg}`);
+          // 页面初始化 options为页面跳转所带来的参数
+          var size = that.setCanvasSize();//动态设置画布大小
+          var initUrl = that.data.placeholder;
+          that.createQrCode(initUrl, "mycanvas", size.w, size.h);
+        }
       },
       fail: function () {
         // fail
@@ -48,14 +56,6 @@ Page({
       }
     })
   },
-  
-  // 获取当前页url地址
-  // getCurrentPageUrl: function(){
-  //   var pages = getCurrentPages()    //获取加载的页面
-  //   var currentPage = pages[pages.length - 1]    //获取当前页面的对象
-  //   var url = currentPage.route    //当前页面url
-  //   return url
-  // },
 
   onLoad: function (options) {
 
@@ -72,12 +72,9 @@ Page({
       title: '数据加载中',
     })
 
-    // 页面初始化 options为页面跳转所带来的参数
-    var size = this.setCanvasSize();//动态设置画布大小
-    var initUrl = this.data.placeholder;
-    this.createQrCode(initUrl, "mycanvas", size.w, size.h);
-
     this.doctorDetail(); // 医生详情接口
+
+
 
     wx.hideLoading();
 

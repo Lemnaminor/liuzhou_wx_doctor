@@ -62,12 +62,12 @@
         <view class='text-gray'>我与该患者的线上咨询记录</view>
       </view>
     </view>
-    <view class='flex-sub flex align-center' bindtap='toOpenList' id="{{thePatientId}}">
-      <view class='personCenter-icon bg-yellow round margin-right-sm text-center flex align-center'>
+    <view class='flex-sub flex align-center' bindtap='' id="{{thePatientId}}">
+      <view class='personCenter-icon bg-{{isDisabled?"gray":"yellow"}} round margin-right-sm text-center flex align-center'>
         <text class='text-xxl'><text class='icon-formfill lg text-white'></text></text>
       </view>
       <view class='flex-sub'>
-        <view class='text-black text-lg'>已开处方</view>
+        <view class='text-{{isDisabled?"gray":"black"}} text-lg'>已开处方</view>
         <view class='text-gray'>我在线上为该患者开具的处方</view>
       </view>
     </view>
