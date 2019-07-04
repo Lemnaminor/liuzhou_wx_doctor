@@ -1,10 +1,8 @@
 {
   "pages": [
-
-        "pages/personCenter/personCenter",
+    "pages/personCenter/personCenter",
     "pages/doctorTask/doctorTask",
     "pages/userManage/userManage",
-
     "pages/checkUp/checkUp",
     "pages/inspect/inspect",
     "pages/replyLanguage/replyLanguage",
@@ -13,7 +11,7 @@
     "pages/editData/editData",
     "pages/openList/openList",
     "pages/userManageDetail/userManageDetail",
-        "pages/userAdvice/userAdvice",
+    "pages/userAdvice/userAdvice",
     "pages/advice/advice",
     "pages/consult/consult",
     "pages/qrcode/qrcode",
@@ -55,8 +53,10 @@
       }
     ]
   },
-  "usingComponents":{
-    "top": "/components/top/top"
+  "usingComponents": {
+    "top": "/components/top/top",
+    "no-data": "/components/noData/noData",
+    "no-data-text": "/components/noDataText/noDataText"
   },
   "sitemapLocation": "sitemap.json"
 }

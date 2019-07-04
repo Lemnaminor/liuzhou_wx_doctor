@@ -1,0 +1,9 @@
+<!--components/noDataText/noDataText.wxml-->
+<view class='padding-lr padding-bottom text-center flex align-center'>
+  <view class='text-df'>
+    <text class='icon-infofill lg text-gray'></text>
+  </view>
+  <view>
+    <text class='text-df margin-left-xs'>暂无数据！</text>
+  </view>
+</view>

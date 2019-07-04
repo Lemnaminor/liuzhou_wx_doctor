@@ -14,8 +14,9 @@
     <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
 
       <!-- 全部 -->
-      <view class='padding'>
+      <no-data wx:if="{{allDoctorTaskList.length == 0}}" />
 
+      <view class='padding'>
         <view class='bg-white radius padding margin-bottom-sm' wx:for="{{allDoctorTaskList}}" wx:key="{{allDoctorTaskList.userId}}" bindtap='toConsult' id='{{item.id}}'>
           <view class='flex align-center padding-bottom-sm'>
             <view class="cu-avatar lg radius margin-right-sm" style="background-image:url({{item.wxIcon}});"></view>
@@ -48,8 +49,9 @@
     <view class="weui-tab__content advice-complete" hidden="{{activeIndex != 1}}">
 
       <!-- 进行中 -->
-      <view class='padding'>
+      <no-data wx:if="{{beingDoctorTaskList.length == 0}}" />
 
+      <view class='padding'>
         <view class='bg-white radius padding margin-bottom-sm' wx:for="{{beingDoctorTaskList}}" wx:key="{{beingDoctorTaskList.id}}" bindtap='toConsult' id='{{item.id}}'>
           <view class='flex align-center padding-bottom-sm'>
             <view class="cu-avatar lg radius margin-right-sm" style="background-image:url({{item.wxIcon}});"></view>
@@ -83,8 +85,9 @@
     <view class="weui-tab__content advice-complete" hidden="{{activeIndex != 2}}">
 
       <!-- 未开始 -->
-      <view class='padding'>
+      <no-data wx:if="{{noDoctorTaskList.length == 0}}" />
 
+      <view class='padding'>
         <view class='bg-white radius padding margin-bottom-sm' wx:for="{{noDoctorTaskList}}" wx:key="{{noDoctorTaskList.id}}" bindtap='toConsult' id='{{item.id}}'>
           <view class='flex align-center padding-bottom-sm'>
             <view class="cu-avatar lg radius margin-right-sm" style="background-image:url({{item.wxIcon}});"></view>

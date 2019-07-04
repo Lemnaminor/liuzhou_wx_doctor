@@ -28,6 +28,8 @@
     </view>
   </view>
 
+  <no-data wx:if="{{evaluateList.length == 0}}" />
+
   <view class="cu-list menu menu-avatar">
     <view class="cu-item padding-top padding-bottom" wx:for="{{evaluateList}}" wx:key="{{evaluateList.id}}">
       <view class="cu-avatar radius lg" style="background-image:url({{item.wxIcon}});"></view>

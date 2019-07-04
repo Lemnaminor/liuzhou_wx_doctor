@@ -14,6 +14,8 @@
     <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
 
       <!-- 咨询-进行中 -->
+      <no-data wx:if="{{beingAdviceList.length == 0}}" />
+
       <view class='cu-list menu menu-avatar'>
         <view class="cu-item" wx:for="{{beingAdviceList}}" wx:key="{{beingAdviceList.patientId}}" bindtap='toConsult' data-patientId="{{item.patientId}}">
           <view class="cu-avatar radius lg" style="background-image:url({{item.wxIcon}});"></view>
@@ -37,8 +39,9 @@
     <view class="weui-tab__content advice-complete" hidden="{{activeIndex != 1}}">
 
       <!-- 咨询-已完成 -->
-      <view class='cu-list menu menu-avatar'>
+      <no-data wx:if="{{successAdviceList.length == 0}}" />
 
+      <view class='cu-list menu menu-avatar'>
         <view class="cu-item" wx:for="{{successAdviceList}}" wx:key="{{successAdviceList.patientId}}" bindtap='toConsult' data-patientId="{{item.patientId}}">
           <view class="cu-avatar radius lg" style="background-image:url({{item.wxIcon}});"></view>
           <view class='content'>

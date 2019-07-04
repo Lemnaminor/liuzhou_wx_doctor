@@ -14,6 +14,8 @@
     <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
 
       <!-- 全部患者 -->
+      <no-data wx:if="{{allUserManageList.length == 0}}" />
+
       <view class='padding'>
         <view class='userManage-list padding bg-white radius margin-top-sm' wx:for="{{allUserManageList}}" wx:key="{{allUserManageList.id}}" bindtap='toUserManageDetail' id='{{item.id}}'>
           <view class='flex align-center solids-bottom padding-bottom-sm margin-bottom-sm'>
@@ -43,6 +45,8 @@
     <view class="weui-tab__content advice-complete" hidden="{{activeIndex != 1}}">
 
       <!-- 星标患者 -->
+      <no-data wx:if="{{starUserManageList.length == 0}}" />
+
     <view class='padding'>
         <view class='userManage-list padding bg-white radius margin-top-sm' wx:for="{{starUserManageList}}" wx:key="{{starUserManageList.id}}" bindtap='toUserManageDetail' id='{{item.id}}'>
           <view class='flex align-center solids-bottom padding-bottom-sm margin-bottom-sm'>

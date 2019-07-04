@@ -1,7 +1,8 @@
 <!--pages/replyLanguage/replyLanguage.wxml-->
 <!-- 常用语回复管理 -->
-<view class='replyLanguage-box cu-list menu'>
+<no-data wx:if="{{replyLanguageList.length == 0}}" />
 
+<view class='replyLanguage-box cu-list menu'>
   <view class='cu-item arrow' wx:for="{{replyLanguageList}}" wx:key="{{item.replieID}}" bindtap='listToBuildReplyLanguage' data-replieID='{{item.replieID}}' data-replieComent='{{item.replieComent}}'>
     <text class='reply-cont text-cut response'>{{item.replieComent}}</text>
   </view>
