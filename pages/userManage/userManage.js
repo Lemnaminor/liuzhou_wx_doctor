@@ -9,7 +9,7 @@ Page({
   data: {
 
     // 路由传参
-    doctorId: getApp().globalData.doctorId, // 医生ID
+    doctorId: '', // 医生ID
 
     // tab导航数据
     tabs: ["全部患者", "星标患者"],
@@ -64,7 +64,7 @@ Page({
     var pageNum = that.data.pageNum;
     console.log(`全部患者：当前页：${pageIndex},显示条数：${pageNum}`);
     wx.request({
-      url: app.globalData.path + `/hospc/enterprise/findPatients`,
+      url: app.globalData.path + `/enterprise/findPatients`,
       data: {
         doctorId: that.data.doctorId,
         pageIndex: that.data.pageIndex,
@@ -120,7 +120,7 @@ Page({
     var pageNum = that.data.pageNum2;
     console.log(`星标患者：当前页：${pageIndex},显示条数：${pageNum}`);
     wx.request({
-      url: app.globalData.path + `/hospc/enterprise/findPatManById`,
+      url: app.globalData.path + `/enterprise/findPatManById`,
       data: {
         doctorId: that.data.doctorId,
         pageIndex: that.data.pageIndex2,
@@ -188,10 +188,9 @@ Page({
   onLoad: function(options) {
 
     console.log(`***** 进入患者管理页面 *****`);
-    // console.log(options);
-    // this.setData({
-    //   doctorId: options.doctorId
-    // })
+    this.setData({
+      doctorId: getApp().globalData.doctorId
+    })
 
     wx.showLoading({
       title: '数据加载中',

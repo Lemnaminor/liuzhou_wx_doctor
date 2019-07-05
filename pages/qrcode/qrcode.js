@@ -29,7 +29,7 @@ Page({
     var that = this;
     var personId = that.data.personId;
     wx.request({
-      url: getApp().globalData.path + `/hospc/lgDoctor/doctor/detail/1/openId`,
+      url: getApp().globalData.path + `/lgDoctor/doctor/detail/1/openId`,
       data: {},
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header

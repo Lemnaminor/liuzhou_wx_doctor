@@ -17,7 +17,7 @@ Page({
               that.queryUsreInfo();
               //用户已经授权过
               wx.switchTab({
-                // url: '/pages/index/index'
+                url: '/pages/doctorTask/doctorTask'
               })
             }
           });

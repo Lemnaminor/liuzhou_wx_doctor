@@ -9,7 +9,7 @@ Page({
   data: {
 
     // 路由传参
-    doctorId: getApp().globalData.doctorId, // 医生ID
+    doctorId: '', // 医生ID
     thePatientId: '', // 患者ID
 
     // 咨询状态数据
@@ -75,7 +75,7 @@ Page({
     var pageNum = that.data.pageNum;
     console.log(`进行中：当前页：${pageIndex},显示条数：${pageNum}`);
     wx.request({
-      url: app.globalData.path + `/hospc/enterprise/findPerCenterConRecordlist`,
+      url: app.globalData.path + `/enterprise/findPerCenterConRecordlist`,
       data: {
         doctorId: that.data.doctorId,
         thePatientId: that.data.thePatientId,
@@ -132,7 +132,7 @@ Page({
     var pageNum = that.data.pageNum2;
     console.log(`已完成：当前页：${pageIndex},显示条数：${pageNum}`);
     wx.request({
-      url: app.globalData.path + `/hospc/enterprise/findPerCenterConRecordlist`,
+      url: app.globalData.path + `/enterprise/findPerCenterConRecordlist`,
       data: {
         doctorId: that.data.doctorId,
         thePatientId: that.data.thePatientId,
@@ -199,6 +199,7 @@ Page({
     console.log(`***** 进入我的评价页面 *****`);
     console.log(options);
     this.setData({
+      doctorId: getApp().globalData.doctorId,
       thePatientId: options.thePatientId
     })
 

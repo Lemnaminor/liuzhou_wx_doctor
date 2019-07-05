@@ -7,7 +7,7 @@ Page({
   data: {
 
     // 路由传参
-    doctorId: '1', // 医生ID
+    doctorId: '', // 医生ID
 
     // 判断是 新建or修改 入口
     isChangeRouter: '',
@@ -35,7 +35,7 @@ Page({
     var that = this;
     var doctorId = that.data.doctorId;
     wx.request({
-      url: getApp().globalData.path + `/hospc/enterprise/addReplie`,
+      url: getApp().globalData.path + `/enterprise/addReplie`,
       data: {
         doctorId: e.detail.value.doctorId,
         replieComent: e.detail.value.replieComent
@@ -80,7 +80,7 @@ Page({
     var that = this;
 
     wx.request({
-      url: getApp().globalData.path + `/hospc/enterprise/editReplie`,
+      url: getApp().globalData.path + `/enterprise/editReplie`,
       data: {
         doctorId: e.detail.value.doctorId,
         replieComent: e.detail.value.replieComent,
@@ -125,7 +125,7 @@ Page({
     console.log(e);
     var that = this;
     wx.request({
-      url: getApp().globalData.path + `/hospc/enterprise/deleteReplie`,
+      url: getApp().globalData.path + `/enterprise/deleteReplie`,
       data: {
         doctorId: that.data.doctorId,
         replieID: that.data.replieID
@@ -207,7 +207,7 @@ Page({
     console.log(`***** 进入新建常用语回复页面 *****`);
     console.log(options);
     this.setData({
-      doctorId: options.doctorId,
+      doctorId: getApp().globalData.doctorId,
       replieID: options.replieID
     })
 

@@ -7,7 +7,7 @@ Page({
   data: {
 
     // 路由传参
-    doctorId: getApp().globalData.doctorId, // 医生ID
+    doctorId: '', // 医生ID
 
     // 星星数量
     starList: [{
@@ -44,7 +44,7 @@ Page({
     var that = this;
     console.log(`游客评价接口：当前页：${that.data.pageIndex},总页数：${that.data.pageCount},显示条数：${that.data.pageNum}`);
     wx.request({
-      url: getApp().globalData.path + `/hospc/enterprise/myEvaluateNum`,
+      url: getApp().globalData.path + `/enterprise/myEvaluateNum`,
       data: {
         doctorId: that.data.doctorId,
         pageIndex: that.data.pageIndex,
@@ -104,9 +104,8 @@ Page({
   onLoad: function(options) {
 
     console.log(`***** 进入我的评价页面 *****`);
-    console.log(options);
     this.setData({
-      doctorId: options.doctorId
+      doctorId: getApp().globalData.doctorId
     })
 
     wx.showLoading({

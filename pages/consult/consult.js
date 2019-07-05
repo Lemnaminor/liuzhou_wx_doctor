@@ -1,4 +1,5 @@
 // pages/consult/consult.js
+var SocketTask;
 Page({
 
   /**
@@ -103,7 +104,7 @@ Page({
 
   },
 
-  // 游客文本输入
+  // 医生文本输入
   bindText(e) {
     console.log('***** 游客文本输入 *****');
     var that = this;
@@ -135,7 +136,7 @@ Page({
   },
 
   // 跳转医生详情页面
-  toDoctorDetail(){
+  toDoctorDetail() {
     console.log('***** 跳转医生详情页面 *****')
     wx.navigateTo({
       url: '/pages/doctorDetail/doctorDetail',
@@ -180,40 +181,80 @@ Page({
   /**
    * websocket 函数方法
    */
-  // 建立socket连接
-  buildLink(){
-    wx.connectSocket({
-      url: 'wss://example.qq.com',
+  // 创建websocket
+  webSocket_open: function () {
+    var that = this;
+    console.log('开始创建')
+    // 创建Socket
+    SocketTask = wx.connectSocket({
+      url: `ws://111.12.86.168:9326`,
       header: {
         'content-type': 'application/json'
       },
-      protocols: ['protocol1'],
-      method: "GET",
-      success: function (res) { },
-      fail: function (res) { },
-      complete: function (res) { },
+      method: 'GET',
+      success: function (res) {
+        console.log('WebSocket连接创建', res)
+      },
+      fail: function (err) {
+        wx.showToast({
+          title: '网络异常！',
+        })
+        console.log(err)
+      },
     })
+    that.initSocket(); // 监听事件
   },
 
-  // 监听 WebSocket 连接打开事件
-  isOpenLink(){
-    wx.onSocketOpen(function(res){
-      console.log('***** webSocket链接已打开 *****');
+  // socket监听事件
+  initSocket: function () {
+
+    var that = this;
+    console.log("进入监听事件", SocketTask);
+
+    // socket链接打开事件
+    SocketTask.onOpen(res => {
+      console.log('监听 WebSocket 连接打开事件。', res);
     })
+
+    // socket链接关闭事件
+    SocketTask.onClose(onClose => {
+      console.log('监听 WebSocket 连接关闭事件。', onClose)
+    })
+
+    // socket链接错误事件
+    SocketTask.onError(onError => {
+      console.log('监听 WebSocket 错误错误事件', onError)
+    })
+
+    // socket链接接受到服务器的消息事件
+    SocketTask.onMessage(onMessage => {
+      console.log('监听 WebSocket 接受到服务器的消息事件', onMessage)
+    })
+
   },
+
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
 
+    console.log(`***** 进入聊天室页面 *****`);
+    console.log(`获取token值：${getApp().globalData.token}`);
+
+    // this.webSocket_open(); // 建立socket链接
+
+
+
+
+
     // 动态设置聊天内容高度适配。
     // 获取底部元素高度
     var query = wx.createSelectorQuery();
     var that = this;
     query.select('.foot').boundingClientRect(function(rect) {
-      console.log(`footer`)
-      console.log(rect.height)
+      // console.log(`footer`)
+      // console.log(rect.height)
       that.setData({
         footHeight: rect.height
       })
@@ -245,6 +286,8 @@ Page({
         })
       }
     })
+
+    
 
 
   },

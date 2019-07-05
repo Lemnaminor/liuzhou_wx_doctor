@@ -7,7 +7,7 @@ Page({
   data: {
 
     // 路由传参
-    doctorId: getApp().globalData.doctorId, // 医生ID
+    doctorId: '', // 医生ID
 
     //设置用户信息
     userList: [{
@@ -51,7 +51,7 @@ Page({
     var that = this;
     var doctorId = that.data.doctorId;
     wx.request({
-      url: getApp().globalData.path + `/hospc/enterprise/edictDoctor?doctorId=${doctorId}`,
+      url: getApp().globalData.path + `/enterprise/edictDoctor?doctorId=${doctorId}`,
       data: {},
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
@@ -80,7 +80,7 @@ Page({
   getWorkList() {
     var that = this;
     wx.request({
-      url: getApp().globalData.path + `/hospc/enterprise/titlelist`,
+      url: getApp().globalData.path + `/enterprise/titlelist`,
       data: {},
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -112,7 +112,7 @@ Page({
   // getDepartmentList() {
   //   var that = this;
   //   wx.request({
-  //     url: getApp().globalData.path + `/hospc/enterprise/departmentlist`,
+  //     url: getApp().globalData.path + `/enterprise/departmentlist`,
   //     data: {},
   //     header: {
   //       'Content-Type': 'application/x-www-form-urlencoded'
@@ -147,7 +147,7 @@ Page({
     var doctorId = that.data.doctorId;
 
     wx.request({
-      url: getApp().globalData.path + `/hospc/enterprise/submitEdictDoctor`,
+      url: getApp().globalData.path + `/enterprise/submitEdictDoctor`,
       data: {
         'id': e.detail.value.id,
         'telPhone': e.detail.value.telPhone,
@@ -221,9 +221,8 @@ Page({
   onLoad: function(options) {
 
     console.log(`***** 进入编辑资料页面 *****`);
-    console.log(options);
     this.setData({
-      doctorId: options.doctorId
+      doctorId: getApp().globalData.doctorId
     })
     this.doctorDetail(); // 调用医生详情接口
     // this.getDepartmentList(); // 调用科室列表接口

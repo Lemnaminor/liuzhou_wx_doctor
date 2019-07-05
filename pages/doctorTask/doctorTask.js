@@ -9,7 +9,7 @@ Page({
   data: {
 
     // 路由传参
-    doctorId: getApp().globalData.doctorId, // 医生ID
+    doctorId: '', // 医生ID
 
     // 任务状态数据
     consulStatus: '',
@@ -85,7 +85,7 @@ Page({
     var pageNum = that.data.pageNum;
     console.log(`全部：当前页：${pageIndex},显示条数：${pageNum}`);
     wx.request({
-      url: app.globalData.path + `/hospc/doctorTask/finddoctorTask`,
+      url: app.globalData.path + `/doctorTask/finddoctorTask`,
       data: {
         doctorId: that.data.doctorId,
         pageIndex: that.data.pageIndex,
@@ -140,7 +140,7 @@ Page({
     var pageNum = that.data.pageNum2;
     console.log(`进行中：当前页：${pageIndex},显示条数：${pageNum}`);
     wx.request({
-      url: app.globalData.path + `/hospc/doctorTask/finddoctorTaskBydoctorId`,
+      url: app.globalData.path + `/doctorTask/finddoctorTaskBydoctorId`,
       data: {
         doctorId: that.data.doctorId,
         consulStatus: that.data.consulStatus,
@@ -196,7 +196,7 @@ Page({
     var pageNum = that.data.pageNum3;
     console.log(`未开始：当前页：${pageIndex},显示条数：${pageNum}`);
     wx.request({
-      url: app.globalData.path + `/hospc/doctorTask/finddoctorTaskBydoctorId`,
+      url: app.globalData.path + `/doctorTask/finddoctorTaskBydoctorId`,
       data: {
         doctorId: that.data.doctorId,
         consulStatus: that.data.consulStatus,
@@ -261,6 +261,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+
+    console.log(`***** 进入医生任务页面 *****`);
+    this.setData({
+      doctorId: getApp().globalData.doctorId
+    })
 
     //tab切换
     var that = this;

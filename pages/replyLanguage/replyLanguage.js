@@ -34,7 +34,7 @@ Page({
     var pageNum = that.data.pageNum;
     console.log(`常用回复语接口：当前页：${pageIndex},显示条数：${pageNum}`);
     wx.request({
-      url: getApp().globalData.path + `/hospc/enterprise/commonReplies`,
+      url: getApp().globalData.path + `/enterprise/commonReplies`,
       data: {
         doctorId: doctorId,
         pageIndex: that.data.pageIndex,
@@ -118,9 +118,8 @@ Page({
   onLoad: function(options) {
 
     console.log(`***** 进入常用语回复页面 *****`);
-    console.log(options);
     this.setData({
-      doctorId: options.doctorId
+      doctorId: getApp().globalData.doctorId
     })
 
     wx.showLoading({

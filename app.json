@@ -2,6 +2,7 @@
   "pages": [
     "pages/personCenter/personCenter",
     "pages/doctorTask/doctorTask",
+    "pages/consult/consult",
     "pages/userManage/userManage",
     "pages/checkUp/checkUp",
     "pages/inspect/inspect",
@@ -13,7 +14,6 @@
     "pages/userManageDetail/userManageDetail",
     "pages/userAdvice/userAdvice",
     "pages/advice/advice",
-    "pages/consult/consult",
     "pages/qrcode/qrcode",
     "pages/myMoney/myMoney",
     "pages/myEvaluate/myEvaluate",

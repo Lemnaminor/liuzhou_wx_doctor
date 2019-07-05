@@ -7,7 +7,7 @@ Page({
   data: {
 
     // 路由传参
-    doctorId: getApp().globalData.doctorId, // 医生ID
+    doctorId: '', // 医生ID
 
     //设置用户信息
     userList: [{
@@ -34,7 +34,7 @@ Page({
     var that = this;
     var doctorId = that.data.doctorId;
     wx.request({
-      url: getApp().globalData.path + `/hospc/enterprise/mycenter?doctorId=${doctorId}`,
+      url: getApp().globalData.path + `/enterprise/mycenter?doctorId=${doctorId}`,
       data: {},
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
@@ -78,7 +78,7 @@ Page({
     }
     console.log(`在线状态：${consulStatus}`);
     wx.request({
-      url: getApp().globalData.path + `/hospc/enterprise/exitonlinestate`,
+      url: getApp().globalData.path + `/enterprise/exitonlinestate`,
       data: {
         doctorId: that.data.doctorId,
         consulStatus: consulStatus
@@ -183,10 +183,9 @@ Page({
    */
   onLoad: function(options) {
 
-    console.log(`***** 进入医生详情页面 *****`);
-    console.log(options);
+    console.log(`***** 进入医生个人中心页面 *****`);
     this.setData({
-      // doctorId: options.doctorId
+      doctorId: getApp().globalData.doctorId
     })
 
     this.doctorDetail(); // 医生详情接口
@@ -194,7 +193,7 @@ Page({
     let that = this;
     //登录的信息创建
     wx.login({
-      success: function(e) {
+      success: function (e) {
         wx.setStorage({
           key: "key",
           data: e.errMsg
@@ -203,7 +202,7 @@ Page({
     })
     //获取用户的信息
     wx.getUserInfo({
-      success: function(res) {
+      success: function (res) {
         console.log(`获取用户的信息`);
         console.log(res);
         let userInfo = res.userInfo
@@ -221,7 +220,7 @@ Page({
           userList: user,
         })
       },
-      fail: function(res) {
+      fail: function (res) {
         console.log(res);
       }
     })

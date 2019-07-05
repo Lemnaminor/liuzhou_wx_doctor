@@ -31,7 +31,7 @@ Page({
   userDetail: function () {
     var that = this;
     wx.request({
-      url: getApp().globalData.path + `/hospc/enterprise/getPatientInfo`,
+      url: getApp().globalData.path + `/enterprise/getPatientInfo`,
       data: {
         doctorId: that.data.doctorId,
         thePatientId: that.data.thePatientId
@@ -77,7 +77,7 @@ Page({
     console.log(`doctorId值:${that.data.doctorId},thePatientId值：${that.data.thePatientId}，isy值：${isy}`);
 
     wx.request({
-      url: getApp().globalData.path + `/hospc/enterprise/savePatMan?doctorID=${that.data.doctorId}&thePatientId=${that.data.thePatientId}&isy=${isy}`,
+      url: getApp().globalData.path + `/enterprise/savePatMan?doctorID=${that.data.doctorId}&thePatientId=${that.data.thePatientId}&isy=${isy}`,
       data: {},
       method: 'POST',
       header: {
@@ -176,7 +176,7 @@ Page({
     console.log(options);
     var that = this;
     this.setData({
-      doctorId: options.doctorId,
+      doctorId: getApp().globalData.doctorId,
       thePatientId: options.thePatientId
     })
     console.log(`获取医生ID值：${that.data.doctorId}，获取患者ID值：${that.data.thePatientId}`);
@@ -251,7 +251,7 @@ Page({
     that.setData({ isLoading: true });
     wx.showNavigationBarLoading(); //在标题栏中显示加载
     wx.request({
-      url: `http://10.35.112.203:8080/hospc/lgDoctor/doctor/evaluateList/${that.data.doctorId}/1/20`,
+      url: `http://10.35.112.203:8080/lgDoctor/doctor/evaluateList/${that.data.doctorId}/1/20`,
       data: {},
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
