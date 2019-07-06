@@ -1,5 +1,5 @@
 export default {
-  appid: "wx67a443c87192ff7a",
+  agentId: 1000034,
   host_domain: '10.35.112.201',
   app_name: 'WX-IM',
   http_protocol: 'http',

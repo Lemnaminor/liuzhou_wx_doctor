@@ -5,11 +5,10 @@ import WxRequestUtil from "../../utils/render/util/WxRequestUtil";
 import { ErrorType } from '../../utils/render/util/ChatUtils';
 
 const api = {
-  mnLogin: "/wx/user/" + conf.appid + "/mnLogin",
-  mnInfo: "/wx/user/" + conf.appid + "/mnInfo",
+  cpInfoUrl: "/wx/cp/doctor/" + conf.agentId + "/cpInfo",
   /**
-   * @param username 微信用户的 openId
-   * @param password 微信用户的 openId 
+   * @param username 企业微信用户的 userId
+   * @param password 企业微信用户的 userId 
    */
   login: function (username, password) {
     let self = getApp();
@@ -21,7 +20,7 @@ const api = {
       .then(token => {
         console.log('token', token);
         // 获取当前登录的用户，存入store
-        return requestApi.request(conf.getInitUrl() + "/" + username, {}, self);
+        return requestApi.request(conf.getInitUrl() , {}, self);
       })
       .then(response => {
 
@@ -36,12 +35,12 @@ const api = {
           chatMap.set(group.id, group);
         });
         // 个人信息
-        wx.setStorageSync('setUser', json.me);
+        wx.setStorageSync('user', json.me);
         // 关注用户
-        wx.setStorageSync('setUserConcernList', json.concerns);
+        wx.setStorageSync('concernList', json.concerns);
         // 聊天组
-        wx.setStorageSync('setChatGroupList', json.groups);
-        wx.setStorageSync('setChatMap', chatMap);
+        wx.setStorageSync('groupList', json.groups);
+        wx.setStorageSync('chatMap', chatMap);
       })
       .catch(function (error) {
         console.log(error);
@@ -68,49 +67,20 @@ export default class MeLogin {
         let wxRequestUtil = new WxRequestUtil();
         // Get 请求后台
         wxRequestUtil.doGet(
-          api.mnLogin,
+          api.cpInfoUrl,
           { code: e.code })
           .then(response => {
+            debugger 
             console.info("响应的数据：" + response.data);
             return response.data;
           }).then(data => {
             //获取用户的信息
-            wx.getUserInfo({
-              success: function (res) {
-                
-                wxRequestUtil.doGet(api.mnInfo, {
-                  sessionKey: data.sessionKey,
-                  signature: res.signature,
-                  rawData: res.rawData,
-                  encryptedData: res.encryptedData,
-                  iv: res.iv
-                }).then(response => {
-                  result = response.data.result;
-                  console.info("响应的用户结果数据：" + result);
-                  // 1. 先将基本信息存放到本地
-                  let userInfo = res.userInfo;
-                  let wxUser = {
-                    userName: userInfo.nickName,
-                    userHeaderUrl: userInfo.avatarUrl,
-                    openId: result.openId,
-                    id: result.id,
-                    unionId: result.unionId
-                  }
-
-                  self._app.globalData.userInfo = wxUser;
-                  // 2. 获取微信用户信息，开始通信登录
-                  var result = response.data.result;
-                  api.login(result.openId, result.openId);
-                })
-              }
-            })
+            var result = data.result;
+            console.info("响应的用户结果数据：" + result);
+            //api.login(result.openId, result.openId);
           }).catch(function (err) {
             console.info("失败信息：" + err.errMsg);
           });
-        wx.setStorage({
-          key: "key",
-          data: e.errMsg
-        })
       }
     })
   }

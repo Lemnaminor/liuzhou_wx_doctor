@@ -1,8 +1,12 @@
 //app.js
-// import MeLogin from "./modules/login/me-Login";
+import MeLogin from "./modules/login/me-Login";
 App({
   onLaunch: function () {
+    let meLogin = new MeLogin(this);
+    meLogin.wxLogin();
+
     console.log(`***** 进入app.js文件 *****`);
+
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -32,6 +36,8 @@ App({
   globalData: {
     token: null,
     userInfo: null,
+    // 应用ID: 医生在线询诊 
+    agentId: 1000034,
     doctorId: '',
     //  path : `http://10.35.112.203:8080`
     // path: `http://172.28.17.11:8080`
