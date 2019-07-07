@@ -1,2 +1,36 @@
 <!--pages/inspect/inspect.wxml-->
-<text>功能正在建设中...</text>
+<view class='padding'>
+
+  <view class='bg-white padding radius margin-bottom' wx:for="{{inspectList}}" wx:key="{{index}}" bindtap='toInspectDetail'>
+    <view class=''>
+      <view>
+        <text>编号：</text>
+        <text>{{item.reportNo}}</text>
+      </view>
+       <view>
+        <text>时间：</text>
+        <text>{{item.createDate}}</text>
+      </view>
+       <view>
+        <text>项目类：</text>
+        <text>{{item.itemClass}}</text>
+      </view>
+       <view>
+        <text>项目子类：</text>
+        <text>{{item.itemSubClass}}</text>
+      </view>
+       <view>
+        <text>报告时间：</text>
+        <text>{{item.reportDate}}</text>
+      </view>
+       <view>
+        <text>检验状态：</text>
+        <text>{{item.reportStatus}}</text>
+      </view>
+    </view>
+  </view>
+
+</view>
+
+<!-- top -->
+<top/>

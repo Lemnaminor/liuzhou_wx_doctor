@@ -1,0 +1,16 @@
+/* pages/editFirst/editFirst.wxss */
+.editdata-box textarea {
+  height: 175rpx;
+}
+.editdata-box .cu-form-group {
+  color: #aaa;
+}
+.editdata-box .cu-form-group input {
+  color: #aaa;
+}
+.tel-list {
+  color: #333!important;
+}
+.tel-list input {
+  color: #333!important;
+}

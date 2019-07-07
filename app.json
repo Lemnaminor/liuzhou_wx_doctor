@@ -1,15 +1,19 @@
 {
   "pages": [
-    "pages/personCenter/personCenter",
-    "pages/doctorTask/doctorTask",
     "pages/consult/consult",
+    "pages/personCenter/personCenter",
+    "pages/editFirst/editFirst",
+    "pages/editData/editData",
+    "pages/editDataSuccess/editDataSuccess",
+    "pages/inspect/inspect",
+    "pages/inspectDetail/inspectDetail",
+    "pages/doctorTask/doctorTask",
+
     "pages/userManage/userManage",
     "pages/checkUp/checkUp",
-    "pages/inspect/inspect",
     "pages/replyLanguage/replyLanguage",
     "pages/buildReplyLanguage/buildReplyLanguage",
     "pages/authorize/authorize",
-    "pages/editData/editData",
     "pages/openList/openList",
     "pages/userManageDetail/userManageDetail",
     "pages/userAdvice/userAdvice",
@@ -17,7 +21,6 @@
     "pages/qrcode/qrcode",
     "pages/myMoney/myMoney",
     "pages/myEvaluate/myEvaluate",
-    "pages/editDataSuccess/editDataSuccess",
     "pages/index/index",
     "pages/logs/logs"
   ],
