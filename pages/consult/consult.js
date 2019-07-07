@@ -1,4 +1,9 @@
 // pages/consult/consult.js
+// pages/consult/consult.js
+const app = getApp();
+// const requestApi = app.$requestApi;
+const imChat = app.$imChat;
+
 var SocketTask;
 Page({
 
@@ -108,6 +113,41 @@ Page({
       })
       return false;
     }
+    // 后台发送数据 start
+
+    let user = app.globalData.userInfo;
+    //let patient = that.data.patientInfo[0];
+
+    var sendInfo = {
+      // code: {0:"心跳",1:"链接就绪",2:"消息"}
+      code: 2,
+      message: {
+        //消息来源用户名
+        username: user.userName,
+        // 发送者头像
+        avatar: user.userHeaderUrl,
+        // 接受的消息用户ID
+        toid: '1d4910e1a0a40f4b20b68431a35fe998',
+        // 消息类型:{1: 患者对医生 , 2:医生对患者}
+        chatType: 2,
+        // 消息内容 
+        content: that.data.userWriteMsg.content,
+        // 内容类型: {1: 文字内容, 2: 语音内容, 3: 文件内容, 4: 视频内容, 5: 图片}
+        contentType: 1,
+        //是否被人发送
+        mine: false,
+        //发送消息的企业用户userId
+        fromid: user.id,
+        timestamp: new Date().getTime
+      }
+    }
+    // 发送消息
+    imChat.setSocketMsg(sendInfo);
+    // 后台发送数据 end
+
+
+
+
     var newMsg = {
       avatar: '../../images/head1.jpg',
       charType: 2,
@@ -131,12 +171,13 @@ Page({
     })
 
     // 信息添加后页面滚动
+    /* 
     console.log(`***** 信息添加后页面滚动 *****`);
     console.log(that.data.msgList.length - 1);
     that.setData({
       toView: 'msg-' + (that.data.msgList.length - 1),
     })
-
+   */
   },
 
   // 医生文本输入
@@ -221,13 +262,15 @@ Page({
     var that = this;
     console.log('开始创建')
     // 创建Socket
+    // 1. 获取 微信用户唯一 token
+    const token = app.globalData.token
     SocketTask = wx.connectSocket({
-      url: `ws://111.12.86.168:9326`,
+      url: 'ws://10.35.112.201:9326?token=' + token,
       header: {
         'content-type': 'application/json'
       },
-      method: 'GET',
-      success: function(res) {
+      method: 'POST',
+      success: function (res) {
         console.log('WebSocket连接创建', res)
       },
       fail: function(err) {
@@ -278,11 +321,16 @@ Page({
     console.log(`***** 进入聊天室页面 *****`);
     console.log(`获取token值：${getApp().globalData.token}`);
 
-    this.webSocket_open(); // 建立socket链接
+     //this.webSocket_open(); // 建立socket链接
+    // 开始通信 start
+    var that = this;
+    imChat.connectSocket();
 
 
+    // 开始通信 end
 
 
+ 
 
     // 动态设置聊天内容高度适配。
     // 获取底部元素高度
@@ -339,7 +387,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    // socket链接接受到服务器的消息事件 
+    SocketTask.onMessage(onMessage => {
+      console.info(JSON.parse(res.data))  // 收到的消息为字符串，需处理一下
+    })
   },
 
   /**
