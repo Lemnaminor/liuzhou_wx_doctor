@@ -76,7 +76,6 @@ export default class MeLogin {
                   encryptedData: res.encryptedData,
                   iv: res.iv
                 }).then(response => {
-                  debugger
                   var result = response.data.result;
                   if (result !=null && result !=undefined){
                     console.info("响应的用户结果数据：" + result);

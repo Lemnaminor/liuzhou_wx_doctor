@@ -2,10 +2,12 @@
   "pages": [
     
     "pages/personCenter/personCenter",
+    "pages/inspect/inspect",
+
     "pages/editFirst/editFirst",
     "pages/editData/editData",
     "pages/editDataSuccess/editDataSuccess",
-    "pages/inspect/inspect",
+ 
     "pages/inspectDetail/inspectDetail",
     "pages/doctorTask/doctorTask",
     "pages/consult/consult",
