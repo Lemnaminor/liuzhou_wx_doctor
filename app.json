@@ -1,5 +1,6 @@
 {
   "pages": [
+    
     "pages/personCenter/personCenter",
     "pages/inspect/inspect",
 
@@ -11,7 +12,7 @@
  
     "pages/inspectDetail/inspectDetail",
     "pages/doctorTask/doctorTask",
-
+    "pages/consult/consult",
     "pages/userManage/userManage",
     "pages/checkUp/checkUp",
     "pages/replyLanguage/replyLanguage",

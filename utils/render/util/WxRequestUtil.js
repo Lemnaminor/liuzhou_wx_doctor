@@ -1,9 +1,10 @@
+import conf from '../../render/conf/index.js';
 // 解决地狱回调问题
 class WxRequestUtil {
 
   constructor() {
     this.instance = null;
-    this.path = "http://10.35.112.201:8081";
+    this.path = conf.getHostUrl();
   }
   /**
    * 单例构造方法，构造一个广为人知的接口，供用户对该类进行实例化
