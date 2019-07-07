@@ -9,8 +9,8 @@ export default {
   his_url: '/api/message/list',
   chat_users_url: '/api/user/chatUserList',
   token_path: '/oauth/token',
-  login:'/user/login',
-  ws_protocol: 'wswx',
+  login: '/user/login',
+  ws_protocol: 'ws',
   getHostUrl: function() {
     return this.http_protocol + '://' + this.host_domain + ':' + this.http_port;
   },
