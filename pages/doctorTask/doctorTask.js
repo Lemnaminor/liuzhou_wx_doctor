@@ -249,10 +249,11 @@ Page({
   toConsult(e){
     console.log(`***** 跳转聊天页面 *****`);
     console.log(e);
-    var userId = e.currentTarget.id;
-    console.log(userId);
+    // var userId = e.currentTarget.id;
+    var imUserId = e.currentTarget.dataset.imuserid;
+    console.log(`imUserId值：${imUserId}`);
     wx.navigateTo({
-      url: `/pages/consult/consult?userId=${userId}`,
+      url: `/pages/consult/consult?imUserId=${imUserId}`,
     })
   },
 

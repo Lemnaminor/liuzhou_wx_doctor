@@ -20,7 +20,7 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now()) 
     wx.setStorageSync('logs', logs)
-    /* 
+
     var that = this;
     wx.request({
       url: that.globalData.path + `/enterprise/findPersCenterUserId?userId=1`,
@@ -40,7 +40,7 @@ App({
 
       }
     })
-   */
+
   },
   globalData: {
     token: null,

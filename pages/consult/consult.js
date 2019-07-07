@@ -127,7 +127,8 @@ Page({
         // 发送者头像
         avatar: user.userHeaderUrl,
         // 接受的消息用户ID
-        toid: '1d4910e1a0a40f4b20b68431a35fe998',
+        // toid: '1d4910e1a0a40f4b20b68431a35fe998',
+        toid: '',
         // 消息类型:{1: 患者对医生 , 2:医生对患者}
         chatType: 2,
         // 消息内容 
@@ -320,7 +321,16 @@ Page({
   onLoad: function(options) {
 
     console.log(`***** 进入聊天室页面 *****`);
-    console.log(`获取token值：${getApp().globalData.token}`);
+    console.log(options);
+    var that = this;
+    that.setData({
+      sendInfo: {
+        message: {
+          toid: options.imUserId
+        }
+      }
+    })
+    console.log(`获取toid值：${that.data.sendInfo.message.toid}`);
 
      //this.webSocket_open(); // 建立socket链接
     // 开始通信 start

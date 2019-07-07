@@ -4,8 +4,6 @@
     "pages/personCenter/personCenter",
     "pages/inspect/inspect",
 
-    "pages/consult/consult",
- 
     "pages/editFirst/editFirst",
     "pages/editData/editData",
     "pages/editDataSuccess/editDataSuccess",
