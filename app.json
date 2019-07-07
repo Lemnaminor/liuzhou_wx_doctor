@@ -1,11 +1,14 @@
 {
   "pages": [
-    "pages/consult/consult",
     "pages/personCenter/personCenter",
+    "pages/inspect/inspect",
+
+    "pages/consult/consult",
+ 
     "pages/editFirst/editFirst",
     "pages/editData/editData",
     "pages/editDataSuccess/editDataSuccess",
-    "pages/inspect/inspect",
+ 
     "pages/inspectDetail/inspectDetail",
     "pages/doctorTask/doctorTask",
 

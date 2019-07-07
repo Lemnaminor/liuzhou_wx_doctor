@@ -10,52 +10,7 @@ Page({
     PatientId: '0000676543',
 
     // 检验报告列表数据
-    inspectList: [{
-      "createDate": "2019-06-27 08:36:55",
-      "reportNo": "6758081",     //编号
-      "itemClass": "甲功5",   //项目类
-      "itemSubClass": "血清",  //项目子类
-      "reportDate": "2019-06-27 09:42:04",  //报告时间
-      "reportStatus": "report"
-    },
-      {
-        "createDate": "2019-06-26 17:42:27",
-        "reportNo": "6756239",
-        "itemClass": "(J)肾4,(J)糖,(J)心4,(J)电4,(J)肝10",
-        "itemSubClass": "血清",
-        "reportDate": "2019-06-26 18:11:20",
-        "reportStatus": "report"
-      }, {
-        "createDate": "2019-06-27 08:36:55",
-        "reportNo": "6758081",     //编号
-        "itemClass": "甲功5",   //项目类
-        "itemSubClass": "血清",  //项目子类
-        "reportDate": "2019-06-27 09:42:04",  //报告时间
-        "reportStatus": "report"
-      },
-      {
-        "createDate": "2019-06-26 17:42:27",
-        "reportNo": "6756239",
-        "itemClass": "(J)肾4,(J)糖,(J)心4,(J)电4,(J)肝10",
-        "itemSubClass": "血清",
-        "reportDate": "2019-06-26 18:11:20",
-        "reportStatus": "report"
-      }, {
-        "createDate": "2019-06-27 08:36:55",
-        "reportNo": "6758081",     //编号
-        "itemClass": "甲功5",   //项目类
-        "itemSubClass": "血清",  //项目子类
-        "reportDate": "2019-06-27 09:42:04",  //报告时间
-        "reportStatus": "report"
-      },
-      {
-        "createDate": "2019-06-26 17:42:27",
-        "reportNo": "6756239",
-        "itemClass": "(J)肾4,(J)糖,(J)心4,(J)电4,(J)肝10",
-        "itemSubClass": "血清",
-        "reportDate": "2019-06-26 18:11:20",
-        "reportStatus": "report"
-      }],
+    inspectList: [],
     pageIndex: 1, // 请求页索引
     pageNum: 5, // 请求数据条数
     pageCount: 0, // 总页数
@@ -139,7 +94,7 @@ Page({
       title: '数据加载中',
     })
 
-    // this.inspectList();
+    this.inspectList();
 
     wx.hideLoading();
 
