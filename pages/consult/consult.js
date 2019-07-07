@@ -353,6 +353,7 @@ Page({
   onShow: function() {
     // socket链接接受到服务器的消息事件 
     SocketTask.onMessage(onMessage => {
+      
       console.info(JSON.parse(res.data))  // 收到的消息为字符串，需处理一下
     })
   },

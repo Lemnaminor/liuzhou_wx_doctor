@@ -5,7 +5,9 @@ import WxRequestUtil from "../../utils/render/util/WxRequestUtil";
 import { ErrorType } from '../../utils/render/util/ChatUtils';
 
 const api = {
-  cpInfoUrl: "/wx/cp/doctor/" + conf.agentId + "/cpInfo",
+
+  cpLogin: "/wx/cp/doctor/" + conf.appId + "/cpLogin",
+  cpInfo: "/wx/cp/doctor/" + conf.appId + "/cpInfo",
   /**
    * @param username 企业微信用户的 userId
    * @param password 企业微信用户的 userId 
@@ -44,46 +46,63 @@ const api = {
       });
   }
 }
-// 用户登录
+// 企业用户登录
 export default class MeLogin {
   constructor(app) {
     this._app = app;
   }
-  wxLogin(){
+  wxLogin() {
     let self = this;
-    wx.qy.login({
+    //登录的信息创建
+    wx.login({
       success: function (e) {
-        //登录的信息创建
         // 定义 WxRequest 的封装对象
         let wxRequestUtil = new WxRequestUtil();
         // Get 请求后台
         wxRequestUtil.doGet(
-          api.cpInfoUrl,
-          { code: e.code })
+          api.cpLogin,
+          {code: e.code})
           .then(response => {
+            debugger
             console.info("响应的数据：" + response.data);
             return response.data;
           }).then(data => {
             //获取用户的信息
-            var result = data.result;
-            // 将基本信息存放到本地
-            let wxUser = {
-              userName: result.name,
-              userHeaderUrl: result.doctorIcon,
-              openId: result.userId,
-              id: result.id,
-              unionId: result.unionId
-            }
-
-            self._app.globalData.userInfo = wxUser;
-
-            
-            console.info("响应的用户结果数据：" + result);
-            
-            api.login(result.userId, result.userId);
+            wx.getUserInfo({
+              success: function (res) {
+                wxRequestUtil.doGet(api.cpInfo, {
+                  sessionKey: data.sessionKey,
+                  signature: res.signature,
+                  rawData: res.rawData,
+                  encryptedData: res.encryptedData,
+                  iv: res.iv
+                }).then(response => {
+                  var result = response.data.result;
+                  if (result !=null && result !=undefined){
+                    console.info("响应的用户结果数据：" + result);
+                    // 1. 先将基本信息存放到本地
+                    let userInfo = res.userInfo;
+                    let wxUser = {
+                      userName: userInfo.nickName,
+                      userHeaderUrl: userInfo.avatarUrl,
+                      openId: result.userId,
+                      id: result.id,
+                      unionId: result.unionId
+                    }
+                    self._app.globalData.userInfo = wxUser;
+                    // 2. 获取微信用户信息，开始通信登录
+                    api.login(result.userId, result.userId);
+                  }
+                })
+              }
+            })
           }).catch(function (err) {
             console.info("失败信息：" + err.errMsg);
-          })
+          });
+        wx.setStorage({
+          key: "key",
+          data: e.errMsg
+        })
       }
     })
   }
