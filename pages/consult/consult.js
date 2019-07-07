@@ -238,6 +238,7 @@ Page({
   // 结束咨询
   endConsult() {
     console.log(`***** 结束咨询 *****`);
+    imChat.closeSocket();
     var that = this;
     that.setData({
       isShowEndConsult: !that.data.isShowEndConsult,
