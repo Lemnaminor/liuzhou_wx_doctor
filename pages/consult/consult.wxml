@@ -76,11 +76,11 @@
 
       </view>
 
-      <!-- <view class="cu-avatar radius" style="background-image:url(../../images/head2.jpg);"></view> -->
-      <block wx:for="{{userList}}" wx:key="userList">
+      <view class="cu-avatar radius" style="background-image:url({{item.avatar}});"></view>
+      <!-- <block wx:for="{{userList}}" wx:key="userList"> -->
         <!-- <text class="userinfo-nickname">{{item.userName}}</text> -->
-        <image bindtap="" class="userinfo-avatar cu-avatar radius" src="{{item.userHeaderUrl}}" mode="cover"></image>
-      </block>
+        <!-- <image bindtap="" class="userinfo-avatar cu-avatar radius" src="{{item.userHeaderUrl}}" mode="cover"></image> -->
+      <!-- </block> -->
       <view class='date'>2018年3月23日 13:23</view>
     </view>
 
@@ -91,9 +91,9 @@
 
 
     <block wx:for="{{msgList}}" wx:for-index="index" wx:key="{{index}}">
-      <!-- 医生回复模板 -->
-      <view wx:if="{{item.classify == 0}}" class="cu-item" id='msg-{{index}}'>
-        <view class="cu-avatar radius" style="background-image:url(../../images/head1.jpg);"></view>
+      <!-- 游客回复模板 -->
+      <view wx:if="{{item.charType == 1}}" class="cu-item" id='msg-{{index}}'>
+        <view class="cu-avatar radius" style="background-image:url({{item.avatar}});"></view>
         <view class="main">
           <view class='content shadow'>
             <text>{{item.content}}</text>
@@ -102,8 +102,8 @@
         <view class='date '> 13:23</view>
       </view>
 
-      <!-- 游客回复模板 -->
-      <view wx:elif="{{item.classify == 1}}" class="cu-item self" id='msg-{{index}}'>
+      <!-- 医生回复模板 -->
+      <view wx:elif="{{item.charType == 2}}" class="cu-item self" id='msg-{{index}}'>
         <view class="main">
           <view class='content shadow'>
             {{item.content}}
@@ -111,11 +111,11 @@
         </view>
 
 
-        <block wx:for="{{userList}}" wx:key="userList">
+        <!-- <block wx:for="{{userList}}" wx:key="userList"> -->
           <!-- <text class="userinfo-nickname">{{item.userName}}</text> -->
-          <image bindtap="" class="userinfo-avatar cu-avatar radius" src="{{item.userHeaderUrl}}" mode="cover"></image>
-          <!-- <view class="cu-avatar radius" style="background-image:url({{item.userHeaderUrl}};"></view> -->
-        </block>
+          <!-- <image bindtap="" class="userinfo-avatar cu-avatar radius" src="{{item.userHeaderUrl}}" mode="cover"></image> -->
+          <view class="cu-avatar radius" style="background-image:url({{item.avatar}})"></view>
+        <!-- </block> -->
 
         <view class='date'>13:23</view>
       </view>

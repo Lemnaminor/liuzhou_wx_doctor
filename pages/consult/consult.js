@@ -26,22 +26,50 @@ Page({
 
     // 游客、医生回复数据
     msgList: [{
-        classify: 0,
-        content: '免费治疗。',
-      },
-      {
-        classify: 1,
-        content: '免费的不放心。',
-      },
-      {
-        classify: 1,
-        content: '有没有收费的手术。',
-      },
-      {
-        classify: 0,
-        content: '单独发微信红包给我。',
-      }
-    ],
+      avatar: '../../images/head2.jpg',
+      charType: 1,
+      cid: null,
+      content: '游客回复1',
+      contentType: 1,
+      fromid: '1',
+      mine: false,
+      timestamp: 0,
+      toid: '',
+      username: '',
+    }, {
+      avatar: '../../images/head1.jpg',
+      charType: 2,
+      cid: null,
+      content: '医生回复1',
+      contentType: 1,
+      fromid: '1',
+      mine: false,
+      timestamp: 0,
+      toid: '',
+      username: '',
+      }, {
+        avatar: '../../images/head2.jpg',
+        charType: 1,
+        cid: null,
+        content: '游客回复2',
+        contentType: 1,
+        fromid: '1',
+        mine: false,
+        timestamp: 0,
+        toid: '',
+        username: '',
+      }, {
+        avatar: '../../images/head1.jpg',
+        charType: 2,
+        cid: null,
+        content: '医生回复2',
+        contentType: 1,
+        fromid: '1',
+        mine: false,
+        timestamp: 0,
+        toid: '',
+        username: '',
+      }],
 
 
     // 评价标签数据
@@ -81,8 +109,7 @@ Page({
     if (that.data.userWriteMsg.content == '') {
       wx.showToast({
         title: '数据不能为空',
-        icon: 'none',
-        duration: 1000
+        icon: 'none'
       })
       return false;
     }
@@ -122,8 +149,16 @@ Page({
 
 
     var newMsg = {
-      classify: 1,
-      content: that.data.userWriteMsg.content
+      avatar: '../../images/head1.jpg',
+      charType: 2,
+      cid: null,
+      content: that.data.userWriteMsg.content,
+      contentType: 1,
+      fromid: '1',
+      mine: false,
+      timestamp: 0,
+      toid: '',
+      username: '',
     };
     var msgList = that.data.msgList.concat(newMsg);
     console.log(msgList);
@@ -223,7 +258,7 @@ Page({
    * websocket 函数方法
    */
   // 创建websocket
-  webSocket_open: function () {
+  webSocket_open: function() {
     var that = this;
     console.log('开始创建')
     // 创建Socket
@@ -238,7 +273,7 @@ Page({
       success: function (res) {
         console.log('WebSocket连接创建', res)
       },
-      fail: function (err) {
+      fail: function(err) {
         wx.showToast({
           title: '网络异常！',
         })
@@ -249,7 +284,7 @@ Page({
   },
 
   // socket监听事件
-  initSocket: function () {
+  initSocket: function() {
 
     var that = this;
     console.log("进入监听事件", SocketTask);
@@ -266,7 +301,8 @@ Page({
 
     // socket链接错误事件
     SocketTask.onError(onError => {
-      console.log('监听 WebSocket 错误错误事件', onError)
+      console.log('监听 WebSocket 错误错误事件', onError);
+
     })
 
     // socket链接接受到服务器的消息事件
@@ -335,7 +371,7 @@ Page({
       }
     })
 
-    
+
 
 
   },

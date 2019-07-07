@@ -27,7 +27,7 @@ Page({
     evaluateCount: 0,
 
     // 游客评价数据
-    evaluateList:[],
+    evaluateList: [],
 
     pageIndex: 1, // 请求页索引
     pageNum: 5, // 请求数据条数

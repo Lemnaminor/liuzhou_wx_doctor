@@ -1,0 +1,29 @@
+<!--pages/inspectDetail/inspectDetail.wxml-->
+<view class='padding'>
+  <view class='bg-white padding-lr radius'>
+
+    <view class='solids-bottom padding-tb-sm' wx:for="{{inspectDetailList}}" wx:key="{{index}}">
+      <view>
+        <text>参考值：</text>
+        <text>{{item.referenceValue}}</text>
+      </view>
+      <view>
+        <text>单位：</text>
+        <text>{{item.unit}}</text>
+      </view>
+      <view>
+        <text>定性结果：</text>
+        <text>{{item.qualitativeResult}}</text>
+      </view>
+      <view>
+        <text>定量结果：</text>
+        <text>{{item.quantitativeResult}}</text>
+      </view>
+      <view>
+        <text>中文名称：</text>
+        <text>{{item.chineseName}}</text>
+      </view>
+    </view> 
+
+  </view>
+</view>
