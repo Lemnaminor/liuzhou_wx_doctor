@@ -13,7 +13,7 @@ export default class ImChat {
     this.consultDoctors = [];    // 问诊的医生列表
     this.app = app;              // 方便在Chat内部操作app
   }
-
+ 
   /* 初始化连接 */
   connectSocket() {
     // 1. 获取 微信用户唯一 token
@@ -65,10 +65,10 @@ export default class ImChat {
       console.log('监听到 WebSocket 连接已打开！')
     })
     // 收到websocket消息
-    wx.onSocketMessage(res => {
+    /* wx.onSocketMessage(res => {
       
       this.getSocketMsg(JSON.parse(res.data))  // 收到的消息为字符串，需处理一下
-    })
+    }) */
   }
   /* 重连 */
   reconnect() {

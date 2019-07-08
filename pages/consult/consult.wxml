@@ -131,15 +131,17 @@
     </block>
 
     <!-- 游客评价后星星模板 -->
+    <!-- 
     <view class='cu-info round'>
-    <text>患者已评价：</text>
-    <text class='icon-favorfill lg text-white' wx:for="{{5}}" wx:key="{{}}"></text>
-  </view>
+      <text>患者已评价：</text>
+      <text class='icon-favorfill lg text-white' wx:for="{{5}}" wx:key="{{}}"></text>
+    </view>
 
-  <view class="cu-info" style='max-width:100%;'>
-    <view class='cu-tag radius bg-gray' wx:for="{{tagList}}" wx:key="{{tagList}}">{{item}}</view>
-    <view class='margin-top-sm'>回答很有用，很细仔，医生很不错。</view>
-  </view>
+    <view class="cu-info" style='max-width:100%;'>
+      <view class='cu-tag radius bg-gray' wx:for="{{tagList}}" wx:key="{{tagList}}">{{item}}</view>
+      <view class='margin-top-sm'>回答很有用，很细仔，医生很不错。</view>
+    </view>
+    -->
   </view>
 </scroll-view>
 

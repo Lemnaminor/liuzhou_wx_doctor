@@ -1,6 +1,6 @@
 {
   "pages": [
-    
+    "pages/authorize/authorize",
     "pages/personCenter/personCenter",
     "pages/inspect/inspect",
 
@@ -15,7 +15,7 @@
     "pages/checkUp/checkUp",
     "pages/replyLanguage/replyLanguage",
     "pages/buildReplyLanguage/buildReplyLanguage",
-    "pages/authorize/authorize",
+    
     "pages/openList/openList",
     "pages/userManageDetail/userManageDetail",
     "pages/userAdvice/userAdvice",

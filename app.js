@@ -23,7 +23,7 @@ App({
 
     var that = this;
     wx.request({
-      url: that.globalData.path + `/enterprise/findPersCenterUserId?userId=1`,
+      url: that.globalData.path + `/enterprise/findPersCenterUserId?userId=oSHLt0KoTxKIWaWFf3IC6-r3RPu8`,
       data: {},
       method: 'GET',
       header: {

@@ -11,13 +11,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    toid: '',
     // 获取用户信息
     userList: {
       userName: "未获取",
       userHeaderUrl: ""
     },
-
+    
     // 填写消息数据
     userWriteMsg: {
       classify: 1,
@@ -25,11 +25,11 @@ Page({
     },
 
     // 游客、医生回复数据
-    msgList: [{
+    msgList: [/* {
       avatar: '../../images/head2.jpg',
       charType: 1,
       cid: null,
-      content: '游客回复1',
+      content: '你好',
       contentType: 1,
       fromid: '1',
       mine: false,
@@ -40,7 +40,7 @@ Page({
       avatar: '../../images/head1.jpg',
       charType: 2,
       cid: null,
-      content: '医生回复1',
+      content: '请描述你的病情',
       contentType: 1,
       fromid: '1',
       mine: false,
@@ -51,7 +51,7 @@ Page({
         avatar: '../../images/head2.jpg',
         charType: 1,
         cid: null,
-        content: '游客回复2',
+        content: '最近有点感冒',
         contentType: 1,
         fromid: '1',
         mine: false,
@@ -62,14 +62,14 @@ Page({
         avatar: '../../images/head1.jpg',
         charType: 2,
         cid: null,
-        content: '医生回复2',
+        content: '我建议你多喝热水',
         contentType: 1,
         fromid: '1',
         mine: false,
         timestamp: 0,
         toid: '',
         username: '',
-      }],
+      } */],
 
 
     // 评价标签数据
@@ -117,7 +117,7 @@ Page({
 
     let user = app.globalData.userInfo;
     //let patient = that.data.patientInfo[0];
-
+    console.info(that.toid);
     var sendInfo = {
       // code: {0:"心跳",1:"链接就绪",2:"消息"}
       code: 2,
@@ -127,8 +127,8 @@ Page({
         // 发送者头像
         avatar: user.userHeaderUrl,
         // 接受的消息用户ID
-        // toid: '1d4910e1a0a40f4b20b68431a35fe998',
-        toid: '',
+        /* toid: 'afe2a8b756f5466c8165575ce3d9a356', */
+        toid: that.toid,
         // 消息类型:{1: 患者对医生 , 2:医生对患者}
         chatType: 2,
         // 消息内容 
@@ -150,7 +150,7 @@ Page({
 
 
     var newMsg = {
-      avatar: '../../images/head1.jpg',
+      avatar: 'https://wx.qlogo.cn/mmopen/vi_32/00rdKaaGRs5o4KSsXWENHPRvb22ZnuJXgFKzBIXic45vjnpJ1CmBVKIgW09QcU7jpc3je52Nshb9ScM0SOZjGNg/132',
       charType: 2,
       cid: null,
       content: that.data.userWriteMsg.content,
@@ -172,13 +172,13 @@ Page({
     })
 
     // 信息添加后页面滚动
-    /* 
+    
     console.log(`***** 信息添加后页面滚动 *****`);
     console.log(that.data.msgList.length - 1);
     that.setData({
       toView: 'msg-' + (that.data.msgList.length - 1),
     })
-   */
+  
   },
 
   // 医生文本输入
@@ -323,14 +323,9 @@ Page({
     console.log(`***** 进入聊天室页面 *****`);
     console.log(options);
     var that = this;
-    that.setData({
-      sendInfo: {
-        message: {
-          toid: options.imUserId
-        }
-      }
-    })
-    console.log(`获取toid值：${that.data.sendInfo.message.toid}`);
+    that.toid = options.imUserId;
+    console.info(that.toid);
+    console.log(`获取toid值：${that.toid}`);
 
      //this.webSocket_open(); // 建立socket链接
     // 开始通信 start
@@ -382,9 +377,6 @@ Page({
       }
     })
 
-
-
-
   },
 
   /**
@@ -397,13 +389,41 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
-    // socket链接接受到服务器的消息事件 
-    SocketTask.onMessage(onMessage => {
-      
-      console.info(JSON.parse(res.data))  // 收到的消息为字符串，需处理一下
+  onShow: function () {
+    var that = this;
+    // 收到websocket消息
+    //console.info(imChat.getSocketMsg())
+    wx.onSocketMessage(res => {
+      console.info(JSON.parse(res.data))
+      let doc = JSON.parse(res.data);
+      // 收到的消息为字符串，需处理一下
+      // 页面渲染内容
+      var newMsg = {
+        charType: 1,
+        avatar: doc.message.avatar,
+        content: doc.message.content
+      };
+
+      var msgList = that.data.msgList.concat(newMsg);
+      console.log(msgList);
+      that.setData({
+        msgList: msgList,
+        userWriteMsg: {
+          charType:1,
+          avatar: doc.message.avatar,
+          content: ''
+        },
+      })
+
+      // 信息添加后页面滚动
+      console.log(`***** 信息添加后页面滚动 *****`);
+      console.log(that.data.msgList.length - 1);
+      that.setData({
+        toView: 'msg-' + (that.data.msgList.length - 1),
+      })
     })
   },
+
 
   /**
    * 生命周期函数--监听页面隐藏

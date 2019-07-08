@@ -66,6 +66,7 @@ export default class MeLogin {
             console.info("响应的数据：" + response.data);
             return response.data;
           }).then(data => {
+            //debugger
             //获取用户的信息
             wx.getUserInfo({
               success: function (res) {
