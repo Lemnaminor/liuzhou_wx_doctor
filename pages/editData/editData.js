@@ -151,11 +151,11 @@ Page({
       data: {
         'id': e.detail.value.id,
         'telPhone': e.detail.value.telPhone,
-        'doctorLevel': e.detail.value.doctorLevel,
+        /* 'doctorLevel': e.detail.value.doctorLevel,
         'doctorLevelDict': e.detail.value.doctorLevelDict,
-        'dept_Id': e.detail.value.dept_Id,
+        'dept_Id': e.detail.value.dept_Id, */
         // 'deptName': e.detail.value.deptName,
-        'workerNumber': e.detail.value.workerNumber,
+        /* 'workerNumber': e.detail.value.workerNumber, */
         'doctorIntroduction': e.detail.value.doctorIntroduction,
         'doctorSkill': e.detail.value.doctorSkill
       },

@@ -53,39 +53,110 @@ export default class MeLogin {
   }
   wxLogin() {
     let self = this;
-    //登录的信息创建
-    wx.login({
-      success: function (e) {
-        // 定义 WxRequest 的封装对象
-        let wxRequestUtil = new WxRequestUtil();
-        wx.qy.login({
+    // 1. 检查登录是否过期
+    wx.qy.checkSession({
+      success: function () {
+        //session_key 未过期，并且在本生命周期一直有效
+      },
+      fail: function () {
+        // session_key 已经失效，需要重新执行登录流程
+        //重新登录
+        wx.login({
           success: function (res) {
-            debugger
-            console.info(res);
-            wxRequestUtil.doGet(api.cpInfo, {
-              agentId: conf.agentId,
-              code: res.code
-            }).then(response => {
-              result = response.data.result;
-              console.info("响应的用户结果数据：" + result);
-              // 1. 先将基本信息存放到本地
-              let userInfo = res.userInfo;
-              let wxUser = {
-                userName: userInfo.nickName,
-                userHeaderUrl: userInfo.avatarUrl,
-                openId: result.openId,
-                id: result.id,
-                unionId: result.unionId
-              }
+            if (res.code) {
+              
+              let code = res.code;
+              wx.getUserInfo({
+                success: function (res) {
+                  // 定义 WxRequest 的封装对象
+                  let wxRequest = WxRequestUtil.getInstance();
+                  wxRequest.doGet(
+                    api.cpLogin,
+                    {code: code}
+                  ).then(response=>{
+                    let data = response.data;
+                    wxRequest.doGet(api.cpInfo, {
+                      agentId: conf.agentId,
+                      sessionKey: data.sessionKey,
+                      rawData: res.rawData,
+                      signature: res.signature,
+                      encryptedData: res.encryptedData,
+                      iv: res.iv
+                    }).then(response=> {
 
-              self._app.globalData.userInfo = wxUser;
-              // 2. 获取微信用户信息，开始通信登录
-              var result = response.data.result;
-              api.login(result.openId, result.openId);
-            })
+                      
+                    });
+                  });
+                }
+              });
+            } else {
+              console.log('登录失败！' + res.errMsg)
+            }
           }
-        })
+        });
+
       }
-    })
+    });
   }
 }
+/* 
+wx.qy.login({
+  success: function (res) {
+    if (res.code) {
+      // 定义 WxRequest 的封装对象
+      let wxRequest = WxRequestUtil.getInstance();
+      //发起网络请求
+      debugger
+      wxRequest.doGet(api.cpInfo, {
+        agentId: conf.agentId,
+        code: res.code
+      }).then(response => {
+        debugger
+        result = response.data.result;
+        console.info("响应的用户结果数据：" + result);
+        // 1. 先将基本信息存放到本地
+        let userInfo = res.userInfo;
+        let wxUser = {
+          userName: userInfo.nickName,
+          userHeaderUrl: userInfo.avatarUrl,
+          userId: result.userId,
+          id: result.id,
+          deptId: result.deptId
+        }
+
+        self._app.globalData.userInfo = wxUser;
+        // 2. 获取微信用户信息，开始通信登录
+        var result = response.data.result;
+        api.login(result.userId, result.userId);
+      });
+
+    } else {
+      console.log('登录失败！' + res.errMsg)
+    }
+  }
+}); 
+
+wx.qy.login({
+  success: function (res) {
+    if (res.code) {
+      debugger
+      wx.getUserInfo({
+        success: function (res) {
+          // 定义 WxRequest 的封装对象
+          let wxRequest = WxRequestUtil.getInstance();
+          debugger
+          wxRequest.doGet(api.cpInfo, {
+            signature: res.signature,
+            rawData: res.rawData,
+            encryptedData: res.encryptedData,
+            iv: res.iv
+          })
+        }
+      });
+    } else {
+      console.log('登录失败！' + res.errMsg)
+    }
+  }
+});
+
+*/

@@ -1,9 +1,11 @@
 export default {
   agentId: 1000034,
-  appId: 'wx67a443c87192ff7a',
+  appId: 'wx71fc2b09c10a663e',
+  /* host_domain: 'ihospital.lzgryy.com', */
   host_domain: '10.35.112.201',
- /*  host_domain: '111.12.86.168', */
+  /* host_domain: '111.12.86.168', */
   app_name: 'WX-IM',
+  /* http_protocol: 'https', */
   http_protocol: 'http',
   http_port: 8081,
   ws_port: 9326,
