@@ -1,5 +1,5 @@
 //app.js
-import MeLogin from "./modules/login/me-Login";
+import MeLogin from "./modules/login/me-Login-qy";
 import ImChat from "./modules/chat/Im-Chat";
 import RequestUtils from "./utils/render/util/RequestUtils";
 App({
@@ -7,7 +7,7 @@ App({
   $requestApi: null,
   $imChat: null,
   onLaunch: function () {
-
+    var that = this;
     // 初始化 实例对象
     //this.$requestApi = new RequestUtils();
     this.$imChat = new ImChat(this);
@@ -21,9 +21,13 @@ App({
     logs.unshift(Date.now()) 
     wx.setStorageSync('logs', logs)
 
-    var that = this;
+    
     wx.request({
+<<<<<<< HEAD
       url: that.globalData.path + `/enterprise/findPersCenterUserId?userId=zyqt18089566892`,
+=======
+      url: that.globalData.path + '/enterprise/findPersCenterUserId?userId=' + that.userInfo.userId,
+>>>>>>> 171aa6deeedb46fcc801b5b453a59d41a7ebfbff
       data: {},
       method: 'GET',
       header: {
@@ -48,10 +52,16 @@ App({
     // 应用ID: 医生在线询诊 
     agentId: 1000034,
     doctorId: '',
+<<<<<<< HEAD
     // path : `http://10.35.112.203:8080`
     // path: `http://172.28.17.11:8080`
     /* path: `http://111.12.86.168:8081` */
     path: `http://127.0.0.1:8082`
+=======
+    path : `http://10.35.112.201:8080`
+    //path: `http://111.12.86.168:8081`
+    //path: `http://ihospital.lzgryy.com:8081`
+>>>>>>> 171aa6deeedb46fcc801b5b453a59d41a7ebfbff
   },
   wxStore: {
     //刷新token 定时器

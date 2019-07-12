@@ -1,8 +1,11 @@
 {
   "pages": [
+<<<<<<< HEAD
     "pages/authorize/authorize",
     "pages/auditAndFillIn/auditAndFillIn",
     "pages/auditAndFillInSuccess/auditAndFillInSuccess",
+=======
+>>>>>>> 171aa6deeedb46fcc801b5b453a59d41a7ebfbff
     
     "pages/personCenter/personCenter",
     "pages/inspect/inspect",

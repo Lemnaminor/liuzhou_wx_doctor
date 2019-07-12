@@ -63,6 +63,7 @@ export default class MeLogin {
           api.cpLogin,
           {code: e.code})
           .then(response => {
+            
             console.info("响应的数据：" + response.data);
             return response.data;
           }).then(data => {
@@ -77,6 +78,7 @@ export default class MeLogin {
                   encryptedData: res.encryptedData,
                   iv: res.iv
                 }).then(response => {
+                  
                   var result = response.data.result;
                   if (result !=null && result !=undefined){
                     console.info("响应的用户结果数据：" + result);
