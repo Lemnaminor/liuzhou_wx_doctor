@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/authorize/authorize",
+    "pages/auditAndFillIn/auditAndFillIn",
+    "pages/auditAndFillInSuccess/auditAndFillInSuccess",
+    
     "pages/personCenter/personCenter",
     "pages/inspect/inspect",
 

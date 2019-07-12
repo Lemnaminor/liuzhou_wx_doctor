@@ -6,15 +6,24 @@
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
+		"enhance": false,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
+		"coverView": true,
 		"autoAudits": false,
-		"checkInvalidKey": true
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.7.2",
-	"appid": "wx67a443c87192ff7a",
+	"appid": "wx71fc2b09c10a663e",
 	"projectname": "liuzhou_wx_doctor",
 	"debugOptions": {
 		"hidedInDevtools": []

@@ -109,53 +109,53 @@ Page({
   },
 
   // 获取科室列表数据
-  // getDepartmentList() {
-  //   var that = this;
-  //   wx.request({
-  //     url: getApp().globalData.path + `/enterprise/departmentlist`,
-  //     data: {},
-  //     header: {
-  //       'Content-Type': 'application/x-www-form-urlencoded'
-  //     },
-  //     method: 'GET',
-  //     success: function(res) {
-  //       console.log('***** 获取科室列表数据 *****');
-  //       console.log(res);
-  //       that.setData({
-  //         selectDepartmentList: res.data.data
-  //       })
-  //     },
-  //     fail: function() {
+     getDepartmentList() {
+         var that = this;
+         wx.request({
+         url: getApp().globalData.path + `/enterprise/departmentlist`,
+         data: {},
+         header: {
+           'Content-Type': 'application/x-www-form-urlencoded'
+         },
+         method: 'GET',
+         success: function(res) {
+         console.log('***** 获取科室列表数据 *****');
+           console.log(res);
+            that.setData({
+            selectDepartmentList: res.data.data
+          })
+       },
+        fail: function() {
 
-  //     }
-  //   })
-  // },
+        }
+      })
+    },
 
   // 选择科室
-  // selectDepartmentList: function(e) {
-  //   console.log('选择科室改变，携带值为', e.detail.value);
-  //   this.setData({
-  //     selectDepartmentListIndex: e.detail.value
-  //   })
-  // },
+    selectDepartmentList: function(e) {
+      console.log('选择科室改变，携带值为', e.detail.value);
+      this.setData({
+        selectDepartmentListIndex: e.detail.value
+      })
+   },
 
-  // 提交保存
+  // 提交保存 进行审核
   editDataFormSubmit(e) {
     console.log(`***** 提交保存 *****`);
     var that = this;
-    var editDataFormList = e.detail.value;
-    var doctorId = that.data.doctorId;
+   /*  var editDataFormList = e.detail.value;
+    var doctorId = that.data.doctorId; */
 
     wx.request({
-      url: getApp().globalData.path + `/enterprise/submitEdictDoctor`,
+      url: getApp().globalData.path + `/enterprise/saveYnAuthorization`,
       data: {
-        'id': e.detail.value.id,
+        'doctorName': e.detail.value.userName,
         'telPhone': e.detail.value.telPhone,
-       /*  'doctorLevel': e.detail.value.doctorLevel,
+        'doctorLevel': e.detail.value.doctorLevel,
         'doctorLevelDict': e.detail.value.doctorLevelDict,
-        'dept_Id': e.detail.value.dept_Id, */
+        'dept_Id': e.detail.value.dept_Id, 
         // 'deptName': e.detail.value.deptName,
-        /* 'workerNumber': e.detail.value.workerNumber, */
+        'workerNumber': e.detail.value.workerNumber,
         'doctorIntroduction': e.detail.value.doctorIntroduction,
         'doctorSkill': e.detail.value.doctorSkill
       },
@@ -172,7 +172,7 @@ Page({
             icon: 'success'
           })
           wx.navigateTo({
-            url: '/pages/editDataSuccess/editDataSuccess',
+            url: '/pages/auditAndFillInSuccess/auditAndFillInSuccess',
           })
         }else{
           wx.showToast({
@@ -214,18 +214,53 @@ Page({
       content2: cont
     })
   },
+  auditQueries(queries){  //审核查询
+    wx.request({
+      url: getApp().globalData.path + `/enterprise/YnAuthorization`,
+      data: {
+        userId: "789456" //zyqt18089566892 ，访问地址，后台赋值
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log('***** 查询用户是否存在，编写审核信息 *****');
+        console.log(res);
+        if (res.data.code != -1) {
+          if (res.data.data.approvalState==1){
+                console.log("未通过");
+                wx.navigateTo({
+                    url: '/pages/auditAndFillInSuccess/auditAndFillInSuccess',
+                })
+          }else{ 
+                console.log("审核通过");
+                wx.navigateTo({
+                  url: '/pages/authorize/authorize',
+                })
+          }
+        /*   wx.showToast({
+            title: '保存成功',
+            icon: 'success'
+          }) */
+       
+        } 
+      },
+      fail: function () {
+
+      }
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.auditQueries();//审核查询
     console.log(`***** 进入编辑资料页面 *****`);
     this.setData({
       doctorId: getApp().globalData.doctorId
     })
-    this.doctorDetail(); // 调用医生详情接口
-    // this.getDepartmentList(); // 调用科室列表接口
+    this.getDepartmentList(); // 调用科室列表接口
+    //this.doctorDetail(); // 调用医生详情接口
+    
     this.getWorkList(); // 调用职称列表接口
 
     let that = this;
@@ -269,28 +304,28 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    
   },
 
   /**

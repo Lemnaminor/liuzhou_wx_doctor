@@ -1,0 +1,10 @@
+/* pages/editDataSuccess/editDataSuccess.wxss */
+page {
+  height: 100%;
+}
+.editDataSuccess-box {
+  height: 100%;
+}
+.editDataSuccess-box .editDataSuccess-cont {
+  margin-top: -250rpx;
+}

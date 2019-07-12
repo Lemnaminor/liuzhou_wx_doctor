@@ -23,7 +23,7 @@ App({
 
     var that = this;
     wx.request({
-      url: that.globalData.path + `/enterprise/findPersCenterUserId?userId=oSHLt0KoTxKIWaWFf3IC6-r3RPu8`,
+      url: that.globalData.path + `/enterprise/findPersCenterUserId?userId=zyqt18089566892`,
       data: {},
       method: 'GET',
       header: {
@@ -50,7 +50,8 @@ App({
     doctorId: '',
     // path : `http://10.35.112.203:8080`
     // path: `http://172.28.17.11:8080`
-    path: `http://111.12.86.168:8081`
+    /* path: `http://111.12.86.168:8081` */
+    path: `http://127.0.0.1:8082`
   },
   wxStore: {
     //刷新token 定时器

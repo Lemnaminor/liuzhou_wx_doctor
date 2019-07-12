@@ -17,7 +17,7 @@
       <no-data wx:if="{{allUserManageList.length == 0}}" />
 
       <view class='padding'>
-        <view class='userManage-list padding bg-white radius margin-top-sm' wx:for="{{allUserManageList}}" wx:key="{{allUserManageList.id}}" bindtap='toUserManageDetail' id='{{item.id}}'>
+        <view class='userManage-list padding bg-white radius margin-top-sm' wx:for="{{allUserManageList}}" wx:key="{{allUserManageList.id}}" bindtap='toUserManageDetail' id='{{item.id}}' data-recId='{{item.recId}}'>
           <view class='flex align-center solids-bottom padding-bottom-sm margin-bottom-sm'>
             <view>
               <view class="cu-avatar radius margin-right-sm" style="background-image:url({{item.wxIcon}});"></view>
@@ -48,7 +48,7 @@
       <no-data wx:if="{{starUserManageList.length == 0}}" />
 
     <view class='padding'>
-        <view class='userManage-list padding bg-white radius margin-top-sm' wx:for="{{starUserManageList}}" wx:key="{{starUserManageList.id}}" bindtap='toUserManageDetail' id='{{item.id}}'>
+        <view class='userManage-list padding bg-white radius margin-top-sm' wx:for="{{starUserManageList}}" wx:key="{{starUserManageList.id}}" bindtap='toUserManageDetail' id='{{item.id}}' data-recId='{{item.recId}}'>
           <view class='flex align-center solids-bottom padding-bottom-sm margin-bottom-sm'>
             <view>
               <view class="cu-avatar radius margin-right-sm" style="background-image:url({{item.wxIcon}});"></view>

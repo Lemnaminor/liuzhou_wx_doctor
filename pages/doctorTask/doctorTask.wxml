@@ -33,9 +33,9 @@
           </view>
           <view class='flex padding-top-sm solids-top text-df'>
             <view>图文咨询</view>
-            <view wx:if="{{item.consulStatus == 1}}" class='margin-left text-main'>进行中</view>
-            <view wx:elif="{{item.consulStatus == 2}}" class='margin-left text-red'>未开始</view>
-            <view wx:if="{{item.consulStatus != 2}}" class='flex-sub text-right'>
+            <view wx:if="{{item.consulStatus == 2}}" class='margin-left text-main'>进行中</view>
+            <view wx:elif="{{item.consulStatus == 1}}" class='margin-left text-red'>未开始</view>
+            <view wx:if="{{item.consulStatus != 1}}" class='flex-sub text-right'>
               <text class='icon-time lg text-gray margin-right-xs'></text>
               <text>{{item.endTime}}小时结束</text>
             </view>
@@ -68,9 +68,9 @@
           </view>
           <view class='flex padding-top-sm solids-top text-df'>
             <view>图文咨询</view>
-            <view wx:if="{{item.consulStatus == 1}}" class='margin-left text-main'>进行中</view>
-            <view wx:elif="{{item.consulStatus == 2}}" class='margin-left text-red'>未开始</view>
-            <view wx:if="{{item.consulStatus != 2}}" class='flex-sub text-right'>
+            <view wx:if="{{item.consulStatus == 2}}" class='margin-left text-main'>进行中</view>
+            <view wx:elif="{{item.consulStatus == 1}}" class='margin-left text-red'>未开始</view>
+            <view wx:if="{{item.consulStatus != 1}}" class='flex-sub text-right'>
               <text class='icon-time lg text-gray margin-right-xs'></text>
               <text>{{item.endTime}}小时结束</text>
             </view>
@@ -104,9 +104,9 @@
           </view>
           <view class='flex padding-top-sm solids-top text-df'>
             <view>图文咨询</view>
-            <view wx:if="{{item.consulStatus == 1}}" class='margin-left text-main'>进行中</view>
-            <view wx:elif="{{item.consulStatus == 2}}" class='margin-left text-red'>未开始</view>
-            <view wx:if="{{item.consulStatus != 2}}" class='flex-sub text-right'>
+            <view wx:if="{{item.consulStatus == 2}}" class='margin-left text-main'>进行中</view>
+            <view wx:elif="{{item.consulStatus == 1}}" class='margin-left text-red'>未开始</view>
+            <view wx:if="{{item.consulStatus != 1}}" class='flex-sub text-right'>
               <text class='icon-time lg text-gray margin-right-xs'></text>
               <text>{{item.endTime}}小时结束</text>
             </view>

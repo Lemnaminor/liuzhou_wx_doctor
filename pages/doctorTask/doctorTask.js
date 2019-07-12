@@ -63,14 +63,14 @@ Page({
       case 1:
         console.log(`进行中`);
         that.setData({
-          consulStatus: '1'
+          consulStatus: '2'
         })
         this.beingDoctorTaskList();
         break;
       case 2:
         console.log(`未开始`);
         that.setData({
-          consulStatus: '2'
+          consulStatus: '1'
         })
         this.noDoctorTaskList();
         break;

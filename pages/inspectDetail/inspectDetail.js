@@ -7,10 +7,10 @@ Page({
   data: {
 
     // 患者ID
-    PatientId: '',
+    ReportId: '',
 
     // 检验报告详情数据
-    inspectDetailList: [{
+    inspectDetailList: [/* {
         "referenceValue": "-", //参考值
         "unit": "cells/uL", //单位
         "qualitativeResult": "正常", //定性结果
@@ -23,7 +23,7 @@ Page({
         "qualitativeResult": "正常",
         "quantitativeResult": "-",
         "chineseName": "*潜血"
-      }
+      } */
     ],
 
   },
@@ -33,11 +33,11 @@ Page({
   // 检验报告详情接口
   inspectDetailList() {
     var that = this;
-
+    console.log("inspectDetailList"+that.data.ReportId)
     wx.request({
       url: getApp().globalData.path + `/enterprise/inspectTestXMLdetails`,
       data: {
-        ReportId: that.data.PatientId
+        ReportId: that.data.ReportId
       },
       method: 'GET',
       header: {
@@ -52,7 +52,7 @@ Page({
           })
 
           that.setData({
-            inspectDetailList: res.data.result.list
+            inspectDetailList: res.data.data.list
           });
           wx.hideLoading();
 
@@ -82,14 +82,15 @@ Page({
     console.log(options);
     var that = this;
     that.setData({
-      PatientId: options.PatientId
+      ReportId: options.ReportId
     })
-
-    wx.showLoading({
+    
+    console.log("onLoad"+options.ReportId);
+    wx.showLoading({ 
       title: '数据加载中',
     })
 
-    // this.inspectDetailList();
+    this.inspectDetailList();
 
     wx.hideLoading();
 

@@ -9,6 +9,7 @@ Page({
     // 路由传参
     doctorId: '', // 医生ID
     thePatientId: '', // 患者ID
+    recId:'',   //咨询记录ID
     // isy: '0', // 标星 0-取消 1-标记
 
     // 收藏
@@ -30,11 +31,13 @@ Page({
   // 患者详情接口
   userDetail: function () {
     var that = this;
+    console.log("that.data.recId" + that.data.recId);
     wx.request({
       url: getApp().globalData.path + `/enterprise/getPatientInfo`,
       data: {
         doctorId: that.data.doctorId,
-        thePatientId: that.data.thePatientId
+        thePatientId: that.data.thePatientId,
+        recId: that.data.recId
       },
       method: 'GET',
       header: {
@@ -142,6 +145,7 @@ Page({
     console.log(`***** 跳转检验页面 *****`);
     console.log(e);
     var thePatientId = e.currentTarget.id;
+    console.log(thePatientId);
     wx.navigateTo({
       url: `/pages/inspect/inspect?userId=${thePatientId}`,
     })
@@ -177,9 +181,10 @@ Page({
     var that = this;
     this.setData({
       doctorId: getApp().globalData.doctorId,
-      thePatientId: options.thePatientId
+      thePatientId: options.thePatientId,
+      recId: options.recid
     })
-    console.log(`获取医生ID值：${that.data.doctorId}，获取患者ID值：${that.data.thePatientId}`);
+    console.log(`获取医生ID值：${that.data.doctorId}，获取患者ID值：${that.data.thePatientId},获取咨询记录ID:${that.data.recId}`);
 
     wx.showLoading({
       title: '数据加载中',

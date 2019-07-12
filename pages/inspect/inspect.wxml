@@ -1,7 +1,7 @@
 <!--pages/inspect/inspect.wxml-->
 <view class='padding'>
 
-  <view class='bg-white padding radius margin-bottom' wx:for="{{inspectList}}" wx:key="{{index}}" bindtap='toInspectDetail'>
+  <view class='bg-white padding radius margin-bottom' wx:for="{{inspectList}}" wx:key="{{index}}" bindtap='toInspectDetail' id='{{item.reportNo}}'>
     <view class=''>
       <view>
         <text>编号：</text>
@@ -19,7 +19,7 @@
         <text>项目子类：</text>
         <text>{{item.itemSubClass}}</text>
       </view>
-       <view>
+      <view>
         <text>报告时间：</text>
         <text>{{item.reportDate}}</text>
       </view>
