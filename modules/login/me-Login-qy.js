@@ -64,37 +64,36 @@ export default class MeLogin {
         wx.login({
           success: function (res) {
             if (res.code) {
-              
-              let code = res.code;
-              wx.getUserInfo({
-                success: function (res) {
-                  // 定义 WxRequest 的封装对象
-                  let wxRequest = WxRequestUtil.getInstance();
-                  wxRequest.doGet(
-                    api.cpLogin,
-                    {code: code}
-                  ).then(response=>{
-                    let data = response.data;
-                    wxRequest.doGet(api.cpInfo, {
-                      agentId: conf.agentId,
-                      sessionKey: data.sessionKey,
-                      rawData: res.rawData,
-                      signature: res.signature,
-                      encryptedData: res.encryptedData,
-                      iv: res.iv
-                    }).then(response=> {
-
-                      
-                    });
-                  });
+              debugger
+              // 定义 WxRequest 的封装对象
+              let wxRequest = WxRequestUtil.getInstance();
+              wxRequest.doGet(
+                api.cpLogin,
+                { 
+                  agentId: conf.agentId,
+                  code: res.code 
                 }
+              ).then(response => {
+                debugger
+                let result = response.data.result;
+                console.info("响应的用户结果数据：" + result);
+                // 1. 先将基本信息存放到本地
+                let wxUser = {
+                  userName: result.doctorName,
+                  userHeaderUrl: result.doctorIcon,
+                  userId: result.userId,
+                  id: result.id,
+                  deptId: result.deptId
+                }
+                self._app.globalData.userInfo = wxUser;
+                // 2. 获取微信用户信息，开始通信登录
+                api.login(result.userId, result.userId);
               });
             } else {
               console.log('登录失败！' + res.errMsg)
             }
           }
         });
-
       }
     });
   }
@@ -111,7 +110,6 @@ wx.qy.login({
         agentId: conf.agentId,
         code: res.code
       }).then(response => {
-        debugger
         result = response.data.result;
         console.info("响应的用户结果数据：" + result);
         // 1. 先将基本信息存放到本地
