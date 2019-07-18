@@ -17,7 +17,7 @@ Page({
               that.queryUsreInfo();
               //用户已经授权过
               wx.switchTab({
-                url: '/pages/doctorTask/doctorTask'
+                url: '/pages/auditAndFillIn/auditAndFillIn'
               })
             }
           });
@@ -54,7 +54,7 @@ Page({
       });
       //授权成功后，跳转进入小程序首页
       wx.switchTab({
-        url: '/pages/doctorTask/doctorTask'
+        url: '/pages/auditAndFillIn/auditAndFillIn'
       })
     } else {
       //用户按了拒绝按钮

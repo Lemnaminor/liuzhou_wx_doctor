@@ -17,27 +17,7 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now()) 
     wx.setStorageSync('logs', logs)
-
-    /* 
-    wx.request({
-      url: that.globalData.path + '/enterprise/findPersCenterUserId?userId=' + that.userInfo.userId,
-      data: {},
-      method: 'GET',
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        console.log('***** 请求doctorId接口 *****');
-        console.log(res);
-        var doctorId = res.data.data.id;
-        that.globalData.doctorId = doctorId;
-        console.log(`公共doctorId值：${that.globalData.doctorId}`)
-      },
-      fail: function () {
-
-      }
-    }) */
-
+    
   },
   globalData: {
     token: null,
@@ -46,6 +26,8 @@ App({
     agentId: 1000034,
     doctorId: '',
     path : `http://10.35.112.201:8082`
+    /* path: `http://111.12.86.168:8081` */
+    path : `http://10.35.112.201:8080`
     //path: `http://111.12.86.168:8081`
     //path: `http://ihospital.lzgryy.com:8081`
   },

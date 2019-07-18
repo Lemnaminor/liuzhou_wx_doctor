@@ -1,0 +1,91 @@
+<!--pages/editData/editData.wxml-->
+<form class='editdata-box' bindsubmit='editDataFormSubmit'>
+
+  <!-- 医生信息 -->
+  <view class='cu-bar bg-white solids-bottom'>
+    <view class='action'>
+      <text class='icon-titles text-orange'></text>
+      <text class='text-black text-lg'>医生信息</text>
+    </view>
+  </view>
+
+  <input hidden='true' value='{{doctorId}}' name='id'></input>
+  <view class="cu-form-group">
+    <view class='title'>
+      <text>姓名</text>
+    </view>
+    <block wx:for="{{userList}}" wx:key="userList">
+      <input value='{{item.userName}}' placeholder="请填写监护人姓名" class='radius' name="userName"></input>
+    </block>
+  </view>
+  <view class="cu-form-group tel-list">
+    <view class='title'>
+      <text>手机号码</text>
+    </view>
+    <input placeholder="请填写手机号码" value='{{doctorDetail.telPhone}}' class='radius' name='telPhone'></input>
+  </view>
+  <view class="cu-form-group">
+    <view class='title'>职称</view>
+   <!--  <input value='{{doctorDetail.doctorLevelDict}}' class='radius' name='doctorLevelDict' disabled></input> -->
+    <picker bindchange="selectWorkList" value="{{selectWorkListIndex}}" range="{{selectWorkList}}" range-key="{{'doctorLevelDict'}}" name="doctorLevel">
+      <view class="picker">
+        {{selectWorkListIndex != null?selectWorkList[selectWorkListIndex].doctorLevelDict:'请选择职称'}}
+        <input hidden value="{{selectWorkList[selectWorkListIndex].doctorLevelDict}}" name="doctorLevelDict"></input>
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class='title'>科室</view>
+    <!-- <input value='{{doctorDetail.dept_Name}}' class='radius' name='dept_Name' disabled></input> -->
+    <picker bindchange="selectDepartmentList" value="{{selectDepartmentListIndex}}" range="{{selectDepartmentList}}" range-key="{{'deptName'}}" name="dept_Id">
+      <view class="picker">
+        {{selectDepartmentListIndex != null?selectDepartmentList[selectDepartmentListIndex].deptName:'请选择科室'}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class='title'>
+      <text>工号</text>
+    </view>
+    <input placeholder="请填写工号，如不知道，可不填写" value='{{doctorDetail.workerNumber}}' class='radius' name='workerNumber' ></input>
+  </view>
+
+
+  <!-- 医生简介 -->
+  <view class='cu-bar bg-white solids-bottom margin-top-sm'>
+    <view class='action'>
+      <text class='icon-titles text-orange'></text>
+      <text class='text-black text-lg'>医生简介</text>
+    </view>
+  </view>
+
+  <view class='textarea-wrp bg-white padding'>
+    <textarea class='response' wx:if="{{isShowMask}}" value='{{content}}' placeholder="{{placeholder}}" maxlength="{{textMaxLength}}" bindinput="bindText" name="doctorIntroduction" />
+    <view class='textLength text-right text-gray'>
+      <text>{{writeLength}}</text> /
+      <text>{{textMaxLength}}</text>
+    </view>
+  </view>
+
+  <!-- 医生擅长 -->
+  <view class='cu-bar bg-white solids-bottom margin-top-sm'>
+    <view class='action'>
+      <text class='icon-titles text-orange'></text>
+      <text class='text-black text-lg'>医生擅长</text>
+    </view>
+  </view>
+
+  <view class='textarea-wrp bg-white padding'>
+    <textarea class='response' wx:if="{{isShowMask2}}" value='{{content2}}' placeholder="{{placeholder2}}" maxlength="{{textMaxLength2}}" bindinput="bindText2" name="doctorSkill" />
+    <view class='textLength text-right text-gray'>
+      <text>{{writeLength2}}</text> /
+      <text>{{textMaxLength2}}</text>
+    </view>
+  </view>
+
+  <!-- 保存提交 -->
+  <view class='padding flex flex-direction'>
+    <button class='cu-btn bg-main lg' form-type="submit">保存</button>
+  </view>
+
+</form>

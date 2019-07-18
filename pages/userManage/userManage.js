@@ -175,9 +175,11 @@ Page({
     var that = this;
     var doctorId = that.data.doctorId;
     var thePatientId = e.currentTarget.id;
-    console.log(thePatientId);
+    var recid = e.currentTarget.dataset.recid
+
+    console.log("recid:"+recid);
     wx.navigateTo({
-      url: `/pages/userManageDetail/userManageDetail?doctorId=${doctorId}&thePatientId=${thePatientId}`,
+      url: `/pages/userManageDetail/userManageDetail?doctorId=${doctorId}&thePatientId=${thePatientId}&recid=${recid}`,
     })
   },
 

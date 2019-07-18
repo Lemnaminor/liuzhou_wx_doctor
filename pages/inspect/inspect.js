@@ -75,11 +75,13 @@ Page({
   },
 
   // 跳转检验报告详情
-  toInspectDetail(){
+  toInspectDetail(e){
     console.log(`***** 跳转检验报告详情 *****`);
     var that = this;
+    console.log(e.currentTarget.id);
+    /* console.log(that.data.id); */
     wx.navigateTo({
-      url: `/pages/inspectDetail/inspectDetail?PatientId=${that.data.PatientId}`,
+      url: `/pages/inspectDetail/inspectDetail?ReportId=${e.currentTarget.id}`,
     })
   },
 
