@@ -264,6 +264,7 @@ Page({
   onLoad: function(options) {
 
     console.log(`***** 进入医生任务页面 *****`);
+    let userInfo = getApp().globalData.userInfo;
     this.setData({
       doctorId: getApp().globalData.doctorId
     })

@@ -1,27 +1,24 @@
 //app.js
-import MeLogin from "./modules/login/me-Login-qy";
 import ImChat from "./modules/chat/Im-Chat";
 import RequestUtils from "./utils/render/util/RequestUtils";
 App({
   $store: null,
   $requestApi: null,
   $imChat: null,
+
   onLaunch: function () {
     var that = this;
     // 初始化 实例对象
     //this.$requestApi = new RequestUtils();
     this.$imChat = new ImChat(this);
-
-    let meLogin = new MeLogin(this);
-    meLogin.wxLogin();
+    
     console.log(`***** 进入app.js文件 *****`);
-
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now()) 
     wx.setStorageSync('logs', logs)
 
-    
+    /* 
     wx.request({
       url: that.globalData.path + '/enterprise/findPersCenterUserId?userId=' + that.userInfo.userId,
       data: {},
@@ -39,7 +36,7 @@ App({
       fail: function () {
 
       }
-    })
+    }) */
 
   },
   globalData: {
@@ -48,7 +45,7 @@ App({
     // 应用ID: 医生在线询诊 
     agentId: 1000034,
     doctorId: '',
-    path : `http://10.35.112.201:8080`
+    path : `http://10.35.112.201:8082`
     //path: `http://111.12.86.168:8081`
     //path: `http://ihospital.lzgryy.com:8081`
   },

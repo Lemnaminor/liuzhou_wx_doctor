@@ -101,10 +101,6 @@ export default class MeLogin {
           }).catch(function (err) {
             console.info("失败信息：" + err.errMsg);
           });
-        wx.setStorage({
-          key: "key",
-          data: e.errMsg
-        })
       }
     })
   }

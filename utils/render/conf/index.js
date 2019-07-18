@@ -7,7 +7,7 @@ export default {
   app_name: 'WX-IM',
   /* http_protocol: 'https', */
   http_protocol: 'http',
-  http_port: 8081,
+  http_port: 8082,
   ws_port: 9326,
   init: '/api/user/init',
   his_url: '/api/message/list',

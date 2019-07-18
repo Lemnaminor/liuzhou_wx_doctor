@@ -1,4 +1,5 @@
-// pages/personCenter/personCenter.js
+// pages/personCenter/personCenter.j
+import MeLogin from "../../modules/login/me-Login-qy.js";
 Page({
 
   /**
@@ -184,45 +185,26 @@ Page({
   onLoad: function(options) {
 
     console.log(`***** 进入医生个人中心页面 *****`);
+    let userInfo = getApp().globalData.userInfo;
+
+    if (userInfo == null) {
+      let meLogin = new MeLogin(getApp());
+      meLogin.wxLogin();
+      userInfo = wx.getStorageSync('userInfo');
+    }
+
     this.setData({
-      doctorId: getApp().globalData.doctorId
+      doctorId: userInfo.id
     })
-
     this.doctorDetail(); // 医生详情接口
-
     let that = this;
-    //登录的信息创建
-    wx.login({
-      success: function (e) {
-        wx.setStorage({
-          key: "key",
-          data: e.errMsg
-        })
-      }
-    })
     //获取用户的信息
-    wx.getUserInfo({
-      success: function (res) {
-        console.log(`获取用户的信息`);
-        console.log(res);
-        let userInfo = res.userInfo
-        let nickName = userInfo.nickName
-        let avatarUrl = userInfo.avatarUrl
-        //先将信息存放到本地
-        wx.setStorageSync('nickName', nickName);
-        wx.setStorageSync('avatarUrl', avatarUrl);
-
-        let user = [{
-          userName: nickName,
-          userHeaderUrl: avatarUrl,
-        }]
-        that.setData({
-          userList: user,
-        })
-      },
-      fail: function (res) {
-        console.log(res);
-      }
+    let user = [{
+      userName: userInfo.userName,
+      userHeaderUrl: userInfo.userHeaderUrl,
+    }]
+    that.setData({
+      userList: user,
     })
 
   },
