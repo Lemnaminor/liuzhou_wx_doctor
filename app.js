@@ -52,7 +52,6 @@ App({
     fileServerPath: `https://www.jklz.online/lgyyfile`,
     path: `https://www.jklz.online/lgyy`
     //path : `http://10.35.112.201:8082`
-    //path: `https://www.jklz.online/lgyy`
   },
   wxStore: {
     //刷新token 定时器

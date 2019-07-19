@@ -1,8 +1,9 @@
 export default {
   agentId: 1000034,
   appId: 'wx71fc2b09c10a663e',
-  host_domain: '10.35.112.201',
-  // host_domain: 'www.jklz.online/lgyy',
+  //host_domain: '10.35.112.201',
+ /*  host_domain: '111.12.86.168', */ 
+  host_domain: 'www.jklz.online/lgyy',
   app_name: 'WX-IM',
   /* http_protocol: 'https', */
   http_protocol: 'https',
@@ -34,7 +35,7 @@ export default {
     return this.his_url;
   },
   getWsUrl: function () {
-    return this.ws_protocol + '://' + this.host_domain;
-    //return 'wss://www.jklz.online/lgyyws';
+    //return this.ws_protocol + '://' + this.host_domain;
+    return 'wss://www.jklz.online/lgyyws';
   }
 };
