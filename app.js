@@ -25,9 +25,9 @@ App({
     // 应用ID: 医生在线询诊 
     agentId: 1000034,
     doctorId: '',
-    path : `http://10.35.112.201:8082`
+    path : `http://10.35.112.202:8082`
     /* path: `http://111.12.86.168:8081` */
-    path : `http://10.35.112.201:8080`
+   /*  path : `http://10.35.112.201:8080` */
     //path: `http://111.12.86.168:8081`
     //path: `http://ihospital.lzgryy.com:8081`
   },

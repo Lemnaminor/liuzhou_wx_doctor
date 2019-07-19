@@ -151,11 +151,8 @@ Page({
       data: {
         'id': e.detail.value.id,
         'telPhone': e.detail.value.telPhone,
-<<<<<<< HEAD
        /*  'doctorLevel': e.detail.value.doctorLevel,
-=======
         /* 'doctorLevel': e.detail.value.doctorLevel,
->>>>>>> 171aa6deeedb46fcc801b5b453a59d41a7ebfbff
         'doctorLevelDict': e.detail.value.doctorLevelDict,
         'dept_Id': e.detail.value.dept_Id, */
         // 'deptName': e.detail.value.deptName,
