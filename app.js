@@ -1,11 +1,11 @@
 //app.js
-import MeLogin from "./modules/login/me-Login-qy";
 import ImChat from "./modules/chat/Im-Chat";
 import RequestUtils from "./utils/render/util/RequestUtils";
 App({
   $store: null,
   $requestApi: null,
   $imChat: null,
+
   onLaunch: function () {
     var that = this;
     // 初始化 实例对象
@@ -15,11 +15,11 @@ App({
     /* let meLogin = new MeLogin(this);
     meLogin.wxLogin(); */
     console.log(`***** 进入app.js文件 *****`);
-
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now()) 
     wx.setStorageSync('logs', logs)
+
     //全局赋值
     that.globalData.doctorId ='';
     

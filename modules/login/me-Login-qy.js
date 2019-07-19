@@ -79,7 +79,7 @@ export default class MeLogin {
                   agentId: conf.agentId,
                   code: res.code
                 }
-              ).then(response => {
+              ).then(response=> {
                 let result = response.data.result;
                 console.info("响应的用户结果数据：" + result);
                 // 1. 先将基本信息存放到本地
@@ -95,7 +95,9 @@ export default class MeLogin {
                 self._app.globalData.doctorId = result.id;
                 // 2. 获取微信用户信息，开始通信登录
                 api.login(result.userId, result.userId);
-              }).catch(err => {
+
+
+              }).catch(err=>{
                 console.log('失败信息:' + err.errMsg);
               });
             } else {

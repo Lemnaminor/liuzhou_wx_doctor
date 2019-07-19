@@ -1,4 +1,4 @@
-// pages/personCenter/personCenter.js
+// pages/personCenter/personCenter.j
 import MeLogin from "../../modules/login/me-Login-qy.js";
 Page({
 
@@ -193,11 +193,13 @@ Page({
       doctorId: getApp().globalData.doctorId
     }) */
     
+
     if (userInfo == null) {
       let meLogin = new MeLogin(getApp());
       meLogin.wxLogin();
       userInfo = wx.getStorageSync('userInfo');
     }
+
     //赋全局值
     //that.globalData.doctorId = userInfo.id;
 
@@ -252,6 +254,7 @@ Page({
       }
     }) */
 
+  
   },
 
   /**
