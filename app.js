@@ -11,13 +11,37 @@ App({
     // 初始化 实例对象
     //this.$requestApi = new RequestUtils();
     this.$imChat = new ImChat(this);
-    
+
+    /* let meLogin = new MeLogin(this);
+    meLogin.wxLogin(); */
     console.log(`***** 进入app.js文件 *****`);
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now()) 
     wx.setStorageSync('logs', logs)
+
+    //全局赋值
+    that.globalData.doctorId ='';
     
+ /*    wx.request({
+      url: that.globalData.path + `/enterprise/findPersCenterUserId?userId=zyqt18089566892`,
+      data: {},
+      method: 'GET',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        console.log('***** 请求doctorId接口 *****');
+        console.log(res);
+        var doctorId = res.data.data.id;
+        that.globalData.doctorId = doctorId;
+        console.log(`公共doctorId值：${that.globalData.doctorId}`)
+      },
+      fail: function () {
+
+      }
+    }) */
+
   },
   globalData: {
     token: null,
@@ -25,11 +49,10 @@ App({
     // 应用ID: 医生在线询诊 
     agentId: 1000034,
     doctorId: '',
-    path : `http://10.35.112.202:8082`
-    /* path: `http://111.12.86.168:8081` */
-   /*  path : `http://10.35.112.201:8080` */
-    //path: `http://111.12.86.168:8081`
-    //path: `http://ihospital.lzgryy.com:8081`
+    fileServerPath: `https://www.jklz.online/lgyyfile`,
+    path: `https://www.jklz.online/lgyy`
+    //path : `http://10.35.112.201:8082`
+    //path: `https://www.jklz.online/lgyy`
   },
   wxStore: {
     //刷新token 定时器
