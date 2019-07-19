@@ -14,9 +14,7 @@
     <view class='title'>
       <text>姓名</text>
     </view>
-    <block wx:for="{{userList}}" wx:key="userList">
-      <input value='{{item.userName}}' placeholder="请填写监护人姓名" class='radius' name="userName"></input>
-    </block>
+      <input value='{{doctorName}}' placeholder="请填写监护人姓名" class='radius' name="doctorName" disabled></input>
   </view>
   <view class="cu-form-group tel-list">
     <view class='title'>
@@ -27,9 +25,10 @@
   <view class="cu-form-group">
     <view class='title'>职称</view>
    <!--  <input value='{{doctorDetail.doctorLevelDict}}' class='radius' name='doctorLevelDict' disabled></input> -->
-    <picker bindchange="selectWorkList" value="{{selectWorkListIndex}}" range="{{selectWorkList}}" range-key="{{'doctorLevelDict'}}" name="doctorLevel">
+    <picker bindchange="selectWorkList" value="{{selectWorkListIndex}}" range="{{selectWorkList}}" range-key="{{'doctorLevelDict'}}">
       <view class="picker">
-        {{selectWorkListIndex != null?selectWorkList[selectWorkListIndex].doctorLevelDict:'请选择职称'}}
+        {{selectWorkList[selectWorkListIndex].doctorLevel != null?selectWorkList[selectWorkListIndex].doctorLevelDict:'请选择职称'}}
+        <input hidden value="{{selectWorkList[selectWorkListIndex].doctorLevel}}" name="doctorLevel"></input>
         <input hidden value="{{selectWorkList[selectWorkListIndex].doctorLevelDict}}" name="doctorLevelDict"></input>
       </view>
     </picker>
@@ -37,9 +36,10 @@
   <view class="cu-form-group">
     <view class='title'>科室</view>
     <!-- <input value='{{doctorDetail.dept_Name}}' class='radius' name='dept_Name' disabled></input> -->
-    <picker bindchange="selectDepartmentList" value="{{selectDepartmentListIndex}}" range="{{selectDepartmentList}}" range-key="{{'deptName'}}" name="dept_Id">
+    <picker bindchange="selectDepartmentList" value="{{selectDepartmentListIndex}}" range="{{selectDepartmentList}}" range-key="{{'deptName'}}">
       <view class="picker">
         {{selectDepartmentListIndex != null?selectDepartmentList[selectDepartmentListIndex].deptName:'请选择科室'}}
+          <input hidden value="{{selectDepartmentList[selectDepartmentListIndex].id}}" name="dept_Id"></input>
       </view>
     </picker>
   </view>

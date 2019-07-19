@@ -13,7 +13,7 @@ export default class ImChat {
     this.consultDoctors = [];    // 问诊的医生列表
     this.app = app;              // 方便在Chat内部操作app
   }
- 
+
   /* 初始化连接 */
   connectSocket() {
     // 1. 获取 微信用户唯一 token
@@ -81,7 +81,7 @@ export default class ImChat {
   closeSocket(removeChat) {
     wx.closeSocket({
       success: res => {
-        console.log('结束咨询：'+res);
+        console.log('结束咨询：' + res);
         clearInterval(this.heartListen);
         // code
       }
@@ -99,6 +99,6 @@ export default class ImChat {
       wx.sendSocketMessage({
         data: JSON.stringify(msg)
       })
-    } 
+    }
   }
 }

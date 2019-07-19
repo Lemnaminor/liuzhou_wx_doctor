@@ -1,10 +1,10 @@
-// pages/main/index.js
+// pages/main/index.j
 var QR = require("../../utils/qrcode.js");
 Page({
   data: {
 
     // 获取路由ID
-    personId: '',
+    doctorId: '',
 
     // 二维码数据
     canvasHidden: false,
@@ -27,19 +27,20 @@ Page({
   // 医生详情接口
   doctorDetail: function () {
     var that = this;
-    var personId = that.data.personId;
+    var doctorId = that.data.doctorId;
+    console.log(doctorId);
     wx.request({
-      url: getApp().globalData.path + `/lgDoctor/doctor/detail/1/openId`,
+      url: getApp().globalData.path + `/enterprise/businesScard?doctorId=${doctorId}`,
       data: {},
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
-        console.log('***** 医生详情接口调用 *****');
+        console.log('***** 医生我的名片接口调用 *****');
         console.log(res);
         if(res.data.code == 0){
           that.setData({
-            doctorDetail: res.data.result,
-            placeholder: res.data.result.qrCodeImg
+            doctorDetail: res.data.data,
+            /* placeholder: res.data.data.qrCodeImg */
           });
           console.log(`二维码地址：${res.data.result.qrCodeImg}`);
           // 页面初始化 options为页面跳转所带来的参数
@@ -60,12 +61,9 @@ Page({
   onLoad: function (options) {
 
     // 获取路由参数ID
-    var that = this;
-    console.log(options);
-    console.log(options.orderId);
-    var personId = options.orderId;
-    that.setData({
-      personId: personId
+    console.log("d" + getApp().globalData.doctorId);
+    this.setData({
+      doctorId: getApp().globalData.doctorId
     })
 
     wx.showLoading({

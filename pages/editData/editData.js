@@ -1,4 +1,5 @@
 // pages/editData/editData.js
+import MeLogin from "../../modules/login/me-Login-qy.js";
 Page({
 
   /**
@@ -145,17 +146,14 @@ Page({
     var that = this;
     var editDataFormList = e.detail.value;
     var doctorId = that.data.doctorId;
-
+    debugger
     wx.request({
       url: getApp().globalData.path + `/enterprise/submitEdictDoctor`,
       data: {
         'id': e.detail.value.id,
         'telPhone': e.detail.value.telPhone,
-<<<<<<< HEAD
        /*  'doctorLevel': e.detail.value.doctorLevel,
-=======
         /* 'doctorLevel': e.detail.value.doctorLevel,
->>>>>>> 171aa6deeedb46fcc801b5b453a59d41a7ebfbff
         'doctorLevelDict': e.detail.value.doctorLevelDict,
         'dept_Id': e.detail.value.dept_Id, */
         // 'deptName': e.detail.value.deptName,
@@ -230,7 +228,7 @@ Page({
     })
     this.doctorDetail(); // 调用医生详情接口
     // this.getDepartmentList(); // 调用科室列表接口
-    this.getWorkList(); // 调用职称列表接口
+    //this.getWorkList(); // 调用职称列表接口
 
     let that = this;
     //登录的信息创建

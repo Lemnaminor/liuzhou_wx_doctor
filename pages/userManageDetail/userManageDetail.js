@@ -147,7 +147,7 @@ Page({
     var thePatientId = e.currentTarget.id;
     console.log(thePatientId);
     wx.navigateTo({
-      url: `/pages/inspect/inspect?userId=${thePatientId}`,
+      url: `/pages/inspect/inspect?thePatientId=${thePatientId}`,
     })
   },
 

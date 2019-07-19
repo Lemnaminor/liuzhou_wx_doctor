@@ -13,7 +13,7 @@ const api = {
    * @param password 企业微信用户的 userId 
    */
   login: function (username, password) {
-    let self = getApp(); 
+    let self = getApp();
     // 实例化封装的请求API
     let requestApi = RequestUtils.getInstance();
     // 1. 请求 登录
@@ -22,7 +22,7 @@ const api = {
       .then(token => {
         console.log('token', token);
         // 获取当前登录的用户，存入store
-        return requestApi.request(conf.getInitUrl() , {}, self);
+        return requestApi.request(conf.getInitUrl(), {}, self);
       })
       .then(response => {
         console.info("响应的数据：" + response.data);
@@ -61,9 +61,9 @@ export default class MeLogin {
         // Get 请求后台
         wxRequestUtil.doGet(
           api.cpLogin,
-          {code: e.code})
+          { code: e.code })
           .then(response => {
-            
+
             console.info("响应的数据：" + response.data);
             return response.data;
           }).then(data => {
@@ -78,9 +78,9 @@ export default class MeLogin {
                   encryptedData: res.encryptedData,
                   iv: res.iv
                 }).then(response => {
-                  
+
                   var result = response.data.result;
-                  if (result !=null && result !=undefined){
+                  if (result != null && result != undefined) {
                     console.info("响应的用户结果数据：" + result);
                     // 1. 先将基本信息存放到本地
                     let userInfo = res.userInfo;
@@ -101,10 +101,6 @@ export default class MeLogin {
           }).catch(function (err) {
             console.info("失败信息：" + err.errMsg);
           });
-        wx.setStorage({
-          key: "key",
-          data: e.errMsg
-        })
       }
     })
   }

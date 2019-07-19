@@ -111,10 +111,14 @@ Page({
           wx.hideLoading();
 
         } else {
-          wx.showToast({
-            title: '网络请求错误',
-            icon: 'none'
-          })
+          if (res.data.code == -1) {
+
+          } else {
+            wx.showToast({
+              title: '网络请求错误',
+              icon: 'none'
+            })
+          }
         }
       },
       fail: function () {
@@ -167,10 +171,14 @@ Page({
           wx.hideLoading();
 
         } else {
-          wx.showToast({
-            title: '网络请求错误',
-            icon: 'none'
-          })
+          if (res.data.code == -1) {
+              
+          } else {
+            wx.showToast({
+              title: '网络请求错误',
+              icon: 'none'
+            })
+          }
         }
       },
       fail: function () {
@@ -230,7 +238,20 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    var index = parseInt(this.data.activeIndex);
 
+    switch (index) {
+      case 0:
+        console.log(`进行中`);
+        this.data.pageIndex = 1;
+        this.beingAdviceList();
+        break;
+      case 1:
+        console.log(`已完成`);
+        this.data.pageIndex2 = 1;
+        this.successAdviceList();
+        break;
+    }
   },
 
   /**

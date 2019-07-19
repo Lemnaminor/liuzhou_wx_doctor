@@ -1,11 +1,12 @@
 // pages/editDataSuccess/editDataSuccess.js
+import MeLogin from "../../modules/login/me-Login-qy.js";
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+      userId:''
   },
 
   /**
@@ -14,11 +15,12 @@ Page({
 
   // 审核查询
   toPersonCenter() { //查询
+  var that=this;
     console.log(`***** 审核查询 *****`);
     wx.request({
       url: getApp().globalData.path + `/enterprise/YnAuthorization`,
       data: {
-        userId: "789456" //zyqt18089566892 ，访问地址，后台赋值
+        userId: that.data.userId //zyqt18089566892 ，访问地址，后台赋值
       },
       method: 'GET',
       success: function (res) {
@@ -27,8 +29,8 @@ Page({
         if (res.data.code != -1) {
           if (res.data.data.approvalState == 2) {
             console.log("审核通过");
-            wx.navigateTo({
-              url: '/pages/authorize/authorize',
+            wx.switchTab({
+              url: '/pages/doctorTask/doctorTask',
             })
           }  
         
@@ -47,7 +49,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    let userInfo = getApp().globalData.userInfo;
+    if (userInfo == null) {
+      let meLogin = new MeLogin(getApp());
+      meLogin.wxLogin();
+      userInfo = wx.getStorageSync('userInfo');
+    }
+     this.setData(
+       {
+         userId: userInfo.userId
+       }
+     )
     var pages = getCurrentPages();
     console.log(`路由数据：${pages.length}`);
     if (pages.length > 2) {

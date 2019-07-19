@@ -1,4 +1,5 @@
 // pages/editData/editData.js
+import MeLogin from "../../modules/login/me-Login-qy.js";
 Page({
 
   /**
@@ -7,8 +8,9 @@ Page({
   data: {
 
     // 路由传参
-    doctorId: '', // 医生ID
-
+    userId: '', // 医生UserID
+    doctorIcon:'',
+    doctorName:'',
     //设置用户信息
     userList: [{
       userName: "未获取",
@@ -46,35 +48,6 @@ Page({
   /**
    * 自定义函数事件
    */
-  // 医生详情接口
-  doctorDetail: function() {
-    var that = this;
-    var doctorId = that.data.doctorId;
-    wx.request({
-      url: getApp().globalData.path + `/enterprise/edictDoctor?doctorId=${doctorId}`,
-      data: {},
-      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-      // header: {}, // 设置请求的 header
-      success: function(res) {
-        console.log('***** 医生详情接口调用 *****');
-        console.log(res);
-        that.setData({
-          doctorDetail: res.data.data,
-          selectWorkListIndex: res.data.data.doctorLevel,
-          selectDepartmentListIndex: res.data.data.dept_Id,
-          content: res.data.data.doctorIntroduction,
-          content2: res.data.data.doctorSkill
-        });
-
-      },
-      fail: function() {
-        // fail
-      },
-      complete: function() {
-        // complete
-      }
-    })
-  },
 
   // 获取职称列表数据
   getWorkList() {
@@ -102,7 +75,7 @@ Page({
   // 选择职称
   selectWorkList: function(e) {
     console.log(e);
-    console.log('选择职称改变，携带值为', e.detail.value);
+    // console.log('选择职称改变，携带值为', e.detail.value);
     this.setData({
       selectWorkListIndex: e.detail.value
     })
@@ -133,7 +106,8 @@ Page({
 
   // 选择科室
     selectDepartmentList: function(e) {
-      console.log('选择科室改变，携带值为', e.detail.value);
+      console.log(e);
+      // console.log('选择科室改变，携带值为', e.detail.value);
       this.setData({
         selectDepartmentListIndex: e.detail.value
       })
@@ -141,6 +115,7 @@ Page({
 
   // 提交保存 进行审核
   editDataFormSubmit(e) {
+    console.log(e);
     console.log(`***** 提交保存 *****`);
     var that = this;
    /*  var editDataFormList = e.detail.value;
@@ -149,7 +124,9 @@ Page({
     wx.request({
       url: getApp().globalData.path + `/enterprise/saveYnAuthorization`,
       data: {
-        'doctorName': e.detail.value.userName,
+        'userId':that.data.userId,
+        'doctorIcon': that.data.doctorIcon,
+        'doctorName': e.detail.value.doctorName,
         'telPhone': e.detail.value.telPhone,
         'doctorLevel': e.detail.value.doctorLevel,
         'doctorLevelDict': e.detail.value.doctorLevelDict,
@@ -215,10 +192,12 @@ Page({
     })
   },
   auditQueries(queries){  //审核查询
+    var that = this;
+    console.log("that.data.userId" + that.data.userId);
     wx.request({
       url: getApp().globalData.path + `/enterprise/YnAuthorization`,
       data: {
-        userId: "789456" //zyqt18089566892 ，访问地址，后台赋值
+        userId: that.data.userId //zyqt18089566892 ，访问地址，后台赋值
       },
       method: 'GET',
       success: function (res) {
@@ -232,8 +211,8 @@ Page({
                 })
           }else{ 
                 console.log("审核通过");
-                wx.navigateTo({
-                  url: '/pages/authorize/authorize',
+                wx.switchTab({
+                  url: '/pages/doctorTask/doctorTask',
                 })
           }
         /*   wx.showToast({
@@ -253,19 +232,31 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.auditQueries();//审核查询
+    
     console.log(`***** 进入编辑资料页面 *****`);
+    let userInfo = getApp().globalData.userInfo;
+    if (userInfo == null) {
+      let meLogin = new MeLogin(getApp());
+      meLogin.wxLogin();
+      userInfo = wx.getStorageSync('userInfo');
+    }
+    console.log(userInfo.userId);
     this.setData({
-      doctorId: getApp().globalData.doctorId
+      userId: userInfo.userId,
+      doctorIcon: userInfo.userHeaderUrl,
+      doctorName: userInfo.userName
+      //doctorId: getApp().globalData.doctorId
     })
+
+    this.auditQueries();//审核查询
+    
     this.getDepartmentList(); // 调用科室列表接口
-    //this.doctorDetail(); // 调用医生详情接口
     
     this.getWorkList(); // 调用职称列表接口
 
     let that = this;
     //登录的信息创建
-    wx.login({
+    /* wx.login({
       success: function(e) {
         wx.setStorage({
           key: "key",
@@ -297,7 +288,7 @@ Page({
         console.log(res);
       }
     })
-
+ */
   },
 
   /**

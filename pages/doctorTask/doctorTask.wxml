@@ -17,7 +17,7 @@
       <no-data wx:if="{{allDoctorTaskList.length == 0}}" />
 
       <view class='padding'>
-        <view class='bg-white radius padding margin-bottom-sm' wx:for="{{allDoctorTaskList}}" wx:key="{{allDoctorTaskList.userId}}" bindtap='toConsult' id='{{item.id}}' data-imUserId="{{item.imUserId}}">
+        <view class='bg-white radius padding margin-bottom-sm' wx:for="{{allDoctorTaskList}}" wx:key="{{allDoctorTaskList.userId}}" bindtap='toConsult' id='{{item.id}}' data-imUserId="{{item.imUserId}}" data-id='{{item.id}}' data-orderId='{{item.orderId}}' data-orderNo='{{item.orderNo}}' data-imdoctorid='{{item.imdoctorid}}'>
           <view class='flex align-center padding-bottom-sm'>
             <view class="cu-avatar lg radius margin-right-sm" style="background-image:url({{item.wxIcon}});"></view>
             <view class='flex-sub'>

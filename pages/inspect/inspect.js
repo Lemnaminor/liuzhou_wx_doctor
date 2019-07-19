@@ -7,7 +7,7 @@ Page({
   data: {
 
     // 患者ID
-    PatientId: '0000676543',
+    PatientId: '',
 
     // 检验报告列表数据
     inspectList: [],
@@ -89,12 +89,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    that.setData({
+      PatientId: options.thePatientId
+    });
+    console.log("PatientId" + that.data.PatientId);
     console.log(`***** 进入检验报告页面 *****`);
 
     wx.showLoading({
       title: '数据加载中',
     })
+    
+    
 
     this.inspectList();
 

@@ -26,11 +26,11 @@
         <text>次咨询</text>
       </view>
       <view>
-        <text class='text-xl text-bold margin-right-sm'>{{doctorDetail.collectionNum}}</text>
+        <text class='text-xl text-bold margin-right-sm'>{{doctorDetail.commentNum}}</text>
         <text>条评价</text>
       </view>
       <view>
-        <text class='text-xl text-bold margin-right-sm'>{{doctorDetail.commentNum}}</text>
+        <text class='text-xl text-bold margin-right-sm'>{{doctorDetail.collectionNum}}</text>
         <text>个收藏</text>
       </view>
     </view>

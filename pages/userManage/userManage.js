@@ -1,4 +1,5 @@
 // pages/userManage/userManage.js
+import MeLogin from "../../modules/login/me-Login-qy.js";
 const app = getApp()
 var sliderWidth = 100; // 需要设置slider的宽度，用于计算中间位置
 Page({
@@ -100,10 +101,15 @@ Page({
           wx.hideLoading();
 
         } else {
-          wx.showToast({
-            title: '网络请求错误',
-            icon: 'none'
-          })
+          if (res.data.code == -1){
+
+          }else{
+            wx.showToast({
+              title: '网络请求错误',
+              icon: 'none'
+            })
+          }
+        
         }
 
       },
@@ -156,10 +162,14 @@ Page({
           wx.hideLoading();
 
         } else {
-          wx.showToast({
-            title: '网络请求错误',
-            icon: 'none'
-          })
+          if (res.data.code == -1) {
+
+          } else {
+            wx.showToast({
+              title: '网络请求错误',
+              icon: 'none'
+            })
+          }
         }
       },
       fail: function () {
@@ -190,8 +200,16 @@ Page({
   onLoad: function(options) {
 
     console.log(`***** 进入患者管理页面 *****`);
+    let userInfo = getApp().globalData.userInfo;
+    if (userInfo == null) {
+      let meLogin = new MeLogin(getApp());
+      meLogin.wxLogin();
+      userInfo = wx.getStorageSync('userInfo');
+    }
+
     this.setData({
-      doctorId: getApp().globalData.doctorId
+      doctorId: userInfo.id
+      //doctorId: getApp().globalData.doctorId
     })
 
     wx.showLoading({
@@ -227,7 +245,20 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    var index = parseInt(this.data.activeIndex);
 
+    switch (index) {
+      case 0:
+        console.log(`进行中`);
+        this.data.pageIndex = 1;
+        this.allUserManageList();
+        break;
+      case 1:
+        console.log(`已完成`);
+        this.data.pageIndex2 = 1;
+        this.starUserManageList();
+        break;
+    }
   },
 
   /**
