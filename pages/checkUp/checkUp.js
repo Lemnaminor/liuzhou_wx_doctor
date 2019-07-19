@@ -15,9 +15,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options);
+    console.log(options.thePatientId);
     var thePatientId = options.thePatientId; //获取到小程序其他页面传来的电话号码；
-    var url = `http://jklz.eimageglobal.com/cloudfilm/hosReportList?sickId=0000757622&hospitalId=07720022`;
+    var url = `http://jklz.eimageglobal.com/cloudfilm/hosReportList?sickId=${options.thePatientId}&hospitalId=07720022`;
     this.setData({
       toCheckUpUrl: url
     })

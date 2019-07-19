@@ -12,6 +12,11 @@ Page({
    */
   data: {
     toid: '',
+    id:'',
+    orderid:'',
+    orderNo:'',
+    imdoctorid:'',
+    tempFilePaths:'',
     // 获取用户信息
     userList: {
       userName: "未获取",
@@ -23,53 +28,11 @@ Page({
       classify: 1,
       content: ''
     },
+    //咨询时间
+    date:'',
 
     // 游客、医生回复数据
-    msgList: [/* {
-      avatar: '../../images/head2.jpg',
-      charType: 1,
-      cid: null,
-      content: '你好',
-      contentType: 1,
-      fromid: '1',
-      mine: false,
-      timestamp: 0,
-      toid: '',
-      username: '',
-    }, {
-      avatar: '../../images/head1.jpg',
-      charType: 2,
-      cid: null,
-      content: '请描述你的病情',
-      contentType: 1,
-      fromid: '1',
-      mine: false,
-      timestamp: 0,
-      toid: '',
-      username: '',
-      }, {
-        avatar: '../../images/head2.jpg',
-        charType: 1,
-        cid: null,
-        content: '最近有点感冒',
-        contentType: 1,
-        fromid: '1',
-        mine: false,
-        timestamp: 0,
-        toid: '',
-        username: '',
-      }, {
-        avatar: '../../images/head1.jpg',
-        charType: 2,
-        cid: null,
-        content: '我建议你多喝热水',
-        contentType: 1,
-        fromid: '1',
-        mine: false,
-        timestamp: 0,
-        toid: '',
-        username: '',
-      } */],
+    msgList: [],
 
 
     // 评价标签数据
@@ -114,10 +77,36 @@ Page({
       return false;
     }
     // 后台发送数据 start
-
+    that.setData({
+      date: new Date().getDate
+    })
+    console.log(new Date().getDate);
+   // that.data=new Date().getDate;
     let user = app.globalData.userInfo;
     //let patient = that.data.patientInfo[0];
     console.info(that.toid);
+    console.log("user.id"+user.id);
+    //发送消息，改变状态
+    //获取记录ID
+    var recId = that.id;
+    wx.request({
+      url: getApp().globalData.path + `/doctorTask/updateState?id=${recId}`,
+      data: {},
+      method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      success: function (res) {
+        console.log('***** 改变咨询状态 *****');
+        console.log(res);
+        
+      },
+      fail: function () {
+        // fail
+      },
+      complete: function () {
+        // complete
+      }
+    })
+  
     var sendInfo = {
       // code: {0:"心跳",1:"链接就绪",2:"消息"}
       code: 2,
@@ -127,19 +116,25 @@ Page({
         // 发送者头像
         avatar: user.userHeaderUrl,
         // 接受的消息用户ID
-        /* toid: 'afe2a8b756f5466c8165575ce3d9a356', */
-        toid: that.toid,
-        // 消息类型:{1: 患者对医生 , 2:医生对患者}
+        toid: that.toId,
+        // 消息类型:{1: 患者对医生发消息 , 2:医生对患者发消息 , 3:患者结束发消息 ， 4:医生结束发消息}
         chatType: 2,
         // 消息内容 
         content: that.data.userWriteMsg.content,
         // 内容类型: {1: 文字内容, 2: 语音内容, 3: 文件内容, 4: 视频内容, 5: 图片}
         contentType: 1,
-        //是否被人发送
+        // 是否被人发送
         mine: false,
-        //发送消息的企业用户userId
-        fromid: user.id,
-        timestamp: new Date().getTime
+        // 发送消息的用户openId
+        fromid: that.imdoctorid,
+        // 服务端时间戳毫秒数
+        timestamp: new Date().getTime,
+        // 咨询纪录ID
+        consulRecId: that.id,
+        // 订单编号
+        orderNo: that.orderid,
+        // 订单ID
+        orderId: that.orderNo
       }
     }
     // 发送消息
@@ -150,7 +145,7 @@ Page({
 
 
     var newMsg = {
-      avatar: 'https://wx.qlogo.cn/mmopen/vi_32/00rdKaaGRs5o4KSsXWENHPRvb22ZnuJXgFKzBIXic45vjnpJ1CmBVKIgW09QcU7jpc3je52Nshb9ScM0SOZjGNg/132',
+      avatar: user.userHeaderUrl,
       charType: 2,
       cid: null,
       content: that.data.userWriteMsg.content,
@@ -162,7 +157,7 @@ Page({
       username: '',
     };
     var msgList = that.data.msgList.concat(newMsg);
-    console.log(msgList);
+    console.log("msgList:"+msgList);
     that.setData({
       msgList: msgList,
       userWriteMsg: {
@@ -235,25 +230,68 @@ Page({
       isShowEndConsult: !that.data.isShowEndConsult
     })
   },
+  choiceImages(){  // 选择图片
+    console.log("******** 选择图片 ********");
+    var that = this;
+    wx.chooseImage({
+      count: 1, // 默认9 
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有 
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有 
+      success: function (res) {
+        console.log(res);
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片 
+        that.setData({
+          tempFilePaths: res.tempFilePaths
+        })
+      
+      }
+    })
+  },
 
   // 结束咨询
   endConsult() {
     console.log(`***** 结束咨询 *****`);
     imChat.closeSocket();
     var that = this;
-    that.setData({
-      isShowEndConsult: !that.data.isShowEndConsult,
-      isShowFootModel: !that.data.isShowFootModel,
-      isUserEndConsult: true,
-      isDoctorEndConsult: true,
-      scrollTop: 10000,
-    })
-    wx.showToast({
-      title: '已结束',
-      icon: 'success',
-      duration: 1500
-    })
+    
 
+    //获取记录ID
+    var recId=that.id;
+    wx.request({
+      url: getApp().globalData.path + `/doctorTask/endingConsultation?id=${recId}`,
+      data: {},
+      method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      success: function (res) {
+        console.log('***** 医生结束咨询 *****');
+        console.log(res);
+        if (res.data.code!=-1){
+          that.setData({
+            isShowEndConsult: !that.data.isShowEndConsult,
+            isShowFootModel: !that.data.isShowFootModel,
+            isUserEndConsult: true,
+            isDoctorEndConsult: true,
+            scrollTop: 10000,
+          })
+
+          wx.showToast({ //提示
+            title: '已结束',
+            icon: 'success',
+            duration: 1500
+          })
+
+        }else{
+          console.log("结束失败");
+        }
+      },
+      fail: function () {
+        // fail
+      },
+      complete: function () {
+        // complete
+      }
+    })
+    
   },
 
   /**
@@ -324,8 +362,11 @@ Page({
     console.log(options);
     var that = this;
     that.toid = options.imUserId;
-    console.info(that.toid);
-    console.log(`获取toid值：${that.toid}`);
+    that.id=options.id; // 咨询记录ID
+    that.orderid=options.orderid; //订单编号
+    that.orderNo=options.orderNo; //订单ID
+    that.imdoctorid=options.imdoctorid; //通讯需要的医生imuser的ID
+    //console.log(`获取toid值：${that.toid}id:${that.id}orderid:${that.orderid}orderNo:${that.orderNo},imdoctorid:${imdoctorid}`);
 
      //this.webSocket_open(); // 建立socket链接
     // 开始通信 start

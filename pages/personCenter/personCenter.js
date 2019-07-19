@@ -34,6 +34,7 @@ Page({
   doctorDetail: function() {
     var that = this;
     var doctorId = that.data.doctorId;
+    console.log("doctorId"+doctorId);
     wx.request({
       url: getApp().globalData.path + `/enterprise/mycenter?doctorId=${doctorId}`,
       data: {},
@@ -70,7 +71,9 @@ Page({
     console.log(e)
     var that = this;
     var isOnline = e.currentTarget.id;
+    console.log("isOnline" + isOnline);
     var doctorId = that.data.doctorId;
+    console.log("doctorId" + doctorId);
     var consulStatus;
     if (isOnline == 'true'){
       consulStatus = 0
@@ -123,9 +126,9 @@ Page({
   toQrcode(e) {
     console.log('***** 跳转我的名片二维码 *****');
     console.log(e.currentTarget.id);
-    var personId = e.currentTarget.id; // 设置二维码页面路由ID
+    var doctorId = e.currentTarget.id; // 设置二维码页面路由ID
     wx.navigateTo({
-      url: `/pages/qrcode/qrcode?orderId=${personId}`,
+      url: `/pages/qrcode/qrcode?doctorId=${doctorId}`,
     })
   },
 
@@ -186,6 +189,10 @@ Page({
 
     console.log(`***** 进入医生个人中心页面 *****`);
     let userInfo = getApp().globalData.userInfo;
+  /*   this.setData({
+      doctorId: getApp().globalData.doctorId
+    }) */
+    
 
     if (userInfo == null) {
       let meLogin = new MeLogin(getApp());
@@ -193,12 +200,15 @@ Page({
       userInfo = wx.getStorageSync('userInfo');
     }
 
+    //赋全局值
+    //that.globalData.doctorId = userInfo.id;
+
     this.setData({
       doctorId: userInfo.id
     })
-    this.doctorDetail(); // 医生详情接口
+
     let that = this;
-    //获取用户的信息
+
     let user = [{
       userName: userInfo.userName,
       userHeaderUrl: userInfo.userHeaderUrl,
@@ -206,7 +216,45 @@ Page({
     that.setData({
       userList: user,
     })
+   
+    this.doctorDetail(); // 医生详情接口
 
+    
+    //登录的信息创建
+   /*  wx.login({
+      success: function (e) {
+        wx.setStorage({
+          key: "key",
+          data: e.errMsg
+        })
+      }
+    })
+    //获取用户的信息
+    wx.getUserInfo({
+      success: function (res) {
+        console.log(`获取用户的信息`);
+        console.log(res);
+        let userInfo = res.userInfo
+        let nickName = userInfo.nickName
+        let avatarUrl = userInfo.avatarUrl
+        //先将信息存放到本地
+        wx.setStorageSync('nickName', nickName);
+        wx.setStorageSync('avatarUrl', avatarUrl);
+
+        let user = [{
+          userName: nickName,
+          userHeaderUrl: avatarUrl,
+        }]
+        that.setData({
+          userList: user,
+        })
+      },
+      fail: function (res) {
+        console.log(res);
+      }
+    }) */
+
+  
   },
 
   /**

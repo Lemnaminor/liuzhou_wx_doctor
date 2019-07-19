@@ -70,9 +70,14 @@ Page({
           wx.hideLoading();
 
         } else {
-          wx.showToast({
-            title: '网络请求错误',
-          })
+          if (res.data.code == -1) {
+
+          } else {
+            wx.showToast({
+              title: '网络请求错误',
+              icon: 'none'
+            })
+          }
         }
   
       },

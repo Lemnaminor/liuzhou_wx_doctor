@@ -9,10 +9,10 @@
         <view class='content'>
           <view>
             <text class='margin-right-sm text-xl'>{{doctorDetail.doctorName}}</text>
-            <text class='text-gray'>{{doctorDetail.doctorLevel}}</text>
+            <text class='text-gray'>{{doctorDetail.doctorLevelDict}}</text>
           </view>
           <view class='text-gray'>
-            <text class='margin-right-sm'>{{doctorDetail.hospitalName}}</text>
+            <text class='margin-right-sm'>{{doctorDetail.hosp_Name}}</text>
             <text>{{doctorDetail.deptName}}</text>
           </view>
         </view>

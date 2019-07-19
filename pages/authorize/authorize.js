@@ -16,7 +16,7 @@ Page({
               //从数据库获取用户信息
               that.queryUsreInfo();
               //用户已经授权过
-              wx.switchTab({
+              wx.navigateTo({
                 url: '/pages/auditAndFillIn/auditAndFillIn'
               })
             }
@@ -53,7 +53,7 @@ Page({
         }
       });
       //授权成功后，跳转进入小程序首页
-      wx.switchTab({
+      wx.navigateTo({
         url: '/pages/auditAndFillIn/auditAndFillIn'
       })
     } else {

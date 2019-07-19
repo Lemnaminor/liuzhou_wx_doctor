@@ -15,7 +15,7 @@
       <text>姓名</text>
     </view>
     <block wx:for="{{userList}}" wx:key="userList">
-      <input value='{{item.userName}}' placeholder="请填写监护人姓名" class='radius' disabled></input>
+      <input value='{{doctorDetail.doctorName}}' placeholder="请填写监护人姓名" class='radius' disabled></input>
     </block>
   </view>
   <view class="cu-form-group tel-list">
