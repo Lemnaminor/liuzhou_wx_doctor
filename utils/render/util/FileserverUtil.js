@@ -1,9 +1,7 @@
 
 import { promisify } from '../../promise.util'
-
 // 1. 微信上载文件函数对象
 const wxUploadFile = promisify(wx.uploadFile)
-
 // 暴露对外对象
 class FileserverUtil {
 
