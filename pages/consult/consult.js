@@ -1,4 +1,4 @@
-// pages/consult/consult.js
+import FileserverUtil from '../../utils/render/util/FileserverUtil';
 // pages/consult/consult.js
 const app = getApp();
 // const requestApi = app.$requestApi;
@@ -16,7 +16,7 @@ Page({
     orderid:'',
     orderNo:'',
     imdoctorid:'',
-    tempFilePaths:'',
+    files:'',
     // 获取用户信息
     userList: {
       userName: "未获取",
@@ -80,12 +80,24 @@ Page({
     that.setData({
       date: new Date().getDate
     })
+    that.data.files='';
+    //图片存储服务器
+    let files = that.data.files
+    // 上传文件之服务器
+    // 实例化文件服务类
+    let fileserver = FileserverUtil.getInstance(getApp());
+    // 上传文件的动作
+    fileserver
+      .uploadFile2(files, urls => {
+       
+      })
+
     console.log(new Date().getDate);
    // that.data=new Date().getDate;
     let user = app.globalData.userInfo;
     //let patient = that.data.patientInfo[0];
     console.info(that.toid);
-    console.log("user.id"+user.id);
+    console.log("that.imdoctorid" + that.imdoctorid);
     //发送消息，改变状态
     //获取记录ID
     var recId = that.id;
@@ -97,7 +109,6 @@ Page({
       success: function (res) {
         console.log('***** 改变咨询状态 *****');
         console.log(res);
-        
       },
       fail: function () {
         // fail
@@ -116,7 +127,7 @@ Page({
         // 发送者头像
         avatar: user.userHeaderUrl,
         // 接受的消息用户ID
-        toid: that.toId,
+        toid: that.toid,
         // 消息类型:{1: 患者对医生发消息 , 2:医生对患者发消息 , 3:患者结束发消息 ， 4:医生结束发消息}
         chatType: 2,
         // 消息内容 
@@ -241,7 +252,7 @@ Page({
         console.log(res);
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片 
         that.setData({
-          tempFilePaths: res.tempFilePaths
+          files: res.tempFilePaths
         })
       
       }
@@ -361,6 +372,8 @@ Page({
     console.log(`***** 进入聊天室页面 *****`);
     console.log(options);
     var that = this;
+    
+     
     that.toid = options.imUserId;
     that.id=options.id; // 咨询记录ID
     that.orderid=options.orderid; //订单编号

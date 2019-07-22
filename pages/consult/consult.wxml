@@ -66,7 +66,7 @@
     <view class="cu-item self">
 
       <!-- 游客咨询信息 -->
-      <view class="main">
+     <!--  <view class="main">
         <view class='content bg-main shadow'>
           <text>性别：男
         年龄：20
@@ -74,20 +74,20 @@
         </text>
         </view>
 
-      </view>
+      </view> -->
 
-      <view class="cu-avatar radius" style="background-image:url({{item.avatar}});"></view>
+      <!-- <view class="cu-avatar radius" style="background-image:url({{item.avatar}});"></view> -->
       <!-- <block wx:for="{{userList}}" wx:key="userList"> -->
         <!-- <text class="userinfo-nickname">{{item.userName}}</text> -->
         <!-- <image bindtap="" class="userinfo-avatar cu-avatar radius" src="{{item.userHeaderUrl}}" mode="cover"></image> -->
       <!-- </block> -->
-      <view class='date'>2018年3月23日 13:23</view>
+      <!-- <view class='date'>2018年3月23日 13:23</view> -->
     </view>
 
     <!-- 默认信息提示 -->
-    <view class="cu-info">
+    <!-- <view class="cu-info">
       请您在2019年06月11日 16:00:00之前完成咨询。点击患者头像可查看病历、检查报告等信息。
-    </view>
+    </view> -->
 
 
     <block wx:for="{{msgList}}" wx:for-index="index" wx:key="{{index}}">
@@ -119,11 +119,11 @@
 
         <view class='date'><!-- {{date}} --></view>
         
-        <view class="cu-item self" wx:if="{{tempFilePaths!=''}}"> 
+        <view class="cu-item self" wx:if="{{files!=''}}"> 
           <view class="main">
-            <image src="{{tempFilePaths}}" class='radius' mode="widthFix"></image>
+            <image src="{{files}}" class='radius' mode="widthFix"></image>
           </view>
-          <view class="cu-avatar radius" style="background-image:url(https://image.weilanwl.com/img/square-3.jpg);"></view>
+          <view class="cu-avatar radius" style="background-image:url({{item.avatar}});"></view>
         </view>
 
       </view>

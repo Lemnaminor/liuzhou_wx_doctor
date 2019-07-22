@@ -319,9 +319,8 @@ Page({
    */
   onShow: function() {
     console.log('监听页面显示');
-
     var index = parseInt(this.data.activeIndex);
-
+    console.log(index);
     switch (index) {
       case 0:
         console.log(`全部`);
@@ -339,6 +338,7 @@ Page({
         this.noDoctorTaskList();
         break;
     }
+    
   },
 
   /**

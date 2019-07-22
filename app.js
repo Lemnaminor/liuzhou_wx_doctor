@@ -28,7 +28,7 @@ App({
       data: {},
       method: 'GET',
       header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded'+
       },
       success: function (res) {
         console.log('***** 请求doctorId接口 *****');
@@ -50,8 +50,11 @@ App({
     agentId: 1000034,
     doctorId: '',
     fileServerPath: `https://www.jklz.online/lgyyfile`,
-    path: `https://www.jklz.online/lgyy`
-    //path : `http://10.35.112.201:8082`
+      path : `http://10.35.112.201:8082`
+     // path: `http://172.28.17.11:8080`
+     /*  path: `http://111.12.86.168:8082` */
+    /* path: `https://www.jklz.online:8443` */
+   /*   path: `https://10.12.0.85:8443` */
   },
   wxStore: {
     //刷新token 定时器
