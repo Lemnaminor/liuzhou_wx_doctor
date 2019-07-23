@@ -12,8 +12,6 @@ App({
     //this.$requestApi = new RequestUtils();
     this.$imChat = new ImChat(this);
 
-    /* let meLogin = new MeLogin(this);
-    meLogin.wxLogin(); */
     console.log(`***** 进入app.js文件 *****`);
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
@@ -50,11 +48,8 @@ App({
     agentId: 1000034,
     doctorId: '',
     fileServerPath: `https://www.jklz.online/lgyyfile`,
-      path : `http://10.35.112.201:8082`
-     // path: `http://172.28.17.11:8080`
-     /*  path: `http://111.12.86.168:8082` */
+    path : `http://10.35.112.201:8082`
     /* path: `https://www.jklz.online:8443` */
-   /*   path: `https://10.12.0.85:8443` */
   },
   wxStore: {
     //刷新token 定时器

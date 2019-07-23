@@ -4,12 +4,10 @@ export default {
   host_domain: '10.35.112.201',
  /*  host_domain: '111.12.86.168', */ 
  /*  host_domain: 'www.jklz.online', */
-  /* host_domain: '10.12.0.85', */
+ /* host_domain: '10.12.0.85', */
   app_name: 'WX-IM',
   http_protocol: 'http',
- /*  http_protocol: 'https', */
   http_port: 8082,
- /*  http_port: 8443, */
   ws_port: 9326,
   init: '/api/user/init',
   his_url: '/api/message/list',
